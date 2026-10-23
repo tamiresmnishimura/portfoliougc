@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfólio UGC</title>
+  <meta name="description" content="Portfólio de criadora de conteúdo UGC: vídeos autênticos que fazem marcas venderem mais.">
+
+  <!-- Fontes do Google: Fraunces (títulos) e Plus Jakarta Sans (textos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       CORES E MEDIDAS DO SITE
+       Troque os valores abaixo para mudar a paleta inteira.
+       ========================================================= */
+    :root {
+      --creme: #f3eee9;
+      --creme-escuro: #e9e1d8;
+      --branco: #fffdfa;
+      --tinta: #14110d;
+      --tinta-suave: #4a433b;
+      --azul: #0049a4;
+      --azul-escuro: #00387f;
+      --laranja: #df7900;
+      --pessego: #ffd29a;
+      --linha: rgba(20, 17, 13, .12);
+      --raio: 14px;
+      --sombra: 0 18px 40px -22px rgba(20, 17, 13, .35);
+      --sombra-leve: 0 8px 24px -16px rgba(20, 17, 13, .3);
+      --altura-menu: 72px;
+      --foco: var(--azul);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: var(--creme);
+      color: var(--tinta);
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    h1, h2, h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -.02em;
+      margin: 0;
+      font-variation-settings: "opsz" 144;
+    }
+
+    p { margin: 0; }
+
+    a { color: inherit; }
+
+    :focus-visible {
+      outline: 3px solid var(--foco);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    [hidden] { display: none !important; }
+
+    .container {
+      width: min(1200px, calc(100% - 2.5rem));
+      margin-inline: auto;
+    }
+
+    .visualmente-oculto {
+      position: absolute !important;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0);
+      white-space: nowrap; border: 0;
+    }
+
+    /* Link "Pular para o conteúdo" (aparece só ao navegar pelo teclado) */
+    .pular {
+      position: absolute;
+      left: 1rem; top: -100px;
+      z-index: 100;
+      background: var(--tinta);
+      color: var(--creme);
+      padding: .75rem 1.25rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .pular:focus { top: 1rem; }
+
+    /* =========================================================
+       ELEMENTOS COMUNS
+       ========================================================= */
+    section {
+      padding: clamp(4.5rem, 10vw, 8rem) 0;
+      scroll-margin-top: calc(var(--altura-menu) - 1px);
+    }
+
+    .secao-topo {
+      display: grid;
+      gap: 1.1rem;
+      max-width: 760px;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    .sobretitulo {
+      display: inline-flex;
+      align-items: center;
+      gap: .8rem;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--azul);
+    }
+    .sobretitulo::before {
+      content: "";
+      width: 32px;
+      height: 2px;
+      background: var(--laranja);
+      flex-shrink: 0;
+    }
+
+    .titulo {
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+    }
+    .titulo em, .capa-nome em {
+      font-style: italic;
+      color: var(--azul);
+      font-weight: 350;
+    }
+
+    .lead {
+      font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+      color: var(--tinta-suave);
+      max-width: 60ch;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      min-height: 50px;
+      padding: .9rem 1.7rem;
+      border-radius: 999px;
+      border: 1.5px solid transparent;
+      font: inherit;
+      font-size: .95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .3s ease, background-color .3s ease, color .3s ease, border-color .3s ease;
+    }
+    .btn svg { width: 18px; height: 18px; transition: transform .3s ease; }
+    .btn:hover svg { transform: translateX(3px); }
+    .btn-primario { background: var(--azul); color: #fff; }
+    .btn-primario:hover { background: var(--azul-escuro); transform: translateY(-2px); }
+    .btn-secundario { border-color: var(--tinta); color: var(--tinta); background: transparent; }
+    .btn-secundario:hover { background: var(--tinta); color: var(--creme); transform: translateY(-2px); }
+
+    /* Blocos de imagem: gradiente (ou foto real, quando houver) */
+    .midia {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background-size: cover;
+      background-position: center;
+    }
+    div.midia::after {
+      /* brilho suave por cima do gradiente, para parecer uma foto */
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(120% 70% at 15% 0%, rgba(255, 255, 255, .32), transparent 55%),
+        radial-gradient(90% 60% at 100% 100%, rgba(20, 17, 13, .22), transparent 60%);
+    }
+
+    /* =========================================================
+       1. MENU FIXO
+       ========================================================= */
+    .topo {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      transition: background-color .35s ease, box-shadow .35s ease;
+    }
+    .topo.rolado, .topo.menu-aberto {
+      background: rgba(243, 238, 233, .94);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--linha);
+    }
+
+    .nav {
+      height: var(--altura-menu);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.45rem;
+      font-style: italic;
+      text-decoration: none;
+      color: var(--tinta);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .logo span { color: var(--laranja); font-style: normal; }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: clamp(1.25rem, 2.5vw, 2.25rem);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .menu a {
+      position: relative;
+      text-decoration: none;
+      font-size: .93rem;
+      font-weight: 500;
+      color: var(--tinta);
+      padding: .35rem 0;
+    }
+    .menu a:not(.menu-cta)::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 1.5px;
+      background: var(--azul);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform .35s ease;
+    }
+    .menu a:not(.menu-cta):hover::after { transform: scaleX(1); transform-origin: left; }
+    .menu .menu-cta {
+      border: 1.5px solid var(--tinta);
+      border-radius: 999px;
+      padding: .55rem 1.2rem;
+      transition: background-color .3s ease, color .3s ease;
+    }
+    .menu .menu-cta:hover { background: var(--tinta); color: var(--creme); }
+
+    .menu-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 46px;
+      height: 46px;
+      padding: 0 11px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .menu-btn span {
+      display: block;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--tinta);
+      transition: transform .35s ease, opacity .25s ease;
+    }
+    .menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 880px) {
+      .menu-btn { display: flex; }
+      .menu {
+        position: fixed;
+        top: var(--altura-menu);
+        left: 0; right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: .5rem 1.25rem 2rem;
+        background: var(--creme);
+        box-shadow: 0 24px 40px -24px rgba(20, 17, 13, .35);
+        max-height: calc(100vh - var(--altura-menu));
+        overflow-y: auto;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity .3s ease, transform .3s ease, visibility .3s;
+      }
+      .menu.aberto { opacity: 1; visibility: visible; transform: none; }
+      .menu a {
+        display: block;
+        padding: 1rem 0;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 1.4rem;
+        border-bottom: 1px solid var(--linha);
+      }
+      .menu a:not(.menu-cta)::after { display: none; }
+      .menu .menu-cta {
+        margin-top: 1.25rem;
+        text-align: center;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-size: 1rem;
+        padding: .9rem 1.2rem;
+      }
+    }
+
+    /* =========================================================
+       1. CAPA
+       ========================================================= */
+    .capa {
+      padding-top: calc(var(--altura-menu) + clamp(2rem, 6vw, 4.5rem));
+      padding-bottom: 0;
+    }
+
+    .capa-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+      gap: clamp(2.5rem, 6vw, 5.5rem);
+      align-items: center;
+    }
+
+    .capa-nome {
+      font-size: clamp(3.2rem, 9.5vw, 7.8rem);
+      line-height: .95;
+      font-weight: 350;
+      letter-spacing: -.035em;
+      margin: 1.1rem 0 1.6rem;
+      overflow-wrap: break-word;
+    }
+
+    .capa-frase {
+      font-size: clamp(1.1rem, 2vw, 1.38rem);
+      line-height: 1.55;
+      color: var(--tinta-suave);
+      max-width: 36ch;
+    }
+
+    .botoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin: 2.2rem 0 2.8rem;
+    }
+
+    .capa-numeros {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      justify-content: start;
+      gap: clamp(1.5rem, 4vw, 3.5rem);
+      list-style: none;
+      margin: 0;
+      padding: 1.8rem 0 0;
+      border-top: 1px solid var(--linha);
+    }
+    .capa-numeros strong {
+      display: block;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1;
+      margin-bottom: .35rem;
+    }
+    .capa-numeros span { font-size: .88rem; color: var(--tinta-suave); }
+
+    .capa-foto {
+      position: relative;
+      isolation: isolate;
+    }
+    .capa-foto::before {
+      /* moldura fina deslocada, detalhe editorial */
+      content: "";
+      position: absolute;
+      inset: 20px -20px -20px 20px;
+      border: 1.5px solid var(--azul);
+      border-radius: var(--raio);
+      z-index: -1;
+    }
+    .capa-foto .moldura {
+      aspect-ratio: 4 / 5;
+      border-radius: var(--raio);
+      overflow: hidden;
+      box-shadow: var(--sombra);
+    }
+    .selo {
+      position: absolute;
+      left: -1.75rem;
+      bottom: 2.25rem;
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      max-width: calc(100% - 1rem);
+      padding: .85rem 1.15rem;
+      background: var(--branco);
+      border-radius: 12px;
+      box-shadow: var(--sombra-leve);
+      font-size: .86rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    .selo::before {
+      content: "";
+      width: 10px; height: 10px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--laranja);
+      box-shadow: 0 0 0 0 rgba(223, 121, 0, .5);
+      animation: pulsar 2.4s ease-out infinite;
+    }
+    @keyframes pulsar {
+      0% { box-shadow: 0 0 0 0 rgba(223, 121, 0, .5); }
+      70% { box-shadow: 0 0 0 10px rgba(223, 121, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(223, 121, 0, 0); }
+    }
+
+    /* Faixa de marcas */
+    .faixa-marcas {
+      margin-top: clamp(4rem, 9vw, 6.5rem);
+      border-block: 1px solid var(--linha);
+      padding: 1.3rem 0;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .faixa-rotulo {
+      flex-shrink: 0;
+      padding-left: max(1.25rem, calc((100vw - 1200px) / 2));
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--tinta-suave);
+      white-space: nowrap;
+    }
+    .faixa-trilho {
+      display: flex;
+      overflow: hidden;
+      min-width: 0;
+      flex: 1;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    .faixa-trilho ul {
+      display: flex;
+      flex-shrink: 0;
+      gap: 3rem;
+      padding: 0 3rem 0 0;
+      margin: 0;
+      list-style: none;
+      animation: rolar 36s linear infinite;
+    }
+    .faixa-trilho:hover ul { animation-play-state: paused; }
+    .faixa-trilho li {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      white-space: nowrap;
+      color: var(--tinta);
+    }
+    .faixa-trilho li::after {
+      content: "✦";
+      font-style: normal;
+      font-size: .8rem;
+      color: var(--laranja);
+    }
+    @keyframes rolar { to { transform: translateX(-100%); } }
+
+    /* =========================================================
+       2. SOBRE MIM
+       ========================================================= */
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      gap: clamp(2.5rem, 7vw, 6rem);
+      align-items: center;
+    }
+    .sobre-foto {
+      position: relative;
+    }
+    .sobre-foto .moldura {
+      aspect-ratio: 4 / 5;
+      border-radius: var(--raio);
+      overflow: hidden;
+      box-shadow: var(--sombra);
+    }
+    .sobre-etiqueta {
+      position: absolute;
+      right: -1rem;
+      top: 2rem;
+      background: var(--tinta);
+      color: var(--creme);
+      padding: .7rem 1.1rem;
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 600;
+      box-shadow: var(--sombra-leve);
+      max-width: calc(100% - 1rem);
+    }
+    .sobre-texto { display: grid; gap: 1.25rem; }
+    .sobre-texto .titulo { margin-bottom: .5rem; }
+    .sobre-texto p { color: var(--tinta-suave); }
+    .entregas-titulo {
+      margin-top: 1rem;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.35rem;
+      font-style: italic;
+    }
+    .entregas {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .8rem 1.5rem;
+    }
+    .entregas li {
+      display: flex;
+      gap: .7rem;
+      align-items: flex-start;
+      font-size: .97rem;
+      line-height: 1.45;
+    }
+    .entregas svg {
+      width: 20px; height: 20px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: var(--azul);
+    }
+    .assinatura {
+      margin-top: .75rem;
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--tinta) !important;
+    }
+
+    /* =========================================================
+       3. CONTEÚDOS DE DESTAQUE
+       ========================================================= */
+    .destaques { background: var(--creme-escuro); }
+    .destaques-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+    }
+    .card-video {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: var(--raio);
+    }
+    .card-capa {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      border-radius: var(--raio);
+      overflow: hidden;
+      box-shadow: var(--sombra);
+    }
+    .card-capa .midia { transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
+    .card-video:hover .card-capa .midia { transform: scale(1.045); }
+    .card-formato {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      z-index: 2;
+      background: rgba(255, 253, 250, .92);
+      color: var(--tinta);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .4rem .8rem;
+      border-radius: 999px;
+    }
+    .play {
+      position: absolute;
+      top: 50%; left: 50%;
+      z-index: 2;
+      width: 76px; height: 76px;
+      transform: translate(-50%, -50%);
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255, 253, 250, .94);
+      color: var(--azul);
+      box-shadow: 0 12px 30px -10px rgba(20, 17, 13, .5);
+      transition: transform .4s ease, background-color .3s ease, color .3s ease;
+    }
+    .play svg { width: 26px; height: 26px; margin-left: 4px; }
+    .card-video:hover .play { transform: translate(-50%, -50%) scale(1.08); background: var(--azul); color: #fff; }
+    .card-numero {
+      margin-top: 1.4rem;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(2.4rem, 4.2vw, 3.4rem);
+      line-height: 1;
+      color: var(--azul);
+      letter-spacing: -.03em;
+    }
+    .card-rotulo {
+      margin-top: .4rem;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--tinta-suave);
+    }
+    .card-titulo {
+      margin-top: 1rem;
+      font-size: 1.4rem;
+      line-height: 1.2;
+    }
+    .card-contexto {
+      margin-top: .45rem;
+      font-size: .95rem;
+      color: var(--tinta-suave);
+    }
+
+    /* =========================================================
+       4. TRABALHOS POR NICHO
+       ========================================================= */
+    .filtros {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-bottom: 2.5rem;
+    }
+    .filtro {
+      font: inherit;
+      font-size: .92rem;
+      font-weight: 600;
+      min-height: 44px;
+      padding: .6rem 1.3rem;
+      border-radius: 999px;
+      border: 1.5px solid rgba(20, 17, 13, .25);
+      background: transparent;
+      color: var(--tinta);
+      cursor: pointer;
+      transition: background-color .3s ease, color .3s ease, border-color .3s ease;
+    }
+    .filtro:hover { border-color: var(--tinta); }
+    .filtro[aria-pressed="true"] { background: var(--tinta); border-color: var(--tinta); color: var(--creme); }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+      gap: clamp(1.25rem, 2.5vw, 2rem);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .trabalho figure { margin: 0; }
+    .trabalho .moldura {
+      aspect-ratio: 4 / 5;
+      border-radius: var(--raio);
+      overflow: hidden;
+      box-shadow: var(--sombra-leve);
+    }
+    .trabalho .midia { transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
+    .trabalho:hover .midia { transform: scale(1.04); }
+    .trabalho figcaption { padding-top: 1rem; }
+    .trabalho-categoria {
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--azul);
+    }
+    .trabalho-titulo {
+      margin-top: .3rem;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.2rem;
+      line-height: 1.25;
+    }
+    .trabalho-marca { margin-top: .2rem; font-size: .9rem; color: var(--tinta-suave); }
+    .trabalho.surgir { animation: surgir .6s cubic-bezier(.2, .7, .2, 1) both; }
+    @keyframes surgir { from { opacity: 0; transform: translateY(14px); } }
+
+    /* =========================================================
+       5. COMO EU TE AJUDO
+       ========================================================= */
+    .servicos { background: var(--branco); }
+    .servicos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
+      gap: clamp(1rem, 2vw, 1.5rem);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .servico {
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+      padding: clamp(1.75rem, 3vw, 2.4rem);
+      background: var(--creme);
+      border: 1px solid var(--linha);
+      border-radius: var(--raio);
+      overflow: hidden;
+      transition: transform .4s ease, box-shadow .4s ease;
+    }
+    .servico::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--laranja);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .5s ease;
+    }
+    .servico:hover { transform: translateY(-4px); box-shadow: var(--sombra); }
+    .servico:hover::before { transform: scaleX(1); }
+    .servico-numero {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--azul);
+      line-height: 1;
+    }
+    .servico h3 { font-size: 1.6rem; }
+    .servico p { color: var(--tinta-suave); font-size: .98rem; }
+    .servico-detalhe {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--linha);
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--tinta) !important;
+    }
+
+    /* =========================================================
+       6. NÚMEROS E DEPOIMENTOS
+       ========================================================= */
+    .contadores {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+      list-style: none;
+      margin: 0 0 clamp(4rem, 8vw, 6rem);
+      padding: 0;
+    }
+    .contador {
+      border-top: 1.5px solid var(--tinta);
+      padding-top: 1.25rem;
+    }
+    .contador-valor {
+      display: block;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+      line-height: 1;
+      letter-spacing: -.035em;
+      font-variant-numeric: tabular-nums;
+    }
+    .contador-valor .sufixo { color: var(--azul); font-style: italic; }
+    .contador-rotulo { display: block; margin-top: .6rem; font-size: .95rem; color: var(--tinta-suave); }
+
+    .subtitulo {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: 1.75rem;
+    }
+    .subtitulo em { font-style: italic; color: var(--azul); }
+
+    .resultados {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1rem, 2vw, 1.5rem);
+      list-style: none;
+      margin: 0 0 clamp(4rem, 8vw, 6rem);
+      padding: 0;
+    }
+    .resultado {
+      height: 100%;
+      background: var(--tinta);
+      color: var(--creme);
+      border-radius: var(--raio);
+      padding: clamp(1.75rem, 3vw, 2.4rem);
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .resultado-marca {
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(243, 238, 233, .75);
+    }
+    .resultado-metrica {
+      margin-top: 1rem;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(2.6rem, 4.5vw, 3.6rem);
+      line-height: 1;
+      color: var(--laranja);
+      letter-spacing: -.03em;
+    }
+    .resultado-rotulo { font-weight: 600; }
+    .resultado-descricao { font-size: .95rem; color: rgba(243, 238, 233, .8); }
+
+    .depoimentos {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1rem, 2vw, 1.5rem);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .depoimento {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: clamp(1.75rem, 3vw, 2.4rem);
+      background: var(--branco);
+      border: 1px solid var(--linha);
+      border-radius: var(--raio);
+      box-shadow: var(--sombra-leve);
+    }
+    .depoimento::before {
+      content: "“";
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 4.5rem;
+      line-height: .6;
+      color: var(--azul);
+      height: 2rem;
+    }
+    .depoimento blockquote { margin: 0; }
+    .depoimento blockquote p {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.18rem;
+      line-height: 1.5;
+    }
+    .depoimento figcaption {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+    }
+    .avatar {
+      width: 48px; height: 48px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    .depoimento-nome { display: block; font-weight: 700; font-size: .97rem; }
+    .depoimento-empresa { display: block; font-size: .88rem; color: var(--tinta-suave); }
+
+    /* =========================================================
+       7. BORA CRIAR JUNTOS (CONTATO)
+       ========================================================= */
+    .contato {
+      --foco: var(--creme);
+      background: var(--azul);
+      color: var(--creme);
+    }
+    .contato .sobretitulo { color: var(--creme); }
+    .contato .titulo em { color: var(--pessego); }
+    .contato .lead { color: rgba(243, 238, 233, .88); }
+    .contato-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: start;
+    }
+    .contato-info { display: grid; gap: 1.25rem; }
+    .contato-links {
+      display: grid;
+      gap: .8rem;
+      list-style: none;
+      margin: 1.25rem 0 0;
+      padding: 0;
+    }
+    .contato-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(243, 238, 233, .3);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--creme);
+      transition: background-color .3s ease, border-color .3s ease;
+    }
+    .contato-link:hover { background: rgba(243, 238, 233, .1); border-color: rgba(243, 238, 233, .6); }
+    .contato-icone {
+      width: 46px; height: 46px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--creme);
+      color: var(--azul);
+    }
+    .contato-icone svg { width: 22px; height: 22px; }
+    .contato-link small {
+      display: block;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(243, 238, 233, .8);
+    }
+    .contato-link strong { display: block; font-weight: 600; overflow-wrap: anywhere; }
+    .contato-link > span:last-child { min-width: 0; }
+
+    .formulario {
+      --foco: var(--azul);
+      background: var(--creme);
+      color: var(--tinta);
+      border-radius: calc(var(--raio) + 4px);
+      padding: clamp(1.5rem, 4vw, 2.75rem);
+      box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .5);
+      display: grid;
+      gap: 1.2rem;
+    }
+    .formulario h3 { font-size: 1.7rem; }
+    .campo { display: grid; gap: .45rem; }
+    .campo label { font-size: .9rem; font-weight: 600; }
+    .campo input, .campo textarea {
+      width: 100%;
+      font: inherit;
+      font-size: 1rem;
+      color: var(--tinta);
+      background: var(--branco);
+      border: 1.5px solid rgba(20, 17, 13, .2);
+      border-radius: 10px;
+      padding: .9rem 1rem;
+      transition: border-color .25s ease, box-shadow .25s ease;
+    }
+    .campo textarea { min-height: 140px; resize: vertical; }
+    .campo input:focus, .campo textarea:focus {
+      outline: none;
+      border-color: var(--azul);
+      box-shadow: 0 0 0 3px rgba(0, 73, 164, .2);
+    }
+    .campo [aria-invalid="true"] { border-color: #b3261e; }
+    .erro { font-size: .85rem; color: #b3261e; min-height: 0; }
+    .erro:empty { display: none; }
+    .formulario .btn { width: 100%; }
+    .form-ok {
+      padding: 1rem 1.2rem;
+      border-radius: 10px;
+      background: #dfeafa;
+      color: var(--azul-escuro);
+      font-weight: 600;
+      font-size: .95rem;
+    }
+    .form-ok:empty { display: none; }
+
+    /* =========================================================
+       8. RODAPÉ
+       ========================================================= */
+    .rodape {
+      --foco: var(--laranja);
+      background: var(--tinta);
+      color: var(--creme);
+      padding: clamp(3.5rem, 7vw, 5rem) 0 2rem;
+    }
+    .rodape-topo {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(243, 238, 233, .15);
+    }
+    .rodape-nome {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      line-height: 1;
+      letter-spacing: -.03em;
+    }
+    .rodape-nome em { font-style: italic; color: var(--laranja); }
+    .rodape-frase { margin-top: .75rem; color: rgba(243, 238, 233, .75); max-width: 40ch; }
+    .redes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .redes a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: .55rem 1.1rem;
+      border: 1px solid rgba(243, 238, 233, .3);
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: .9rem;
+      transition: background-color .3s ease, color .3s ease;
+    }
+    .redes a:hover { background: var(--creme); color: var(--tinta); }
+    .rodape-base {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-top: 1.75rem;
+      font-size: .85rem;
+      color: rgba(243, 238, 233, .7);
+    }
+    .rodape-base a { color: var(--creme); }
+
+    /* =========================================================
+       ANIMAÇÃO DE ENTRADA AO ROLAR
+       ========================================================= */
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1);
+      transition-delay: var(--atraso, 0ms);
+    }
+    .js .reveal.visivel { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .js .reveal { opacity: 1; transform: none; }
+      .faixa-trilho ul[aria-hidden="true"] { display: none; }
+      .faixa-trilho ul { flex-wrap: wrap; flex-shrink: 1; row-gap: .5rem; }
+    }
+
+    /* =========================================================
+       AJUSTES PARA TABLET E CELULAR
+       ========================================================= */
+    @media (max-width: 980px) {
+      .contadores { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .resultados, .depoimentos { grid-template-columns: minmax(0, 1fr); max-width: 640px; }
+    }
+
+    @media (max-width: 880px) {
+      .capa-grid, .sobre-grid, .contato-grid { grid-template-columns: minmax(0, 1fr); }
+      .capa-foto { max-width: 460px; width: calc(100% - 20px); }
+      .sobre-foto { max-width: 460px; }
+      .destaques-grid {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 380px;
+        margin-inline: auto;
+        gap: 3.5rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body { font-size: 1rem; }
+      .container { width: calc(100% - 2.5rem); }
+      .capa-numeros { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+      .capa-numeros span { font-size: .8rem; display: block; line-height: 1.35; }
+      .botoes .btn { flex: 1 1 100%; }
+      .selo { left: .75rem; bottom: 1rem; }
+      .sobre-etiqueta { right: .75rem; }
+      .entregas { grid-template-columns: minmax(0, 1fr); }
+      .faixa-marcas { flex-direction: column; align-items: stretch; gap: 1rem; }
+      .faixa-rotulo { padding-left: 0; text-align: center; }
+      .contadores { gap: 2rem 1.25rem; }
+      .rodape-topo { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ============ MENU FIXO ============ -->
+  <header class="topo" id="topo">
+    <nav class="nav container" aria-label="Navegação principal">
+      <a href="#inicio" class="logo" id="logo"></a>
+      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="menu" id="menu">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#destaques">Destaques</a></li>
+        <li><a href="#trabalhos">Trabalhos</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#numeros">Números</a></li>
+        <li><a href="#contato" class="menu-cta">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <noscript><p class="container" style="padding-top:100px">Ative o JavaScript do navegador para ver o portfólio completo.</p></noscript>
+
+    <!-- ============ 1. CAPA ============ -->
+    <section class="capa" id="inicio" aria-labelledby="capa-nome">
+      <div class="container capa-grid">
+        <div class="capa-texto">
+          <p class="sobretitulo reveal" data-cfg="capa.sobretitulo"></p>
+          <h1 class="capa-nome reveal" id="capa-nome" style="--atraso:80ms"></h1>
+          <p class="capa-frase reveal" data-cfg="capa.frase" style="--atraso:160ms"></p>
+          <div class="botoes reveal" style="--atraso:240ms">
+            <a href="#contato" class="btn btn-primario">Falar comigo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a href="#trabalhos" class="btn btn-secundario">Ver os trabalhos</a>
+          </div>
+          <ul class="capa-numeros reveal" id="capa-numeros" style="--atraso:320ms"></ul>
+        </div>
+        <div class="capa-foto reveal" style="--atraso:200ms">
+          <div class="moldura" id="capa-midia"></div>
+          <p class="selo" data-cfg="capa.selo"></p>
+        </div>
+      </div>
+
+      <div class="faixa-marcas" aria-labelledby="faixa-rotulo">
+        <p class="faixa-rotulo" id="faixa-rotulo" data-cfg="capa.rotuloMarcas"></p>
+        <div class="faixa-trilho">
+          <ul id="marcas"></ul>
+          <ul id="marcas-copia" aria-hidden="true"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. SOBRE MIM ============ -->
+    <section class="sobre" id="sobre" aria-labelledby="sobre-titulo">
+      <div class="container sobre-grid">
+        <div class="sobre-foto reveal">
+          <div class="moldura" id="sobre-midia"></div>
+          <p class="sobre-etiqueta" data-cfg="sobre.etiqueta"></p>
+        </div>
+        <div class="sobre-texto">
+          <p class="sobretitulo reveal" data-cfg="sobre.sobretitulo"></p>
+          <h2 class="titulo reveal" id="sobre-titulo" data-cfg="sobre.titulo"></h2>
+          <div id="sobre-paragrafos" style="display:grid;gap:1rem"></div>
+          <h3 class="entregas-titulo reveal" data-cfg="sobre.entregasTitulo"></h3>
+          <ul class="entregas" id="entregas"></ul>
+          <p class="assinatura reveal" data-cfg="sobre.assinatura"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. CONTEÚDOS DE DESTAQUE ============ -->
+    <section class="destaques" id="destaques" aria-labelledby="destaques-titulo">
+      <div class="container">
+        <div class="secao-topo">
+          <p class="sobretitulo reveal" data-cfg="destaques.sobretitulo"></p>
+          <h2 class="titulo reveal" id="destaques-titulo" data-cfg="destaques.titulo"></h2>
+          <p class="lead reveal" data-cfg="destaques.descricao"></p>
+        </div>
+        <div class="destaques-grid" id="destaques-lista"></div>
+      </div>
+    </section>
+
+    <!-- ============ 4. TRABALHOS POR NICHO ============ -->
+    <section class="trabalhos" id="trabalhos" aria-labelledby="trabalhos-titulo">
+      <div class="container">
+        <div class="secao-topo">
+          <p class="sobretitulo reveal" data-cfg="trabalhos.sobretitulo"></p>
+          <h2 class="titulo reveal" id="trabalhos-titulo" data-cfg="trabalhos.titulo"></h2>
+          <p class="lead reveal" data-cfg="trabalhos.descricao"></p>
+        </div>
+        <div class="filtros reveal" id="filtros" role="group" aria-label="Filtrar trabalhos por nicho"></div>
+        <p class="visualmente-oculto" id="filtro-aviso" aria-live="polite"></p>
+        <ul class="galeria" id="galeria"></ul>
+      </div>
+    </section>
+
+    <!-- ============ 5. COMO EU TE AJUDO ============ -->
+    <section class="servicos" id="servicos" aria-labelledby="servicos-titulo">
+      <div class="container">
+        <div class="secao-topo">
+          <p class="sobretitulo reveal" data-cfg="servicos.sobretitulo"></p>
+          <h2 class="titulo reveal" id="servicos-titulo" data-cfg="servicos.titulo"></h2>
+          <p class="lead reveal" data-cfg="servicos.descricao"></p>
+        </div>
+        <ul class="servicos-grid" id="servicos-lista"></ul>
+      </div>
+    </section>
+
+    <!-- ============ 6. NÚMEROS E DEPOIMENTOS ============ -->
+    <section class="numeros" id="numeros" aria-labelledby="numeros-titulo">
+      <div class="container">
+        <div class="secao-topo">
+          <p class="sobretitulo reveal" data-cfg="numeros.sobretitulo"></p>
+          <h2 class="titulo reveal" id="numeros-titulo" data-cfg="numeros.titulo"></h2>
+          <p class="lead reveal" data-cfg="numeros.descricao"></p>
+        </div>
+        <ul class="contadores" id="contadores"></ul>
+
+        <h3 class="subtitulo reveal" data-cfg="numeros.resultadosTitulo"></h3>
+        <ul class="resultados" id="resultados"></ul>
+
+        <h3 class="subtitulo reveal" data-cfg="numeros.depoimentosTitulo"></h3>
+        <ul class="depoimentos" id="depoimentos"></ul>
+      </div>
+    </section>
+
+    <!-- ============ 7. BORA CRIAR JUNTOS ============ -->
+    <section class="contato" id="contato" aria-labelledby="contato-titulo">
+      <div class="container contato-grid">
+        <div class="contato-info">
+          <p class="sobretitulo reveal" data-cfg="contato.sobretitulo"></p>
+          <h2 class="titulo reveal" id="contato-titulo" data-cfg="contato.titulo"></h2>
+          <p class="lead reveal" data-cfg="contato.descricao"></p>
+          <ul class="contato-links" id="contato-links"></ul>
+        </div>
+
+        <form class="formulario reveal" id="formulario" novalidate aria-labelledby="form-titulo">
+          <h3 id="form-titulo" data-cfg="contato.formTitulo"></h3>
+          <div class="campo">
+            <label for="nome">Seu nome</label>
+            <input id="nome" name="nome" type="text" autocomplete="name" required aria-describedby="erro-nome">
+            <p class="erro" id="erro-nome"></p>
+          </div>
+          <div class="campo">
+            <label for="email">Seu e-mail</label>
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="erro-email">
+            <p class="erro" id="erro-email"></p>
+          </div>
+          <div class="campo">
+            <label for="mensagem">Conte sobre o seu projeto</label>
+            <textarea id="mensagem" name="mensagem" required aria-describedby="erro-mensagem"></textarea>
+            <p class="erro" id="erro-mensagem"></p>
+          </div>
+          <button type="submit" class="btn btn-primario">Enviar mensagem <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <p class="form-ok" id="form-ok" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ 8. RODAPÉ ============ -->
+  <footer class="rodape">
+    <div class="container">
+      <div class="rodape-topo">
+        <div>
+          <p class="rodape-nome" id="rodape-nome"></p>
+          <p class="rodape-frase" data-cfg="rodape.frase"></p>
+        </div>
+        <nav aria-label="Redes sociais">
+          <ul class="redes" id="redes"></ul>
+        </nav>
+      </div>
+      <div class="rodape-base">
+        <p id="direitos"></p>
+        <a href="#inicio">Voltar ao topo ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ==================================================================
+       ÁREA DE EDIÇÃO
+       Todo o conteúdo do site está aqui embaixo. Você só precisa mudar
+       os textos entre aspas. Não apague as vírgulas, aspas e chaves.
+
+       COMO TROCAR UM BLOCO DE GRADIENTE POR UMA FOTO REAL:
+       1. Coloque a foto na mesma pasta deste arquivo (ex.: "minha-foto.jpg").
+       2. No item desejado, preencha o campo  foto: "minha-foto.jpg"
+       3. Pronto! Se "foto" estiver vazio (""), o site mostra o gradiente.
+       Dica: escreva no campo "alt" uma descrição da foto (para acessibilidade).
+       Formatos ideais: capa e sobre em 4:5 (ex.: 1080x1350), destaques em
+       9:16 (ex.: 1080x1920) e trabalhos em 4:5.
+       ================================================================== */
+
+    // EDITE AQUI: seu nome. Ele aparece no menu, na capa, nos textos e no rodapé.
+    const NOME = "SEU NOME";
+
+    // Gradientes da paleta do site. Use os nomes (ex.: G.royal) nos itens abaixo.
+    const G = {
+      royal:   "linear-gradient(160deg, #0049a4 0%, #3b7bd6 48%, #f2c391 100%)",
+      poente:  "linear-gradient(200deg, #df7900 0%, #f0ad5f 45%, #f6e3cf 100%)",
+      noite:   "linear-gradient(150deg, #14110d 0%, #1d2f55 55%, #0049a4 100%)",
+      ambar:   "radial-gradient(circle at 30% 25%, #ffd9ae 0%, #df7900 55%, #7c3f00 100%)",
+      areia:   "linear-gradient(135deg, #efe5da 0%, #d6c0a6 55%, #9c7f61 100%)",
+      oceano:  "linear-gradient(170deg, #9dbcec 0%, #0049a4 60%, #14110d 100%)",
+      pessego: "linear-gradient(140deg, #f7d7bd 0%, #eaa877 50%, #df7900 100%)",
+      grafite: "linear-gradient(120deg, #3a332b 0%, #14110d 60%, #4a3418 100%)"
+    };
+
+    const CONFIG = {
+
+      // EDITE AQUI: dados gerais (aparecem na aba do navegador).
+      perfil: {
+        profissao: "Criadora de conteúdo UGC"
+      },
+
+      // EDITE AQUI: textos da capa (primeira tela do site).
+      capa: {
+        sobretitulo: "Criadora de conteúdo UGC",
+        frase: "Crio vídeos autênticos, com cara de gente de verdade, que fazem a sua marca parar o scroll, gerar confiança e vender mais.",
+        selo: "Agenda aberta para novas parcerias",
+        // Foto principal da capa. Para usar uma foto real, preencha "foto".
+        imagem: { foto: "", gradiente: G.royal, alt: `Retrato de ${NOME}, criadora de conteúdo UGC` },
+        // Os três números curtos abaixo dos botões.
+        numeros: [
+          { valor: "+120", rotulo: "vídeos entregues" },
+          { valor: "+40",  rotulo: "marcas atendidas" },
+          { valor: "+8M",  rotulo: "views somadas" }
+        ],
+        rotuloMarcas: "Marcas que confiam"
+      },
+
+      // EDITE AQUI: nomes das marcas com quem você já trabalhou (faixa da capa).
+      marcas: ["Aurora Cosméticos", "Casa Lume", "Sabor da Vila", "Ateliê Ana", "Movi Fit", "Pura Pele", "Brisa Home", "Grão Café"],
+
+      // EDITE AQUI: seção Sobre mim.
+      sobre: {
+        sobretitulo: "Sobre mim",
+        titulo: `Prazer, eu sou a <em>${NOME}</em>`,
+        etiqueta: "Luz natural e roteiro estratégico",
+        imagem: { foto: "", gradiente: G.pessego, alt: `${NOME} gravando um vídeo em casa com o celular` },
+        paragrafos: [
+          "Sou criadora de conteúdo UGC e apaixonada por transformar produtos em histórias que as pessoas querem assistir até o final. Meu trabalho é fazer a sua marca parecer o que ela é: algo que gente de verdade usa e indica.",
+          "Gravo em casa ou em locações reais, com luz natural, áudio limpo e aquele jeito de conversa entre amigas que gera confiança. Cada vídeo nasce de um roteiro pensado para prender a atenção nos primeiros segundos e levar quem assiste até a compra.",
+          "Meu compromisso é simples: conteúdo bonito, entregue no prazo e com resultado de verdade para o seu negócio."
+        ],
+        entregasTitulo: "Junto com cada vídeo, você recebe",
+        entregas: [
+          "Roteiro estratégico aprovado antes da gravação",
+          "Edição com legendas, cortes dinâmicos e trilha",
+          "Arquivos em alta qualidade e sem marca d'água",
+          "Ganchos alternativos para testar nos anúncios",
+          "Direitos de uso combinados em contrato",
+          "Até duas rodadas de ajustes inclusas"
+        ],
+        assinatura: `Com carinho, ${NOME}`
+      },
+
+      // EDITE AQUI: seus três melhores conteúdos.
+      // link: cole o endereço do vídeo (Instagram, TikTok, YouTube, Drive...).
+      // capa: preencha "foto" com a imagem de capa vertical (9:16).
+      destaques: {
+        sobretitulo: "Conteúdos de destaque",
+        titulo: "Vídeos que <em>performaram</em> de verdade",
+        descricao: "Três conteúdos que mostram o que acontece quando estratégia e autenticidade andam juntas. Toque para assistir.",
+        itens: [
+          {
+            link: "https://instagram.com/seuusuario",   // LINK DO VÍDEO
+            capa: { foto: "", gradiente: G.royal, alt: "Capa do vídeo de rotina de skincare" }, // CAPA DO VÍDEO
+            formato: "Reels",
+            numero: "+2,4M",
+            rotulo: "views no reels",
+            titulo: "Rotina de skincare em 30 segundos",
+            contexto: "Para Aurora Cosméticos, virou o anúncio campeão da conta."
+          },
+          {
+            link: "https://instagram.com/seuusuario",   // LINK DO VÍDEO
+            capa: { foto: "", gradiente: G.ambar, alt: "Capa do vídeo de unboxing da cafeteira" }, // CAPA DO VÍDEO
+            formato: "Anúncio",
+            numero: "4,1%",
+            rotulo: "de conversão no anúncio",
+            titulo: "Unboxing da cafeteira que esgotou",
+            contexto: "Corte de 15 segundos para Grão Café, rodando por 60 dias."
+          },
+          {
+            link: "https://instagram.com/seuusuario",   // LINK DO VÍDEO
+            capa: { foto: "", gradiente: G.noite, alt: "Capa do vídeo de looks com três peças" }, // CAPA DO VÍDEO
+            formato: "TikTok",
+            numero: "+18 mil",
+            rotulo: "salvamentos no TikTok",
+            titulo: "Três peças, uma semana de looks",
+            contexto: "Tutorial de moda para Ateliê Ana com passo a passo."
+          }
+        ]
+      },
+
+      // EDITE AQUI: galeria de trabalhos. A "categoria" vira um botão de filtro
+      // automaticamente. Crie novas categorias só escrevendo um nome novo.
+      trabalhos: {
+        sobretitulo: "Trabalhos por nicho",
+        titulo: "Um olhar para cada <em>nicho</em>",
+        descricao: "Cada segmento tem sua linguagem. Escolha um nicho e veja como adapto o conteúdo para conversar com o seu público.",
+        rotuloTodos: "Todos",
+        itens: [
+          { categoria: "Beleza",  titulo: "Sérum vitamina C: antes e depois",        marca: "Aurora Cosméticos", foto: "", gradiente: G.pessego, alt: "Vídeo de sérum facial sendo aplicado" },
+          { categoria: "Beleza",  titulo: "Rotina noturna com hidratante",           marca: "Pura Pele",         foto: "", gradiente: G.royal,   alt: "Vídeo de rotina noturna de cuidados com a pele" },
+          { categoria: "Casa",    titulo: "Organização da cozinha em um minuto",     marca: "Casa Lume",         foto: "", gradiente: G.areia,   alt: "Vídeo de cozinha organizada com potes" },
+          { categoria: "Casa",    titulo: "Difusor de aromas: primeiras impressões", marca: "Brisa Home",        foto: "", gradiente: G.oceano,  alt: "Vídeo de difusor de aromas na sala" },
+          { categoria: "Comida",  titulo: "Receita rápida com granola artesanal",    marca: "Sabor da Vila",     foto: "", gradiente: G.ambar,   alt: "Vídeo de tigela com iogurte e granola" },
+          { categoria: "Comida",  titulo: "Café da manhã completo em 5 minutos",     marca: "Grão Café",         foto: "", gradiente: G.poente,  alt: "Vídeo de mesa de café da manhã" },
+          { categoria: "Moda",    titulo: "Provador real: jeans para todos os corpos", marca: "Ateliê Ana",      foto: "", gradiente: G.noite,   alt: "Vídeo de provador com calças jeans" },
+          { categoria: "Moda",    titulo: "Três jeitos de usar a mesma camisa",      marca: "Ateliê Ana",        foto: "", gradiente: G.grafite, alt: "Vídeo de looks com camisa branca" },
+          { categoria: "Fitness", titulo: "Treino de 15 minutos em casa",            marca: "Movi Fit",          foto: "", gradiente: G.oceano,  alt: "Vídeo de treino funcional na sala" },
+          { categoria: "Fitness", titulo: "Testei a garrafa térmica por uma semana", marca: "Movi Fit",          foto: "", gradiente: G.pessego, alt: "Vídeo de garrafa térmica na academia" }
+        ]
+      },
+
+      // EDITE AQUI: seus serviços.
+      servicos: {
+        sobretitulo: "Como eu te ajudo",
+        titulo: "Serviços pensados para <em>vender</em>",
+        descricao: "Do roteiro ao arquivo final, cuido de cada etapa para você receber conteúdo pronto para usar e escalar.",
+        itens: [
+          { titulo: "Vídeo UGC",            descricao: "Vídeos verticais com roteiro, gancho forte e linguagem natural, prontos para anúncio ou para o orgânico.", detalhe: "De 15 a 60 segundos" },
+          { titulo: "Corte para anúncio",   descricao: "Variações do mesmo vídeo com ganchos e chamadas diferentes, para você testar e escalar o que mais vende.", detalhe: "De 3 a 5 variações por vídeo" },
+          { titulo: "Fotos de produto",     descricao: "Fotos com luz natural e cenário real, perfeitas para site, marketplace e redes sociais.", detalhe: "Pacotes a partir de 10 fotos" },
+          { titulo: "Unboxing",             descricao: "A experiência de abrir o produto pela primeira vez, valorizando embalagem, detalhes e uma reação sincera.", detalhe: "Ideal para lançamentos" },
+          { titulo: "Publicação no perfil", descricao: "Conteúdo publicado no meu perfil, alcançando uma audiência engajada que confia nas minhas indicações.", detalhe: "Reels, TikTok e stories" },
+          { titulo: "Pacote mensal",        descricao: "Uma rotina de conteúdo para sua marca nunca ficar sem criativo novo, com valor especial e prioridade na agenda.", detalhe: "Perfeito para quem anuncia todo mês" }
+        ]
+      },
+
+      // EDITE AQUI: números, resultados de campanha e depoimentos.
+      numeros: {
+        sobretitulo: "Números e depoimentos",
+        titulo: "Resultados que <em>falam</em> por mim",
+        descricao: "Conteúdo bonito é bom. Conteúdo bonito que traz retorno é o que faz as marcas voltarem.",
+        // valor: número (use ponto para decimal, ex.: 4.9). casas: quantas casas decimais mostrar.
+        contadores: [
+          { valor: 4.9, casas: 1, prefixo: "",  sufixo: "/5",    rotulo: "nota média das marcas" },
+          { valor: 87,  casas: 0, prefixo: "",  sufixo: "%",     rotulo: "das marcas me recontratam" },
+          { valor: 5,   casas: 0, prefixo: "",  sufixo: " dias", rotulo: "de prazo médio de entrega" },
+          { valor: 2.4, casas: 1, prefixo: "+", sufixo: "M",     rotulo: "de alcance no maior vídeo" }
+        ],
+        resultadosTitulo: "Resultados de <em>campanha</em>",
+        resultados: [
+          { marca: "Aurora Cosméticos", metrica: "3,8%", rotulo: "de CTR no anúncio",       descricao: "O dobro da média da conta, com custo por clique 41% menor." },
+          { marca: "Casa Lume",         metrica: "+320", rotulo: "vendas em 7 dias",        descricao: "Campanha de lançamento com três vídeos e cortes para anúncio." },
+          { marca: "Movi Fit",          metrica: "-38%", rotulo: "no custo por aquisição",  descricao: "Teste com cinco ganchos diferentes para o mesmo produto." }
+        ],
+        depoimentosTitulo: "O que as <em>marcas</em> dizem",
+        depoimentos: [
+          { texto: "Ela entendeu o briefing de primeira e entregou vídeos com uma naturalidade que nenhuma produtora tinha conseguido. O anúncio virou o melhor da nossa conta.", nome: "Mariana Costa", empresa: "Gerente de Marketing, Aurora Cosméticos", gradiente: G.pessego },
+          { texto: "Prazo cumprido, roteiro aprovado sem retrabalho e cortes prontos para testar. É raro encontrar tanto profissionalismo junto com tanta criatividade.", nome: "Rafael Lima", empresa: "Head de Growth, Casa Lume", gradiente: G.royal },
+          { texto: "Recontratamos todo mês. Os vídeos geram comentários de clientes perguntando onde comprar, e isso não tem preço para uma marca pequena como a nossa.", nome: "Juliana Alves", empresa: "Fundadora, Sabor da Vila", gradiente: G.ambar }
+        ]
+      },
+
+      // EDITE AQUI: seus contatos.
+      contato: {
+        sobretitulo: "Contato",
+        titulo: "Bora criar <em>juntos</em>?",
+        descricao: "Me conta sobre o seu produto e o seu objetivo. Respondo em até 24 horas úteis com uma proposta sob medida para a sua marca.",
+        email: "seuemail@email.com",
+        whatsapp: "(00) 00000-0000",
+        instagram: "@seuusuario",
+        mensagemWhatsApp: "Olá! Vi seu portfólio e quero conversar sobre um projeto de conteúdo.",
+        formTitulo: "Envie uma mensagem",
+        // Como o formulário funciona:
+        // "mailto"   = abre o programa de e-mail da pessoa com a mensagem já preenchida.
+        // "mensagem" = só mostra uma mensagem de confirmação na tela.
+        modoFormulario: "mailto",
+        assuntoEmail: "Proposta de parceria pelo portfólio",
+        mensagemSucesso: "Obrigada pela mensagem! Seu programa de e-mail foi aberto com tudo preenchido. É só clicar em enviar que eu respondo rapidinho."
+      },
+
+      // EDITE AQUI: suas redes sociais (aparecem no rodapé).
+      redes: [
+        { nome: "Instagram", link: "https://instagram.com/seuusuario" },
+        { nome: "TikTok",    link: "https://tiktok.com/@seuusuario" },
+        { nome: "YouTube",   link: "https://youtube.com/@seuusuario" },
+        { nome: "LinkedIn",  link: "https://linkedin.com/in/seuusuario" }
+      ],
+
+      // EDITE AQUI: frase do rodapé.
+      rodape: {
+        frase: "Conteúdo UGC autêntico para marcas que querem ser lembradas e escolhidas."
+      }
+    };
+
+    /* ==================================================================
+       FIM DA ÁREA DE EDIÇÃO
+       Daqui para baixo é o funcionamento do site. Não precisa mexer.
+       ================================================================== */
+
+    document.documentElement.classList.add("js");
+
+    const $ = (seletor) => document.querySelector(seletor);
+    const reduzirMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function esc(texto) {
+      return String(texto == null ? "" : texto).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    }
+
+    function pegar(caminho) {
+      return caminho.split(".").reduce((obj, chave) => (obj == null ? undefined : obj[chave]), CONFIG);
+    }
+
+    // Mostra a foto real se existir; senão, o bloco em gradiente.
+    function midia(item) {
+      if (item.foto) {
+        return `<img class="midia" src="${esc(item.foto)}" alt="${esc(item.alt)}" loading="lazy">`;
+      }
+      return `<div class="midia" role="img" aria-label="${esc(item.alt)}" style="background-image:${item.gradiente}"></div>`;
+    }
+
+    const icones = {
+      check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8 12.5 2.5 2.5L16 9.5"/></svg>',
+      play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5Z"/></svg>',
+      whatsapp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5 5 16a8.5 8.5 0 1 1 3 3l-4.5 1.5Z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2L9 9.5Z"/></svg>',
+      email: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>',
+      instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor"/></svg>'
+    };
+
+    /* ---------- Textos simples (atributo data-cfg) ---------- */
+    document.querySelectorAll("[data-cfg]").forEach((el) => {
+      const valor = pegar(el.dataset.cfg);
+      if (valor != null) el.innerHTML = valor;
+    });
+
+    document.title = `${NOME} | ${CONFIG.perfil.profissao}`;
+
+    // Nome com a última palavra em itálico (efeito editorial)
+    const partesNome = NOME.trim().split(/\s+/);
+    const ultima = partesNome.pop();
+    const nomeEditorial = (partesNome.length ? esc(partesNome.join(" ")) + " " : "") + `<em>${esc(ultima)}</em>`;
+    $("#capa-nome").innerHTML = nomeEditorial;
+    $("#rodape-nome").innerHTML = nomeEditorial;
+    $("#logo").innerHTML = `${esc(NOME)}<span>.</span>`;
+
+    /* ---------- Capa ---------- */
+    $("#capa-midia").innerHTML = midia(CONFIG.capa.imagem);
+    $("#capa-numeros").innerHTML = CONFIG.capa.numeros
+      .map((n) => `<li><strong>${esc(n.valor)}</strong><span>${esc(n.rotulo)}</span></li>`).join("");
+    const listaMarcas = CONFIG.marcas.map((m) => `<li>${esc(m)}</li>`).join("");
+    $("#marcas").innerHTML = listaMarcas;
+    $("#marcas-copia").innerHTML = listaMarcas;
+
+    /* ---------- Sobre ---------- */
+    $("#sobre-midia").innerHTML = midia(CONFIG.sobre.imagem);
+    $("#sobre-paragrafos").innerHTML = CONFIG.sobre.paragrafos
+      .map((p, i) => `<p class="reveal" style="--atraso:${i * 80}ms">${esc(p)}</p>`).join("");
+    $("#entregas").innerHTML = CONFIG.sobre.entregas
+      .map((e, i) => `<li class="reveal" style="--atraso:${i * 60}ms">${icones.check}<span>${esc(e)}</span></li>`).join("");
+
+    /* ---------- Destaques ---------- */
+    $("#destaques-lista").innerHTML = CONFIG.destaques.itens.map((d, i) => `
+      <a class="card-video reveal" style="--atraso:${i * 120}ms" href="${esc(d.link)}" target="_blank" rel="noopener noreferrer">
+        <div class="card-capa">
+          ${midia(d.capa)}
+          <span class="card-formato">${esc(d.formato)}</span>
+          <span class="play">${icones.play}</span>
+        </div>
+        <p class="card-numero">${esc(d.numero)}</p>
+        <p class="card-rotulo">${esc(d.rotulo)}</p>
+        <h3 class="card-titulo">${esc(d.titulo)}</h3>
+        <p class="card-contexto">${esc(d.contexto)}</p>
+        <span class="visualmente-oculto">(abre o vídeo em uma nova aba)</span>
+      </a>`).join("");
+
+    /* ---------- Trabalhos com filtro ---------- */
+    const itensTrabalho = CONFIG.trabalhos.itens;
+    const categorias = [...new Set(itensTrabalho.map((t) => t.categoria))];
+
+    $("#galeria").innerHTML = itensTrabalho.map((t, i) => `
+      <li class="trabalho reveal" style="--atraso:${(i % 4) * 80}ms" data-categoria="${esc(t.categoria)}">
+        <figure>
+          <div class="moldura">${midia(t)}</div>
+          <figcaption>
+            <p class="trabalho-categoria">${esc(t.categoria)}</p>
+            <p class="trabalho-titulo">${esc(t.titulo)}</p>
+            <p class="trabalho-marca">${esc(t.marca)}</p>
+          </figcaption>
+        </figure>
+      </li>`).join("");
+
+    const filtros = $("#filtros");
+    filtros.innerHTML = [CONFIG.trabalhos.rotuloTodos, ...categorias].map((c, i) =>
+      `<button type="button" class="filtro" data-filtro="${i === 0 ? "*" : esc(c)}" aria-pressed="${i === 0}">${esc(c)}</button>`
+    ).join("");
+
+    filtros.addEventListener("click", (evento) => {
+      const botao = evento.target.closest(".filtro");
+      if (!botao) return;
+      const escolha = botao.dataset.filtro;
+      filtros.querySelectorAll(".filtro").forEach((b) => b.setAttribute("aria-pressed", String(b === botao)));
+      let total = 0;
+      document.querySelectorAll(".trabalho").forEach((item) => {
+        const mostrar = escolha === "*" || item.dataset.categoria === escolha;
+        item.hidden = !mostrar;
+        item.classList.remove("surgir");
+        if (mostrar) {
+          total++;
+          item.classList.add("visivel");
+          void item.offsetWidth; // reinicia a animação
+          item.classList.add("surgir");
+        }
+      });
+      $("#filtro-aviso").textContent = escolha === "*"
+        ? `Mostrando todos os ${total} trabalhos.`
+        : `Mostrando ${total} ${total === 1 ? "trabalho" : "trabalhos"} de ${botao.textContent}.`;
+    });
+
+    /* ---------- Serviços ---------- */
+    $("#servicos-lista").innerHTML = CONFIG.servicos.itens.map((s, i) => `
+      <li class="reveal" style="--atraso:${(i % 3) * 100}ms">
+        <article class="servico">
+          <span class="servico-numero" aria-hidden="true">${String(i + 1).padStart(2, "0")}</span>
+          <h3>${esc(s.titulo)}</h3>
+          <p>${esc(s.descricao)}</p>
+          <p class="servico-detalhe">${esc(s.detalhe)}</p>
+        </article>
+      </li>`).join("");
+
+    /* ---------- Números, resultados e depoimentos ---------- */
+    const formatar = (n, casas) => n.toLocaleString("pt-BR", { minimumFractionDigits: casas, maximumFractionDigits: casas });
+
+    $("#contadores").innerHTML = CONFIG.numeros.contadores.map((c, i) => `
+      <li class="contador reveal" style="--atraso:${i * 100}ms">
+        <span class="contador-valor" aria-hidden="true">${esc(c.prefixo)}<span class="contador-num" data-valor="${c.valor}" data-casas="${c.casas || 0}">${formatar(0, c.casas || 0)}</span><span class="sufixo">${esc(c.sufixo)}</span></span>
+        <span class="visualmente-oculto">${esc(c.prefixo)}${formatar(c.valor, c.casas || 0)}${esc(c.sufixo)}</span>
+        <span class="contador-rotulo">${esc(c.rotulo)}</span>
+      </li>`).join("");
+
+    $("#resultados").innerHTML = CONFIG.numeros.resultados.map((r, i) => `
+      <li class="reveal" style="--atraso:${i * 100}ms">
+        <article class="resultado">
+          <p class="resultado-marca">${esc(r.marca)}</p>
+          <p class="resultado-metrica">${esc(r.metrica)}</p>
+          <p class="resultado-rotulo">${esc(r.rotulo)}</p>
+          <p class="resultado-descricao">${esc(r.descricao)}</p>
+        </article>
+      </li>`).join("");
+
+    $("#depoimentos").innerHTML = CONFIG.numeros.depoimentos.map((d, i) => `
+      <li class="reveal" style="--atraso:${i * 100}ms">
+        <figure class="depoimento">
+          <blockquote><p>${esc(d.texto)}</p></blockquote>
+          <figcaption>
+            <span class="avatar">${midia({ foto: d.foto, gradiente: d.gradiente, alt: `Foto de ${d.nome}` })}</span>
+            <span><span class="depoimento-nome">${esc(d.nome)}</span><span class="depoimento-empresa">${esc(d.empresa)}</span></span>
+          </figcaption>
+        </figure>
+      </li>`).join("");
+
+    function animarContador(el) {
+      const alvo = parseFloat(el.dataset.valor);
+      const casas = parseInt(el.dataset.casas, 10);
+      if (reduzirMovimento) { el.textContent = formatar(alvo, casas); return; }
+      const duracao = 1800;
+      const inicio = performance.now();
+      function passo(agora) {
+        const t = Math.min((agora - inicio) / duracao, 1);
+        const suave = 1 - Math.pow(1 - t, 3);
+        el.textContent = formatar(alvo * suave, casas);
+        if (t < 1) requestAnimationFrame(passo);
+      }
+      requestAnimationFrame(passo);
+    }
+
+    /* ---------- Contato ---------- */
+    const ct = CONFIG.contato;
+    let digitosWhats = ct.whatsapp.replace(/\D/g, "");
+    if (!digitosWhats.startsWith("55") || digitosWhats.length <= 11) digitosWhats = "55" + digitosWhats;
+    const linkWhats = `https://wa.me/${digitosWhats}?text=${encodeURIComponent(ct.mensagemWhatsApp)}`;
+    const linkInsta = `https://instagram.com/${ct.instagram.replace("@", "")}`;
+
+    $("#contato-links").innerHTML = [
+      { icone: icones.whatsapp, rotulo: "WhatsApp", valor: ct.whatsapp, link: linkWhats, externo: true },
+      { icone: icones.email, rotulo: "E-mail", valor: ct.email, link: `mailto:${ct.email}`, externo: false },
+      { icone: icones.instagram, rotulo: "Instagram", valor: ct.instagram, link: linkInsta, externo: true }
+    ].map((c, i) => `
+      <li class="reveal" style="--atraso:${i * 90}ms">
+        <a class="contato-link" href="${esc(c.link)}" ${c.externo ? 'target="_blank" rel="noopener noreferrer"' : ""}>
+          <span class="contato-icone">${c.icone}</span>
+          <span><small>${c.rotulo}</small><strong>${esc(c.valor)}</strong></span>
+          ${c.externo ? '<span class="visualmente-oculto">(abre em uma nova aba)</span>' : ""}
+        </a>
+      </li>`).join("");
+
+    const form = $("#formulario");
+    const regras = [
+      { id: "nome",     valida: (v) => v.trim().length >= 2, erro: "Conta pra mim o seu nome." },
+      { id: "email",    valida: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()), erro: "Digite um e-mail válido, por exemplo nome@empresa.com." },
+      { id: "mensagem", valida: (v) => v.trim().length >= 10, erro: "Escreva uma mensagem com pelo menos 10 caracteres." }
+    ];
+
+    form.addEventListener("submit", (evento) => {
+      evento.preventDefault();
+      let primeiroErro = null;
+      regras.forEach((r) => {
+        const campo = document.getElementById(r.id);
+        const ok = r.valida(campo.value);
+        campo.setAttribute("aria-invalid", String(!ok));
+        document.getElementById("erro-" + r.id).textContent = ok ? "" : r.erro;
+        if (!ok && !primeiroErro) primeiroErro = campo;
+      });
+      if (primeiroErro) { primeiroErro.focus(); return; }
+
+      const nome = form.nome.value.trim();
+      const email = form.email.value.trim();
+      const mensagem = form.mensagem.value.trim();
+
+      if (ct.modoFormulario === "mailto") {
+        const corpo = `Nome: ${nome}\nE-mail: ${email}\n\n${mensagem}`;
+        window.location.href = `mailto:${ct.email}?subject=${encodeURIComponent(ct.assuntoEmail)}&body=${encodeURIComponent(corpo)}`;
+        $("#form-ok").textContent = ct.mensagemSucesso;
+      } else {
+        $("#form-ok").textContent = `Obrigada, ${nome}! Recebi sua mensagem e respondo em breve no e-mail ${email}.`;
+      }
+      form.reset();
+      regras.forEach((r) => document.getElementById(r.id).removeAttribute("aria-invalid"));
+    });
+
+    /* ---------- Rodapé ---------- */
+    $("#redes").innerHTML = CONFIG.redes
+      .map((r) => `<li><a href="${esc(r.link)}" target="_blank" rel="noopener noreferrer">${esc(r.nome)}<span class="visualmente-oculto"> (abre em uma nova aba)</span></a></li>`).join("");
+    $("#direitos").textContent = `© ${new Date().getFullYear()} ${NOME}. Todos os direitos reservados.`;
+
+    /* ---------- Menu: fundo ao rolar e menu-sanduíche ---------- */
+    const topo = $("#topo");
+    const menuBtn = $("#menu-btn");
+    const menu = $("#menu");
+
+    function aoRolar() { topo.classList.toggle("rolado", window.scrollY > 20); }
+    window.addEventListener("scroll", aoRolar, { passive: true });
+    aoRolar();
+
+    function abrirMenu(abrir) {
+      menuBtn.setAttribute("aria-expanded", String(abrir));
+      menuBtn.setAttribute("aria-label", abrir ? "Fechar menu" : "Abrir menu");
+      menu.classList.toggle("aberto", abrir);
+      topo.classList.toggle("menu-aberto", abrir);
+    }
+    menuBtn.addEventListener("click", () => abrirMenu(menuBtn.getAttribute("aria-expanded") !== "true"));
+    menu.addEventListener("click", (e) => { if (e.target.closest("a")) abrirMenu(false); });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && menu.classList.contains("aberto")) { abrirMenu(false); menuBtn.focus(); }
+    });
+    window.addEventListener("resize", () => { if (window.innerWidth > 880) abrirMenu(false); });
+
+    /* ---------- Animações de entrada (IntersectionObserver) ---------- */
+    const elementosReveal = document.querySelectorAll(".reveal");
+    const numerosContador = document.querySelectorAll(".contador-num");
+
+    if ("IntersectionObserver" in window && !reduzirMovimento) {
+      const observador = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+          if (entrada.isIntersecting) {
+            entrada.target.classList.add("visivel");
+            observador.unobserve(entrada.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+      elementosReveal.forEach((el) => observador.observe(el));
+
+      const observadorNumeros = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+          if (entrada.isIntersecting) {
+            animarContador(entrada.target);
+            observadorNumeros.unobserve(entrada.target);
+          }
+        });
+      }, { threshold: 0.6 });
+      numerosContador.forEach((el) => observadorNumeros.observe(el));
+    } else {
+      elementosReveal.forEach((el) => el.classList.add("visivel"));
+      numerosContador.forEach((el) => { el.textContent = formatar(parseFloat(el.dataset.valor), parseInt(el.dataset.casas, 10)); });
+    }
+  </script>
+</body>
+</html>
