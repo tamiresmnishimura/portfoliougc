@@ -4,18 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- EDITE AQUI: título e descrição que aparecem no Google e quando o link
-       é compartilhado no WhatsApp, Instagram ou LinkedIn. Troque SEU NOME. -->
-  <title>SEU NOME | Criadora de conteúdo UGC</title>
-  <meta name="description" content="Portfólio de criadora de conteúdo UGC: vídeos autênticos que fazem marcas venderem mais.">
+       é compartilhado no WhatsApp, Instagram ou LinkedIn. -->
+  <title>Tamires Nishimura | Criadora de conteúdo UGC</title>
+  <meta name="description" content="Portfólio de Tamires Nishimura, criadora de conteúdo UGC: mais de 90 vídeos autênticos para mais de 80 marcas de moda, beleza, gastronomia, casa, viagens e muito mais.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:url" content="https://tamiresmnishimura.github.io/portfoliougc/">
-  <meta property="og:title" content="SEU NOME | Criadora de conteúdo UGC">
+  <meta property="og:title" content="Tamires Nishimura | Criadora de conteúdo UGC">
   <meta property="og:description" content="Vídeos autênticos que fazem marcas pararem o scroll, gerarem confiança e venderem mais.">
+  <meta property="og:image" content="https://tamiresmnishimura.github.io/portfoliougc/fotos/capa.jpg">
   <meta name="theme-color" content="#f3eee9">
 
-  <!-- Ícone da aba do navegador (letra em itálico nas cores do site) -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230049a4'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-style='italic' font-size='40' fill='%23f3eee9'%3EU%3C/text%3E%3Ccircle cx='49' cy='47' r='4' fill='%23df7900'/%3E%3C/svg%3E">
+  <!-- Ícone da aba do navegador (inicial em itálico nas cores do site) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230049a4'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-style='italic' font-size='40' fill='%23f3eee9'%3ET%3C/text%3E%3Ccircle cx='49' cy='47' r='4' fill='%23df7900'/%3E%3C/svg%3E">
 
   <!-- Fontes do Google: Fraunces (títulos) e Plus Jakarta Sans (textos) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,6 +52,7 @@
       scroll-behavior: smooth;
       -webkit-text-size-adjust: 100%;
     }
+    html:has(dialog[open]) { overflow: hidden; }
 
     body {
       margin: 0;
@@ -184,7 +186,7 @@
     .btn-secundario { border-color: var(--tinta); color: var(--tinta); background: transparent; }
     .btn-secundario:hover { background: var(--tinta); color: var(--creme); transform: translateY(-2px); }
 
-    /* Blocos de imagem: gradiente (ou foto real, quando houver) */
+    /* Blocos de imagem: foto real ou gradiente */
     .midia {
       position: relative;
       width: 100%;
@@ -194,7 +196,6 @@
       background-position: center;
     }
     div.midia::after {
-      /* brilho suave por cima do gradiente, para parecer uma foto */
       content: "";
       position: absolute;
       inset: 0;
@@ -351,7 +352,7 @@
     }
 
     .capa-nome {
-      font-size: clamp(3.2rem, 9.5vw, 7.8rem);
+      font-size: clamp(3rem, 8.5vw, 7.2rem);
       line-height: .95;
       font-weight: 350;
       letter-spacing: -.035em;
@@ -398,7 +399,6 @@
       isolation: isolate;
     }
     .capa-foto::before {
-      /* moldura fina deslocada, detalhe editorial */
       content: "";
       position: absolute;
       inset: 20px -20px -20px 20px;
@@ -434,7 +434,6 @@
       flex-shrink: 0;
       border-radius: 50%;
       background: var(--laranja);
-      box-shadow: 0 0 0 0 rgba(223, 121, 0, .5);
       animation: pulsar 2.4s ease-out infinite;
     }
     @keyframes pulsar {
@@ -462,7 +461,7 @@
       color: var(--tinta-suave);
       white-space: nowrap;
     }
-    .faixa-trilho {
+    .faixa-trilho, .logos-linha {
       display: flex;
       overflow: hidden;
       min-width: 0;
@@ -477,9 +476,9 @@
       padding: 0 3rem 0 0;
       margin: 0;
       list-style: none;
-      animation: rolar 36s linear infinite;
+      animation: rolar 60s linear infinite;
     }
-    .faixa-trilho:hover ul { animation-play-state: paused; }
+    .faixa-trilho:hover ul, .logos-linha:hover ul { animation-play-state: paused; }
     .faixa-trilho li {
       display: flex;
       align-items: center;
@@ -507,9 +506,7 @@
       gap: clamp(2.5rem, 7vw, 6rem);
       align-items: center;
     }
-    .sobre-foto {
-      position: relative;
-    }
+    .sobre-foto { position: relative; }
     .sobre-foto .moldura {
       aspect-ratio: 4 / 5;
       border-radius: var(--raio);
@@ -573,8 +570,8 @@
     .destaques { background: var(--creme-escuro); }
     .destaques-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: clamp(1.5rem, 3vw, 2.5rem);
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: clamp(1rem, 2vw, 1.75rem);
     }
     .card-video {
       display: block;
@@ -588,27 +585,38 @@
       border-radius: var(--raio);
       overflow: hidden;
       box-shadow: var(--sombra);
+      background: var(--tinta);
     }
-    .card-capa .midia { transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
-    .card-video:hover .card-capa .midia { transform: scale(1.045); }
-    .card-formato {
+    .card-capa::after {
+      content: "";
       position: absolute;
-      top: 1rem; left: 1rem;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(20, 17, 13, .35) 0%, transparent 22%, transparent 70%, rgba(20, 17, 13, .35) 100%);
+      pointer-events: none;
+    }
+    .card-capa .midia, .trabalho .midia { transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
+    .card-video:hover .card-capa .midia { transform: scale(1.045); }
+    .card-selo {
+      position: absolute;
+      top: .8rem; left: .8rem;
       z-index: 2;
-      background: rgba(255, 253, 250, .92);
+      max-width: calc(100% - 1.6rem);
+      background: rgba(255, 253, 250, .94);
       color: var(--tinta);
-      font-size: .75rem;
+      font-size: .7rem;
       font-weight: 700;
-      letter-spacing: .08em;
+      letter-spacing: .06em;
       text-transform: uppercase;
-      padding: .4rem .8rem;
+      line-height: 1.25;
+      padding: .4rem .75rem;
       border-radius: 999px;
     }
+    .card-selo.ouro { background: var(--laranja); color: var(--tinta); }
     .play {
       position: absolute;
       top: 50%; left: 50%;
       z-index: 2;
-      width: 76px; height: 76px;
+      width: 64px; height: 64px;
       transform: translate(-50%, -50%);
       display: grid;
       place-items: center;
@@ -618,33 +626,58 @@
       box-shadow: 0 12px 30px -10px rgba(20, 17, 13, .5);
       transition: transform .4s ease, background-color .3s ease, color .3s ease;
     }
-    .play svg { width: 26px; height: 26px; margin-left: 4px; }
+    .play svg { width: 22px; height: 22px; margin-left: 3px; }
     .card-video:hover .play { transform: translate(-50%, -50%) scale(1.08); background: var(--azul); color: #fff; }
     .card-numero {
-      margin-top: 1.4rem;
+      margin-top: 1.2rem;
       font-family: "Fraunces", Georgia, serif;
-      font-size: clamp(2.4rem, 4.2vw, 3.4rem);
+      font-size: clamp(1.9rem, 2.8vw, 2.6rem);
       line-height: 1;
       color: var(--azul);
       letter-spacing: -.03em;
     }
     .card-rotulo {
       margin-top: .4rem;
-      font-size: .78rem;
+      font-size: .74rem;
       font-weight: 700;
-      letter-spacing: .14em;
+      letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--tinta-suave);
     }
     .card-titulo {
-      margin-top: 1rem;
-      font-size: 1.4rem;
+      margin-top: .9rem;
+      font-size: 1.3rem;
       line-height: 1.2;
     }
+    .card-titulo em { font-style: italic; color: var(--azul); }
     .card-contexto {
-      margin-top: .45rem;
-      font-size: .95rem;
+      margin-top: .4rem;
+      font-size: .92rem;
+      line-height: 1.5;
       color: var(--tinta-suave);
+    }
+    .deslize {
+      display: none;
+      margin-top: .5rem;
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--tinta-suave);
+    }
+
+    @media (max-width: 1100px) {
+      .destaques-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 1.25rem;
+        gap: 1.25rem;
+        margin-inline: -1.25rem;
+        padding: .25rem 1.25rem 1rem;
+        scrollbar-width: none;
+      }
+      .destaques-grid::-webkit-scrollbar { display: none; }
+      .destaques-grid .card-video { flex: 0 0 min(280px, 72%); scroll-snap-align: start; }
+      .deslize { display: block; }
     }
 
     /* =========================================================
@@ -657,55 +690,94 @@
       margin-bottom: 2.5rem;
     }
     .filtro {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
       font: inherit;
       font-size: .92rem;
       font-weight: 600;
       min-height: 44px;
-      padding: .6rem 1.3rem;
+      padding: .55rem 1.15rem;
       border-radius: 999px;
       border: 1.5px solid rgba(20, 17, 13, .25);
       background: transparent;
       color: var(--tinta);
       cursor: pointer;
+      white-space: nowrap;
       transition: background-color .3s ease, color .3s ease, border-color .3s ease;
     }
+    .filtro small { font-size: .75rem; font-weight: 600; opacity: .65; }
     .filtro:hover { border-color: var(--tinta); }
     .filtro[aria-pressed="true"] { background: var(--tinta); border-color: var(--tinta); color: var(--creme); }
 
     .galeria {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
-      gap: clamp(1.25rem, 2.5vw, 2rem);
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: clamp(1.25rem, 2.5vw, 2rem) clamp(1rem, 2vw, 1.5rem);
       list-style: none;
       margin: 0;
       padding: 0;
     }
-    .trabalho figure { margin: 0; }
+    .trabalho {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 12px;
+    }
     .trabalho .moldura {
-      aspect-ratio: 4 / 5;
-      border-radius: var(--raio);
+      position: relative;
+      aspect-ratio: 9 / 16;
+      border-radius: 12px;
       overflow: hidden;
+      background: var(--creme-escuro);
       box-shadow: var(--sombra-leve);
     }
-    .trabalho .midia { transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
-    .trabalho:hover .midia { transform: scale(1.04); }
-    .trabalho figcaption { padding-top: 1rem; }
-    .trabalho-categoria {
-      font-size: .74rem;
+    .trabalho:hover .midia { transform: scale(1.05); }
+    .mini-play {
+      position: absolute;
+      right: .65rem;
+      bottom: .65rem;
+      width: 38px; height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255, 253, 250, .92);
+      color: var(--azul);
+      transition: background-color .3s ease, color .3s ease;
+    }
+    .mini-play svg { width: 14px; height: 14px; margin-left: 2px; }
+    .trabalho:hover .mini-play { background: var(--azul); color: #fff; }
+    .trabalho-legenda { padding-top: .8rem; }
+    .trabalho-marca {
+      font-size: .72rem;
       font-weight: 700;
-      letter-spacing: .14em;
+      letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--azul);
     }
     .trabalho-titulo {
-      margin-top: .3rem;
+      margin-top: .2rem;
       font-family: "Fraunces", Georgia, serif;
-      font-size: 1.2rem;
+      font-size: 1.08rem;
       line-height: 1.25;
     }
-    .trabalho-marca { margin-top: .2rem; font-size: .9rem; color: var(--tinta-suave); }
     .trabalho.surgir { animation: surgir .6s cubic-bezier(.2, .7, .2, 1) both; }
     @keyframes surgir { from { opacity: 0; transform: translateY(14px); } }
+    .mais { display: flex; justify-content: center; margin-top: 3rem; }
+    @media (max-width: 1100px) { .galeria { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+    @media (max-width: 700px) {
+      .filtros {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        margin-inline: -1.25rem;
+        padding: .25rem 1.25rem .5rem;
+        scrollbar-width: none;
+      }
+      .filtros::-webkit-scrollbar { display: none; }
+      .galeria { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem .85rem; }
+      .trabalho-titulo { font-size: 1rem; }
+    }
 
     /* =========================================================
        5. COMO EU TE AJUDO
@@ -794,6 +866,46 @@
     }
     .subtitulo em { font-style: italic; color: var(--azul); }
 
+    /* Parede de logos (duas faixas em movimento) */
+    .logos {
+      display: grid;
+      gap: 1.1rem;
+      margin-bottom: clamp(4rem, 8vw, 6rem);
+    }
+    .logos-linha ul {
+      display: flex;
+      flex-shrink: 0;
+      gap: 1.1rem;
+      padding: .5rem 1.1rem .75rem 0;
+      margin: 0;
+      list-style: none;
+      animation: rolar 110s linear infinite;
+    }
+    .logos-linha.reversa ul { animation-direction: reverse; }
+    .logo-item {
+      width: 100px; height: 100px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--branco);
+      box-shadow: var(--sombra-leve);
+    }
+    .logo-item img { width: 100%; height: 100%; object-fit: cover; }
+    .logo-texto {
+      display: grid;
+      place-items: center;
+      padding: .8rem;
+      text-align: center;
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: .98rem;
+      line-height: 1.12;
+      color: var(--tinta);
+      border: 1px solid var(--linha);
+    }
+    .logo-texto.azul { background: var(--azul); color: var(--creme); border-color: var(--azul); }
+    .logo-texto.tinta { background: var(--tinta); color: var(--creme); border-color: var(--tinta); }
+
     .resultados {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -832,7 +944,7 @@
 
     .depoimentos {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: clamp(1rem, 2vw, 1.5rem);
       list-style: none;
       margin: 0;
@@ -843,41 +955,44 @@
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
-      padding: clamp(1.75rem, 3vw, 2.4rem);
+      gap: 1.1rem;
+      padding: clamp(1.5rem, 2.5vw, 2rem);
       background: var(--branco);
       border: 1px solid var(--linha);
       border-radius: var(--raio);
       box-shadow: var(--sombra-leve);
     }
-    .depoimento::before {
-      content: "“";
-      font-family: "Fraunces", Georgia, serif;
-      font-size: 4.5rem;
-      line-height: .6;
-      color: var(--azul);
-      height: 2rem;
-    }
+    .estrelas { color: var(--laranja); letter-spacing: .15em; font-size: .95rem; }
     .depoimento blockquote { margin: 0; }
     .depoimento blockquote p {
       font-family: "Fraunces", Georgia, serif;
-      font-size: 1.18rem;
+      font-size: 1.1rem;
       line-height: 1.5;
     }
     .depoimento figcaption {
       margin-top: auto;
       display: flex;
       align-items: center;
-      gap: .9rem;
+      gap: .8rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--linha);
     }
     .avatar {
-      width: 48px; height: 48px;
+      width: 46px; height: 46px;
       flex-shrink: 0;
       border-radius: 50%;
       overflow: hidden;
+      display: grid;
+      place-items: center;
+      background: var(--azul);
+      color: var(--creme);
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 1.2rem;
     }
-    .depoimento-nome { display: block; font-weight: 700; font-size: .97rem; }
-    .depoimento-empresa { display: block; font-size: .88rem; color: var(--tinta-suave); }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .depoimento-nome { display: block; font-weight: 700; font-size: .92rem; line-height: 1.35; }
+    .depoimento-empresa { display: block; font-size: .85rem; color: var(--tinta-suave); }
 
     /* =========================================================
        7. BORA CRIAR JUNTOS (CONTATO)
@@ -935,7 +1050,7 @@
       color: rgba(243, 238, 233, .8);
     }
     .contato-link strong { display: block; font-weight: 600; overflow-wrap: anywhere; }
-    .contato-link > span:last-child { min-width: 0; }
+    .contato-link > span:nth-child(2) { min-width: 0; }
 
     .formulario {
       --foco: var(--azul);
@@ -968,7 +1083,7 @@
       box-shadow: 0 0 0 3px rgba(0, 73, 164, .2);
     }
     .campo [aria-invalid="true"] { border-color: #b3261e; }
-    .erro { font-size: .85rem; color: #b3261e; min-height: 0; }
+    .erro { font-size: .85rem; color: #b3261e; }
     .erro:empty { display: none; }
     .formulario .btn { width: 100%; }
     .form-ok {
@@ -1039,6 +1154,58 @@
     .rodape-base a { color: var(--creme); }
 
     /* =========================================================
+       PLAYER DE VÍDEO (abre por cima da página)
+       ========================================================= */
+    .player {
+      --foco: var(--creme);
+      border: 0;
+      padding: 0;
+      background: transparent;
+      max-width: none;
+      max-height: none;
+      overflow: visible;
+    }
+    .player::backdrop { background: rgba(20, 17, 13, .88); }
+    .player-caixa { position: relative; display: grid; gap: .85rem; justify-items: center; }
+    .player-video {
+      width: min(calc(100vw - 2.5rem), calc((100vh - 9rem) * 9 / 16), 420px);
+      aspect-ratio: 9 / 16;
+      border-radius: var(--raio);
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, .7);
+    }
+    .player-video iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .player-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .4rem 1rem;
+      color: var(--creme);
+      font-size: .95rem;
+      text-align: center;
+    }
+    .player-info strong { font-family: "Fraunces", Georgia, serif; font-weight: 400; font-size: 1.15rem; }
+    .player-info a { color: var(--pessego); font-weight: 600; }
+    .player-fechar {
+      position: absolute;
+      top: -.5rem;
+      right: -3.5rem;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 0;
+      background: var(--creme);
+      color: var(--tinta);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    @media (max-width: 600px) {
+      .player-fechar { top: auto; bottom: -4rem; right: 50%; transform: translateX(50%); }
+      .player-caixa { padding-bottom: 3.5rem; }
+    }
+
+    /* =========================================================
        ANIMAÇÃO DE ENTRADA AO ROLAR
        ========================================================= */
     .js .reveal {
@@ -1053,33 +1220,35 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .js .reveal { opacity: 1; transform: none; }
-      .faixa-trilho ul[aria-hidden="true"] { display: none; }
-      .faixa-trilho ul { flex-wrap: wrap; flex-shrink: 1; row-gap: .5rem; }
+      .faixa-trilho ul[aria-hidden="true"], .logos-linha ul[aria-hidden="true"] { display: none; }
+      .faixa-trilho ul, .logos-linha ul { flex-wrap: wrap; flex-shrink: 1; row-gap: .5rem; justify-content: center; }
+      .faixa-trilho, .logos-linha { -webkit-mask-image: none; mask-image: none; }
     }
 
     /* =========================================================
        AJUSTES PARA TABLET E CELULAR
        ========================================================= */
+    @media (max-width: 1100px) {
+      .depoimentos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
     @media (max-width: 980px) {
       .contadores { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .resultados, .depoimentos { grid-template-columns: minmax(0, 1fr); max-width: 640px; }
+      .resultados { grid-template-columns: minmax(0, 1fr); max-width: 640px; }
     }
 
     @media (max-width: 880px) {
       .capa-grid, .sobre-grid, .contato-grid { grid-template-columns: minmax(0, 1fr); }
       .capa-foto { max-width: 460px; width: calc(100% - 20px); }
       .sobre-foto { max-width: 460px; }
-      .destaques-grid {
-        grid-template-columns: minmax(0, 1fr);
-        max-width: 380px;
-        margin-inline: auto;
-        gap: 3.5rem;
-      }
+    }
+
+    @media (max-width: 640px) {
+      .depoimentos { grid-template-columns: minmax(0, 1fr); }
     }
 
     @media (max-width: 600px) {
       body { font-size: 1rem; }
-      .container { width: calc(100% - 2.5rem); }
       .capa-numeros { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
       .capa-numeros span { font-size: .8rem; display: block; line-height: 1.35; }
       .botoes .btn { flex: 1 1 100%; }
@@ -1089,6 +1258,8 @@
       .faixa-marcas { flex-direction: column; align-items: stretch; gap: 1rem; }
       .faixa-rotulo { padding-left: 0; text-align: center; }
       .contadores { gap: 2rem 1.25rem; }
+      .logo-item { width: 84px; height: 84px; }
+      .logo-texto { font-size: .85rem; padding: .6rem; }
       .rodape-topo { flex-direction: column; align-items: flex-start; }
     }
   </style>
@@ -1173,6 +1344,7 @@
           <p class="lead reveal" data-cfg="destaques.descricao"></p>
         </div>
         <div class="destaques-grid" id="destaques-lista"></div>
+        <p class="deslize" aria-hidden="true">Deslize para ver mais →</p>
       </div>
     </section>
 
@@ -1182,11 +1354,12 @@
         <div class="secao-topo">
           <p class="sobretitulo reveal" data-cfg="trabalhos.sobretitulo"></p>
           <h2 class="titulo reveal" id="trabalhos-titulo" data-cfg="trabalhos.titulo"></h2>
-          <p class="lead reveal" data-cfg="trabalhos.descricao"></p>
+          <p class="lead reveal" id="trabalhos-descricao"></p>
         </div>
         <div class="filtros reveal" id="filtros" role="group" aria-label="Filtrar trabalhos por nicho"></div>
         <p class="visualmente-oculto" id="filtro-aviso" aria-live="polite"></p>
         <ul class="galeria" id="galeria"></ul>
+        <div class="mais"><button type="button" class="btn btn-secundario" id="ver-mais"></button></div>
       </div>
     </section>
 
@@ -1211,7 +1384,15 @@
           <p class="lead reveal" data-cfg="numeros.descricao"></p>
         </div>
         <ul class="contadores" id="contadores"></ul>
+        <h3 class="subtitulo reveal" id="logos-titulo" data-cfg="marcas.tituloLogos"></h3>
+      </div>
 
+      <div class="logos reveal" role="region" aria-labelledby="logos-titulo">
+        <div class="logos-linha"><ul id="logos-1"></ul><ul id="logos-1-copia" aria-hidden="true"></ul></div>
+        <div class="logos-linha reversa"><ul id="logos-2"></ul><ul id="logos-2-copia" aria-hidden="true"></ul></div>
+      </div>
+
+      <div class="container">
         <h3 class="subtitulo reveal" data-cfg="numeros.resultadosTitulo"></h3>
         <ul class="resultados" id="resultados"></ul>
 
@@ -1273,34 +1454,37 @@
     </div>
   </footer>
 
+  <!-- Player que abre os vídeos do YouTube por cima da página -->
+  <dialog class="player" id="player" aria-labelledby="player-titulo">
+    <div class="player-caixa">
+      <button class="player-fechar" id="player-fechar" type="button" aria-label="Fechar vídeo">×</button>
+      <div class="player-video" id="player-video"></div>
+      <p class="player-info"><strong id="player-titulo"></strong><a id="player-link" href="#" target="_blank" rel="noopener noreferrer">Abrir no YouTube</a></p>
+    </div>
+  </dialog>
+
   <script>
     /* ==================================================================
        ÁREA DE EDIÇÃO
        Todo o conteúdo do site está aqui embaixo. Você só precisa mudar
        os textos entre aspas. Não apague as vírgulas, aspas e chaves.
 
-       COMO TROCAR UM BLOCO DE GRADIENTE POR UMA FOTO REAL:
-       1. Coloque a foto na mesma pasta deste arquivo (ex.: "minha-foto.jpg").
-       2. No item desejado, preencha o campo  foto: "minha-foto.jpg"
-       3. Pronto! Se "foto" estiver vazio (""), o site mostra o gradiente.
-       Dica: escreva no campo "alt" uma descrição da foto (para acessibilidade).
-       Formatos ideais: capa e sobre em 4:5 (ex.: 1080x1350), destaques em
-       9:16 (ex.: 1080x1920) e trabalhos em 4:5.
+       FOTOS: ficam na pasta "fotos". Para trocar, salve a nova foto lá
+       e escreva o nome dela no campo foto (ex.: foto: "fotos/nova.jpg").
+
+       VÍDEOS: basta colar o link do YouTube (shorts, youtu.be ou normal).
+       A capa aparece sozinha: primeiro o site procura a imagem na pasta
+       "capas" (nome do arquivo = código do vídeo) e, se não achar, usa a
+       capa do próprio YouTube. Não precisa fazer mais nada.
        ================================================================== */
 
     // EDITE AQUI: seu nome. Ele aparece no menu, na capa, nos textos e no rodapé.
-    const NOME = "SEU NOME";
+    const NOME = "Tamires Nishimura";
 
-    // Gradientes da paleta do site. Use os nomes (ex.: G.royal) nos itens abaixo.
+    // Gradientes da paleta (usados quando um item não tem foto).
     const G = {
       royal:   "linear-gradient(160deg, #0049a4 0%, #3b7bd6 48%, #f2c391 100%)",
-      poente:  "linear-gradient(200deg, #df7900 0%, #f0ad5f 45%, #f6e3cf 100%)",
-      noite:   "linear-gradient(150deg, #14110d 0%, #1d2f55 55%, #0049a4 100%)",
-      ambar:   "radial-gradient(circle at 30% 25%, #ffd9ae 0%, #df7900 55%, #7c3f00 100%)",
-      areia:   "linear-gradient(135deg, #efe5da 0%, #d6c0a6 55%, #9c7f61 100%)",
-      oceano:  "linear-gradient(170deg, #9dbcec 0%, #0049a4 60%, #14110d 100%)",
-      pessego: "linear-gradient(140deg, #f7d7bd 0%, #eaa877 50%, #df7900 100%)",
-      grafite: "linear-gradient(120deg, #3a332b 0%, #14110d 60%, #4a3418 100%)"
+      pessego: "linear-gradient(140deg, #f7d7bd 0%, #eaa877 50%, #df7900 100%)"
     };
 
     const CONFIG = {
@@ -1315,99 +1499,286 @@
         sobretitulo: "Criadora de conteúdo UGC",
         frase: "Crio vídeos autênticos, com cara de gente de verdade, que fazem a sua marca parar o scroll, gerar confiança e vender mais.",
         selo: "Agenda aberta para novas parcerias",
-        // Foto principal da capa. Para usar uma foto real, preencha "foto".
-        imagem: { foto: "", gradiente: G.royal, alt: `Retrato de ${NOME}, criadora de conteúdo UGC` },
+        imagem: { foto: "fotos/capa.jpg", gradiente: G.royal, alt: `${NOME} sorrindo, de blusa branca e calça jeans, sobre fundo azul` },
         // Os três números curtos abaixo dos botões.
         numeros: [
-          { valor: "+120", rotulo: "vídeos entregues" },
-          { valor: "+40",  rotulo: "marcas atendidas" },
-          { valor: "+8M",  rotulo: "views somadas" }
+          { valor: "+90",  rotulo: "vídeos no portfólio" },
+          { valor: "+80",  rotulo: "marcas atendidas" },
+          { valor: "+10M", rotulo: "views somadas" }
         ],
         rotuloMarcas: "Marcas que confiam"
       },
 
-      // EDITE AQUI: nomes das marcas com quem você já trabalhou (faixa da capa).
-      marcas: ["Aurora Cosméticos", "Casa Lume", "Sabor da Vila", "Ateliê Ana", "Movi Fit", "Pura Pele", "Brisa Home", "Grão Café"],
+      // EDITE AQUI: marcas.
+      marcas: {
+        // Nomes que passam na faixa fina da capa.
+        faixa: ["Colcci", "Hering", "Farm", "Liz", "Copacol", "Rap10", "OLX", "Zap Imóveis", "Perplexity", "Lança Perfume", "Coala", "Buriti Shopping", "5àsec", "Sabrina Fernandes", "Voy", "Empório Macadâmia"],
+        tituloLogos: "Marcas que já confiaram no <em>meu trabalho</em>",
+        // Logos (ficam na pasta "logos"). Para incluir uma nova, salve a
+        // imagem quadrada na pasta e adicione uma linha { nome, logo }.
+        logos: [
+          { nome: "Liz", logo: "logos/liz.jpg" },
+          { nome: "Hering", logo: "logos/hering.jpg" },
+          { nome: "Copacol", logo: "logos/copacol.jpg" },
+          { nome: "Rap10", logo: "logos/rap10.jpg" },
+          { nome: "Zap Imóveis", logo: "logos/zap.jpg" },
+          { nome: "Sabrina Fernandes", logo: "logos/sabrina-fernandes.jpg" },
+          { nome: "Empório Macadâmia", logo: "logos/emporio-macadamia.jpg" },
+          { nome: "Buriti Shopping", logo: "logos/buriti.jpg" },
+          { nome: "5àsec", logo: "logos/5asec.jpg" },
+          { nome: "Relove", logo: "logos/relove.jpg" },
+          { nome: "Tropical Especiarias", logo: "logos/tropical.jpg" },
+          { nome: "Viasete", logo: "logos/viasete.jpg" },
+          { nome: "Bothanica Mineral", logo: "logos/bothanica.jpg" },
+          { nome: "iFinance", logo: "logos/ifinance.jpg" },
+          { nome: "Pelmex+", logo: "logos/pelmex.jpg" },
+          { nome: "Carolina Areco", logo: "logos/carolina-areco.jpg" },
+          { nome: "Essencial Spa", logo: "logos/essencial.jpg" },
+          { nome: "Rancho do Zé João", logo: "logos/rancho-do-ze-joao.jpg" },
+          { nome: "Vinagreen", logo: "logos/vinagreen.jpg" },
+          { nome: "Touti", logo: "logos/touti.jpg" },
+          { nome: "Cajs", logo: "logos/cajs.jpg" },
+          { nome: "Entre Chalés", logo: "logos/entre-chales.jpg" },
+          { nome: "Poli-Pet", logo: "logos/polipet.jpg" },
+          { nome: "Trisanti", logo: "logos/trisanti.jpg" },
+          { nome: "Bem Me Fiz", logo: "logos/bem-me-fiz.jpg" },
+          { nome: "Pharmapele", logo: "logos/pharmapele.jpg" },
+          { nome: "Acqua Lavanderia", logo: "logos/acqua.jpg" },
+          { nome: "Rahra Semijoias", logo: "logos/rahra.jpg" },
+          { nome: "Chama Congelante", logo: "logos/chama-congelante.jpg" },
+          { nome: "Pra Casa", logo: "logos/pra-casa.jpg" },
+          { nome: "Zanin", logo: "logos/zanin.jpg" },
+          { nome: "Focus Educação", logo: "logos/focus.jpg" },
+          { nome: "Digorestte", logo: "logos/digorestte.jpg" },
+          { nome: "Speck Truffle Sauce", logo: "logos/speck.jpg" },
+          { nome: "Carolina Gonçalves", logo: "logos/carolina-goncalves.jpg" },
+          { nome: "Valle Branco Alimentos", logo: "logos/valle-branco.jpg" },
+          { nome: "iÁgua", logo: "logos/iagua.jpg" },
+          { nome: "Carrano", logo: "logos/carrano.jpg" },
+          { nome: "Aya", logo: "logos/aya.jpg" },
+          { nome: "A. Balzaquiana", logo: "logos/balzaquiana.jpg" },
+          { nome: "Amor de Brechó", logo: "logos/amor-de-brecho.jpg" },
+          { nome: "Peçarara Brechó", logo: "logos/pecarara.jpg" },
+          { nome: "Leve Brechó", logo: "logos/leve-brecho.jpg" },
+          { nome: "Burguesinha's Brechó Chic", logo: "logos/burguesinhas.jpg" },
+          { nome: "Bazar da Thatá", logo: "logos/bazar-da-thata.jpg" },
+          { nome: "Blza", logo: "logos/blza.jpg" },
+          { nome: "Georgia Carvalho", logo: "logos/georgia-carvalho.jpg" },
+          { nome: "Unique Star", logo: "logos/unique-star.jpg" },
+          { nome: "RC Consultoria de Beleza", logo: "logos/rc-consultoria.jpg" },
+          { nome: "Amanda Uchôa Studio", logo: "logos/amanda-uchoa.jpg" },
+          { nome: "Eduarda Aquino", logo: "logos/eduarda-aquino.jpg" },
+          { nome: "Única Joias", logo: "logos/unica-joias.jpg" },
+          { nome: "Eleve Pratas", logo: "logos/eleve-pratas.jpg" },
+          { nome: "Birô", logo: "logos/biro.jpg" },
+          { nome: "PDC Culture", logo: "logos/pdc-culture.jpg" },
+          { nome: "Pitaia", logo: "logos/pitaia.jpg" },
+          { nome: "Marca parceira", logo: "logos/marca-folha.jpg" },
+          { nome: "Marca parceira", logo: "logos/marca-ancora.jpg" },
+          { nome: "Marca parceira", logo: "logos/kb.jpg" },
+          { nome: "Marca parceira", logo: "logos/marca-geometrica.jpg" }
+        ],
+        // Marcas que ainda não têm logo: aparecem como um selo com o nome.
+        // Quando tiver a logo, mova a marca para a lista de cima.
+        semLogo: ["Colcci", "Farm", "Voy", "Moldavita", "Vida Costeira", "Platô", "Whale Houses", "Esperança Presentes", "Santa Essência", "Battagini", "Descubra Cunha", "Lança Perfume", "Lez a Lez", "OLX", "Perplexity", "Coala", "Silvercare", "Lavieen", "Khali", "Hoomy", "The Frozen Palm Tree", "Dale", "EasySIM4U", "Meu Celular", "Padoca Caiupura", "Constlivre", "Tem Vantagem", "EITA"]
+      },
 
       // EDITE AQUI: seção Sobre mim.
       sobre: {
         sobretitulo: "Sobre mim",
-        titulo: `Prazer, eu sou a <em>${NOME}</em>`,
-        etiqueta: "Luz natural e roteiro estratégico",
-        imagem: { foto: "", gradiente: G.pessego, alt: `${NOME} gravando um vídeo em casa com o celular` },
+        titulo: "Prazer, eu sou a <em>Tamires</em>",
+        etiqueta: "Piquete-SP, com a mala sempre pronta",
+        imagem: { foto: "fotos/sobre.jpg", gradiente: G.pessego, alt: `${NOME} sorrindo e apontando para a câmera em uma sala iluminada` },
         paragrafos: [
-          "Sou criadora de conteúdo UGC e apaixonada por transformar produtos em histórias que as pessoas querem assistir até o final. Meu trabalho é fazer a sua marca parecer o que ela é: algo que gente de verdade usa e indica.",
-          "Gravo em casa ou em locações reais, com luz natural, áudio limpo e aquele jeito de conversa entre amigas que gera confiança. Cada vídeo nasce de um roteiro pensado para prender a atenção nos primeiros segundos e levar quem assiste até a compra.",
-          "Meu compromisso é simples: conteúdo bonito, entregue no prazo e com resultado de verdade para o seu negócio."
+          "Tenho 32 anos, sou pós-graduada em Gestão de Pessoas pela USP e trabalhei 10 anos com RH antes de me dedicar à criação de conteúdo. Esse olhar treinado para pessoas virou o meu diferencial: eu sei o que faz alguém parar, prestar atenção e confiar.",
+          "Moro em Piquete-SP e vivo com uma mala na mão, entre o Vale do Paraíba, Santo André, São Paulo e Salto. Na minha rotina aparecem personagens que o público adora: meu noivo, minhas sobrinhas gêmeas e minha avó, que era costureira.",
+          "Amo moda e consumo consciente, falo sobre tecidos, adoro me cuidar, viajar, comer bem e tomar um bom vinho. É essa verdade que eu levo para cada vídeo da sua marca."
         ],
-        entregasTitulo: "Junto com cada vídeo, você recebe",
+        entregasTitulo: "O que você recebe comigo",
         entregas: [
-          "Roteiro estratégico aprovado antes da gravação",
-          "Edição com legendas, cortes dinâmicos e trilha",
-          "Arquivos em alta qualidade e sem marca d'água",
+          "Roteiro pensado para o objetivo da sua marca",
+          "Gravação com luz natural e cenários reais",
+          "Edição dinâmica, com legendas e cortes",
+          "Arquivos em alta qualidade, prontos para usar",
           "Ganchos alternativos para testar nos anúncios",
-          "Direitos de uso combinados em contrato",
-          "Até duas rodadas de ajustes inclusas"
+          "Entrega no prazo e comunicação próxima"
         ],
-        assinatura: `Com carinho, ${NOME}`
+        assinatura: "Com carinho, Tamires"
       },
 
-      // EDITE AQUI: seus três melhores conteúdos.
-      // link: cole o endereço do vídeo (Instagram, TikTok, YouTube, Drive...).
-      // capa: preencha "foto" com a imagem de capa vertical (9:16).
+      // EDITE AQUI: seus melhores conteúdos.
+      // link: o endereço do vídeo no YouTube (a capa vem sozinha).
+      // selo: etiqueta no canto da capa. numero e rotulo: o resultado (opcional).
       destaques: {
         sobretitulo: "Conteúdos de destaque",
         titulo: "Vídeos que <em>performaram</em> de verdade",
-        descricao: "Três conteúdos que mostram o que acontece quando estratégia e autenticidade andam juntas. Toque para assistir.",
+        descricao: "Cinco conteúdos que mostram o que acontece quando estratégia e autenticidade andam juntas. Toque para assistir.",
         itens: [
           {
-            link: "https://instagram.com/seuusuario",   // LINK DO VÍDEO
-            capa: { foto: "", gradiente: G.royal, alt: "Capa do vídeo de rotina de skincare" }, // CAPA DO VÍDEO
-            formato: "Reels",
-            numero: "+2,4M",
-            rotulo: "views no reels",
-            titulo: "Rotina de skincare em 30 segundos",
-            contexto: "Para Aurora Cosméticos, virou o anúncio campeão da conta."
+            link: "https://youtube.com/shorts/zkgbYJ6nbFY",   // LINK DO VÍDEO
+            selo: "Vencedora do concurso", ouro: true,
+            numero: "1º lugar", rotulo: "no concurso da Colcci",
+            titulo: "Colcci",
+            contexto: "Look com a camiseta da Copa escolhido como o vencedor do concurso."
           },
           {
-            link: "https://instagram.com/seuusuario",   // LINK DO VÍDEO
-            capa: { foto: "", gradiente: G.ambar, alt: "Capa do vídeo de unboxing da cafeteira" }, // CAPA DO VÍDEO
-            formato: "Anúncio",
-            numero: "4,1%",
-            rotulo: "de conversão no anúncio",
-            titulo: "Unboxing da cafeteira que esgotou",
-            contexto: "Corte de 15 segundos para Grão Café, rodando por 60 dias."
+            link: "https://youtube.com/shorts/vDy_HsxSQ2Y",   // LINK DO VÍDEO
+            selo: "Viral no TikTok",
+            numero: "+2M", rotulo: "views no TikTok",
+            titulo: "Rap10",
+            contexto: "Receita prática que levou a marca para milhões de pessoas."
           },
           {
-            link: "https://instagram.com/seuusuario",   // LINK DO VÍDEO
-            capa: { foto: "", gradiente: G.noite, alt: "Capa do vídeo de looks com três peças" }, // CAPA DO VÍDEO
-            formato: "TikTok",
-            numero: "+18 mil",
-            rotulo: "salvamentos no TikTok",
-            titulo: "Três peças, uma semana de looks",
-            contexto: "Tutorial de moda para Ateliê Ana com passo a passo."
+            link: "https://youtube.com/shorts/-ubMCwwZWUA",   // LINK DO VÍDEO
+            selo: "Viral no TikTok",
+            numero: "Milhões", rotulo: "de views no TikTok",
+            titulo: "Copacol",
+            contexto: "Receita com a marca que conquistou o público do TikTok."
+          },
+          {
+            link: "https://youtube.com/shorts/pqKJMhF41ao",   // LINK DO VÍDEO
+            selo: "Moda íntima",
+            rotulo: "Sutiã com caimento real",
+            titulo: "Liz",
+            contexto: "Sutiã apresentado com foco em conforto e caimento real."
+          },
+          {
+            link: "https://youtube.com/shorts/NKkCdkueXRw",   // LINK DO VÍDEO
+            selo: "Antes e depois",
+            rotulo: "Resultado na prática",
+            titulo: "Coala",
+            contexto: "Antes e depois que mostra o resultado do produto na prática."
           }
         ]
       },
 
-      // EDITE AQUI: galeria de trabalhos. A "categoria" vira um botão de filtro
-      // automaticamente. Crie novas categorias só escrevendo um nome novo.
+      // EDITE AQUI: vídeos por nicho. Cada nicho vira um botão de filtro.
+      // Para incluir um vídeo, copie uma linha e troque marca, título e link.
       trabalhos: {
         sobretitulo: "Trabalhos por nicho",
         titulo: "Um olhar para cada <em>nicho</em>",
-        descricao: "Cada segmento tem sua linguagem. Escolha um nicho e veja como adapto o conteúdo para conversar com o seu público.",
+        // {total} e {nichos} são preenchidos automaticamente.
+        descricao: "São {total} vídeos em {nichos} nichos. Escolha um nicho e veja como adapto a linguagem para conversar com o seu público.",
         rotuloTodos: "Todos",
-        itens: [
-          { categoria: "Beleza",  titulo: "Sérum vitamina C: antes e depois",        marca: "Aurora Cosméticos", foto: "", gradiente: G.pessego, alt: "Vídeo de sérum facial sendo aplicado" },
-          { categoria: "Beleza",  titulo: "Rotina noturna com hidratante",           marca: "Pura Pele",         foto: "", gradiente: G.royal,   alt: "Vídeo de rotina noturna de cuidados com a pele" },
-          { categoria: "Casa",    titulo: "Organização da cozinha em um minuto",     marca: "Casa Lume",         foto: "", gradiente: G.areia,   alt: "Vídeo de cozinha organizada com potes" },
-          { categoria: "Casa",    titulo: "Difusor de aromas: primeiras impressões", marca: "Brisa Home",        foto: "", gradiente: G.oceano,  alt: "Vídeo de difusor de aromas na sala" },
-          { categoria: "Comida",  titulo: "Receita rápida com granola artesanal",    marca: "Sabor da Vila",     foto: "", gradiente: G.ambar,   alt: "Vídeo de tigela com iogurte e granola" },
-          { categoria: "Comida",  titulo: "Café da manhã completo em 5 minutos",     marca: "Grão Café",         foto: "", gradiente: G.poente,  alt: "Vídeo de mesa de café da manhã" },
-          { categoria: "Moda",    titulo: "Provador real: jeans para todos os corpos", marca: "Ateliê Ana",      foto: "", gradiente: G.noite,   alt: "Vídeo de provador com calças jeans" },
-          { categoria: "Moda",    titulo: "Três jeitos de usar a mesma camisa",      marca: "Ateliê Ana",        foto: "", gradiente: G.grafite, alt: "Vídeo de looks com camisa branca" },
-          { categoria: "Fitness", titulo: "Treino de 15 minutos em casa",            marca: "Movi Fit",          foto: "", gradiente: G.oceano,  alt: "Vídeo de treino funcional na sala" },
-          { categoria: "Fitness", titulo: "Testei a garrafa térmica por uma semana", marca: "Movi Fit",          foto: "", gradiente: G.pessego, alt: "Vídeo de garrafa térmica na academia" }
+        porPagina: 20,
+        nichos: [
+          { nome: "Moda", videos: [
+            { marca: "Liz", titulo: "Bermuda", link: "https://youtube.com/shorts/g6Roj4frQIU" },
+            { marca: "Sabrina Fernandes", titulo: "Um vestido para cada dia da semana", link: "https://youtube.com/shorts/EQ4VD7r9kNw" },
+            { marca: "Liz", titulo: "Microfibra na lupa", link: "https://youtube.com/shorts/5sh6Czculo8" },
+            { marca: "Carol Areco", titulo: "Óculos", link: "https://youtube.com/shorts/U01Dk17gAHk" },
+            { marca: "Liz", titulo: "Maiô", link: "https://youtube.com/shorts/pDF1DGc7U9k" },
+            { marca: "Sabrina Fernandes", titulo: "Conjunto Alice", link: "https://youtube.com/shorts/vvXbP8f903s" },
+            { marca: "VS", titulo: "Brinco", link: "https://youtube.com/shorts/BZH4J_bgKfA" },
+            { marca: "Liz", titulo: "Linha microfibra", link: "https://youtube.com/shorts/tGV0sPCNVrg" },
+            { marca: "Moldavita", titulo: "Moda online", link: "https://youtube.com/shorts/JU_N27VI-xw" },
+            { marca: "Sabrina Fernandes", titulo: "O que comprei x o que recebi", link: "https://youtube.com/shorts/lCzgezoJ6fM" }
+          ]},
+          { nome: "Provadores", videos: [
+            { marca: "Viasete", titulo: "Provador poá", link: "https://youtube.com/shorts/2-9leBRvMAk" },
+            { marca: "Heloíse", titulo: "Saia", link: "https://youtube.com/shorts/7_QSSxzulYY" },
+            { marca: "Lança Perfume", titulo: "Provador", link: "https://youtube.com/shorts/P1VeB78dou0" },
+            { marca: "Óculos", titulo: "Provador de óculos", link: "https://youtube.com/shorts/7qPVIj6gN4I" },
+            { marca: "Lez a Lez", titulo: "Provador", link: "https://youtube.com/shorts/dx60KSNgs3s" },
+            { marca: "Farm", titulo: "Provador", link: "https://youtube.com/shorts/uTvqsHkvDvs" },
+            { marca: "Festa", titulo: "Provador de vestido de festa", link: "https://youtube.com/shorts/3Ql_m36rj5Y" },
+            { marca: "Cajs", titulo: "Provador", link: "https://youtube.com/shorts/J6cR6TQh9iQ" }
+          ]},
+          { nome: "Beleza", videos: [
+            { marca: "Silvercare", titulo: "Review", link: "https://youtube.com/shorts/iHKypNyLSDI" },
+            { marca: "Bem Me Fiz", titulo: "Experiência", link: "https://youtube.com/shorts/Y98Zz5V-GP4" },
+            { marca: "Lavieen", titulo: "Laser na IKB Clinic", link: "https://youtube.com/shorts/RT8yY885xuE" },
+            { marca: "Silvercare", titulo: "Duplas", link: "https://youtube.com/shorts/MjQxAkkaBV0" },
+            { marca: "Chama Congelante", titulo: "Apresentação do projeto", link: "https://youtube.com/shorts/38SG8qvT37s" },
+            { marca: "Carolina Gonçalves", titulo: "Tratamento de gordura localizada", link: "https://youtube.com/shorts/wZUczVHydiU" },
+            { marca: "Silvercare", titulo: "Apresentação", link: "https://youtube.com/shorts/ZU8ESdTHGNc" }
+          ]},
+          { nome: "Saúde", videos: [
+            { marca: "Voy", titulo: "Emagrecimento", link: "https://youtube.com/shorts/zZYwDdpSX70" },
+            { marca: "Empório Macadâmia", titulo: "Programa de fidelidade", link: "https://youtube.com/shorts/AA9ZTdH-ccs" },
+            { marca: "Constlivre", titulo: "Review", link: "https://youtube.com/shorts/Koa79CJTQmY" },
+            { marca: "Presente", titulo: "Chocolate para presentear", link: "https://youtube.com/shorts/nlqTzpcPfzI" },
+            { marca: "Essencial Spa", titulo: "Lipedema", link: "https://youtube.com/shorts/oWdVbBzOS3c" },
+            { marca: "Empório Macadâmia", titulo: "Bebida proteica", link: "https://youtube.com/shorts/ICHnuZDongw" },
+            { marca: "Bothanica Mineral", titulo: "Review", link: "https://youtube.com/shorts/J07SsnxZ1Vc" }
+          ]},
+          { nome: "Gastronomia", videos: [
+            { marca: "Copacol", titulo: "Sanduíche", link: "https://youtube.com/shorts/_uSQIenXBKo" },
+            { marca: "Copacol", titulo: "Fishgets", link: "https://youtube.com/shorts/Xrpm7AmG7TM" },
+            { marca: "Speck", titulo: "Maionese trufada em ASMR", link: "https://youtube.com/shorts/qwLCa9SRy_E" },
+            { marca: "Padoca Caiupura", titulo: "Experiência", link: "https://youtube.com/shorts/MEII_hicPec" },
+            { marca: "Copacol", titulo: "Filé assado", link: "https://youtube.com/shorts/4BUU448AEAs" },
+            { marca: "Battagini", titulo: "Pizzaria em Lorena", link: "https://youtube.com/shorts/6X4cJrrpwg8" },
+            { marca: "Tropical Especiarias", titulo: "Drinks", link: "https://youtube.com/shorts/Svi-VP0Fsps" },
+            { marca: "Receita", titulo: "Panqueca com manteiga de amendoim", link: "https://youtube.com/shorts/60G3KwWXUBs" }
+          ]},
+          { nome: "Casa", videos: [
+            { marca: "Coala", titulo: "Lançamento", link: "https://youtube.com/shorts/1BFxYgk0Zww" },
+            { marca: "Vinagreen", titulo: "Dica para a louça", link: "https://youtube.com/shorts/KWjGJhEC7pw" },
+            { marca: "Khali", titulo: "Copa", link: "https://youtube.com/shorts/IauMUmXP4_s" },
+            { marca: "Hoomy", titulo: "Review", link: "https://youtube.com/shorts/9S-3A7OL_sA" },
+            { marca: "Pra Casa", titulo: "Achadinhos", link: "https://youtube.com/shorts/EiOsKUBIfUg" },
+            { marca: "Khali", titulo: "Presente", link: "https://youtube.com/shorts/Fevre49NJKg" },
+            { marca: "Coala", titulo: "Lançamento, parte 2", link: "https://youtube.com/shorts/24h4B18I-qE" }
+          ]},
+          { nome: "Viagens", videos: [
+            { marca: "Whale Houses", titulo: "Casas em Ubatuba", link: "https://youtube.com/shorts/-hbeGlG_seM" },
+            { marca: "Descubra Cunha", titulo: "Turismo em Cunha", link: "https://youtube.com/shorts/4u4m_hWH0nY" },
+            { marca: "Entre Chalés", titulo: "Hospedagem", link: "https://youtube.com/shorts/WK3UlGbCmuE" },
+            { marca: "Ubatuba", titulo: "Apartamento na praia", link: "https://youtube.com/shorts/aCDiHUcdzqs" },
+            { marca: "Hospedagem", titulo: "Tour pelo loft", link: "https://youtube.com/shorts/oOw63thEXqs" },
+            { marca: "Rancho do Zé João", titulo: "Experiência", link: "https://youtube.com/shorts/6HdJgK66mCQ" }
+          ]},
+          { nome: "Gêmeas", videos: [
+            { marca: "Vida Costeira", titulo: "Moda infantil", link: "https://youtube.com/shorts/zfpjIRytEv4" },
+            { marca: "Rancho do Zé João", titulo: "Passeio com as gêmeas", link: "https://youtube.com/shorts/BmVTJ4dOt3M" },
+            { marca: "Vida Costeira", titulo: "Coleção Copa", link: "https://youtube.com/shorts/qmwes0Fa4C0" },
+            { marca: "Empório Macadâmia", titulo: "Lanche das gêmeas", link: "https://youtube.com/shorts/We9FPZ3woS0" },
+            { marca: "Digorestte", titulo: "Review", link: "https://youtube.com/shorts/pIUyGpLvbL8" }
+          ]},
+          { nome: "Apps", videos: [
+            { marca: "Perplexity", titulo: "Inteligência artificial no dia a dia", link: "https://youtube.com/shorts/56mg2bcThrs" },
+            { marca: "Comet", titulo: "Navegador com IA", link: "https://youtube.com/shorts/lZ888Ub6XEY" },
+            { marca: "EITA", titulo: "Aplicativo", link: "https://youtube.com/shorts/5fyDIct7eJo" },
+            { marca: "Perplexity", titulo: "Pesquisa com IA", link: "https://youtube.com/shorts/qZuYfxLD1gc" },
+            { marca: "Comet", titulo: "Review", link: "https://youtube.com/shorts/h0sz8ChqLBg" },
+            { marca: "Tem Vantagem", titulo: "Clube de benefícios", link: "https://youtube.com/shorts/0tG0amsTjdY" },
+            { marca: "Perplexity", titulo: "Dicas de uso", link: "https://youtube.com/shorts/IdmvuVLL3NQ" },
+            { marca: "Beleza Benefícios", titulo: "Aplicativo", link: "https://youtube.com/shorts/Lpu6brtr1XE" },
+            { marca: "Relove", titulo: "Moda circular", link: "https://youtube.com/shorts/OrXiRGWX5Nw" }
+          ]},
+          { nome: "Datas especiais", videos: [
+            { marca: "Liz", titulo: "Carnaval", link: "https://youtube.com/shorts/2e4s6e7wzN0" },
+            { marca: "Sabrina Fernandes", titulo: "Dia dos Namorados", link: "https://youtube.com/shorts/U3XTqE5fNaE" },
+            { marca: "Liz", titulo: "Dia das Mães", link: "https://youtu.be/SysLVmMQ2pM" },
+            { marca: "Touti", titulo: "Dia dos Namorados", link: "https://youtube.com/shorts/VJl7Wle1KNg" },
+            { marca: "Buriti Shopping", titulo: "Dia dos Namorados", link: "https://youtube.com/shorts/pGZggzvElFg" },
+            { marca: "Liz", titulo: "Dia das Mães 2025", link: "https://youtube.com/shorts/4SRube3tURk" }
+          ]},
+          { nome: "Internacionais", videos: [
+            { marca: "Dale", titulo: "Versão narrada", link: "https://youtube.com/shorts/TVapZ_BIpN4" },
+            { marca: "EasySIM4U", titulo: "Chip para viagem", link: "https://youtube.com/shorts/KaC0q8h0Q-Q" },
+            { marca: "The Frozen Palm Tree", titulo: "Sorveteria na Flórida", link: "https://youtube.com/shorts/SWbt8njuThY" },
+            { marca: "The Frozen Palm Tree", titulo: "Açaí", link: "https://youtube.com/shorts/GMnGGVdib8Y" },
+            { marca: "The Frozen Palm Tree", titulo: "Meme", link: "https://youtube.com/shorts/q3rWu40vdCU" },
+            { marca: "Dale", titulo: "Versão falada", link: "https://youtube.com/shorts/noD0jPMEqeE" },
+            { marca: "The Frozen Palm Tree", titulo: "Dias da semana", link: "https://youtube.com/shorts/XdysG2NsMVQ" }
+          ]},
+          { nome: "Black Friday", videos: [
+            { marca: "Liz", titulo: "Black Friday", link: "https://youtu.be/pTZ8T1eBpkE" },
+            { marca: "Meu Celular", titulo: "Black Friday antecipada", link: "https://youtube.com/shorts/lczhDI5Z1Bo" },
+            { marca: "Liz", titulo: "Sale", link: "https://youtube.com/shorts/yXJQYAfLoGE" },
+            { marca: "Liz", titulo: "Bazar", link: "https://youtube.com/shorts/OylaMNoFvj4" }
+          ]},
+          { nome: "Outros", videos: [
+            { marca: "iFinance", titulo: "Finanças", link: "https://youtube.com/shorts/Z-Ln0ajZefo" },
+            { marca: "OLX", titulo: "Compra e venda", link: "https://youtube.com/shorts/SKv8jVZMBzI" },
+            { marca: "Focus Educação", titulo: "Cursos", link: "https://youtube.com/shorts/hfaKMRJzIXU" },
+            { marca: "Poli-Pet", titulo: "Pet", link: "https://youtube.com/shorts/lzwVtZcSWjg" },
+            { marca: "Zap Imóveis", titulo: "Busca de imóveis", link: "https://youtube.com/shorts/s8PpATlU9Ic" },
+            { marca: "iFinance", titulo: "Finanças, parte 2", link: "https://youtube.com/shorts/UdDST6KgFkU" },
+            { marca: "Zanin", titulo: "Concessionária", link: "https://youtube.com/shorts/er-bMr6fMPY" }
+          ]}
         ]
       },
 
@@ -1417,12 +1788,12 @@
         titulo: "Serviços pensados para <em>vender</em>",
         descricao: "Do roteiro ao arquivo final, cuido de cada etapa para você receber conteúdo pronto para usar e escalar.",
         itens: [
-          { titulo: "Vídeo UGC",            descricao: "Vídeos verticais com roteiro, gancho forte e linguagem natural, prontos para anúncio ou para o orgânico.", detalhe: "De 15 a 60 segundos" },
-          { titulo: "Corte para anúncio",   descricao: "Variações do mesmo vídeo com ganchos e chamadas diferentes, para você testar e escalar o que mais vende.", detalhe: "De 3 a 5 variações por vídeo" },
-          { titulo: "Fotos de produto",     descricao: "Fotos com luz natural e cenário real, perfeitas para site, marketplace e redes sociais.", detalhe: "Pacotes a partir de 10 fotos" },
-          { titulo: "Unboxing",             descricao: "A experiência de abrir o produto pela primeira vez, valorizando embalagem, detalhes e uma reação sincera.", detalhe: "Ideal para lançamentos" },
-          { titulo: "Publicação no perfil", descricao: "Conteúdo publicado no meu perfil, alcançando uma audiência engajada que confia nas minhas indicações.", detalhe: "Reels, TikTok e stories" },
-          { titulo: "Pacote mensal",        descricao: "Uma rotina de conteúdo para sua marca nunca ficar sem criativo novo, com valor especial e prioridade na agenda.", detalhe: "Perfeito para quem anuncia todo mês" }
+          { titulo: "Vídeo UGC",            descricao: "Vídeos verticais com roteiro, gancho forte e linguagem natural, prontos para anúncio ou para o orgânico.", detalhe: "Reels, TikTok e anúncios" },
+          { titulo: "Corte para anúncio",   descricao: "Variações do mesmo vídeo com ganchos e chamadas diferentes, para você testar e escalar o que mais vende.", detalhe: "Ideal para tráfego pago" },
+          { titulo: "Fotos de produto",     descricao: "Fotos com luz natural e cenário real, perfeitas para site, marketplace e redes sociais.", detalhe: "Para site, marketplace e redes" },
+          { titulo: "Unboxing e provador",  descricao: "A experiência de abrir e experimentar o produto pela primeira vez, com detalhes e uma reação sincera.", detalhe: "Ideal para moda e lançamentos" },
+          { titulo: "Publicação no perfil", descricao: "Conteúdo publicado no meu perfil, alcançando uma audiência engajada que confia nas minhas indicações.", detalhe: "Instagram e TikTok" },
+          { titulo: "Pacote mensal",        descricao: "Uma rotina de conteúdo para sua marca nunca ficar sem criativo novo, com prioridade na agenda.", detalhe: "Perfeito para quem anuncia todo mês" }
         ]
       },
 
@@ -1431,24 +1802,30 @@
         sobretitulo: "Números e depoimentos",
         titulo: "Resultados que <em>falam</em> por mim",
         descricao: "Conteúdo bonito é bom. Conteúdo bonito que traz retorno é o que faz as marcas voltarem.",
-        // valor: número (use ponto para decimal, ex.: 4.9). casas: quantas casas decimais mostrar.
+        // valor: número (use ponto para decimal, ex.: 4.9). casas: casas decimais.
         contadores: [
-          { valor: 4.9, casas: 1, prefixo: "",  sufixo: "/5",    rotulo: "nota média das marcas" },
-          { valor: 87,  casas: 0, prefixo: "",  sufixo: "%",     rotulo: "das marcas me recontratam" },
-          { valor: 5,   casas: 0, prefixo: "",  sufixo: " dias", rotulo: "de prazo médio de entrega" },
-          { valor: 2.4, casas: 1, prefixo: "+", sufixo: "M",     rotulo: "de alcance no maior vídeo" }
+          { valor: 80, casas: 0, prefixo: "+", sufixo: "",  rotulo: "marcas atendidas" },
+          { valor: 90, casas: 0, prefixo: "+", sufixo: "",  rotulo: "vídeos no portfólio" },
+          { valor: 5,  casas: 1, prefixo: "",  sufixo: "",  rotulo: "de nota em todas as avaliações das marcas" },
+          { valor: 8,  casas: 0, prefixo: "+", sufixo: "M", rotulo: "de views no vídeo de maior alcance" }
         ],
         resultadosTitulo: "Resultados de <em>campanha</em>",
         resultados: [
-          { marca: "Aurora Cosméticos", metrica: "3,8%", rotulo: "de CTR no anúncio",       descricao: "O dobro da média da conta, com custo por clique 41% menor." },
-          { marca: "Casa Lume",         metrica: "+320", rotulo: "vendas em 7 dias",        descricao: "Campanha de lançamento com três vídeos e cortes para anúncio." },
-          { marca: "Movi Fit",          metrica: "-38%", rotulo: "no custo por aquisição",  descricao: "Teste com cinco ganchos diferentes para o mesmo produto." }
+          { marca: "Colcci",           metrica: "1º lugar", rotulo: "no concurso da marca",        descricao: "Vídeo com a camiseta da Copa escolhido como o vencedor do concurso." },
+          { marca: "Rap10",            metrica: "+2M",      rotulo: "de views no TikTok",          descricao: "Receita prática e rápida que viralizou e levou a marca para milhões de pessoas." },
+          { marca: "Alcance orgânico", metrica: "+8M",      rotulo: "de views em um único vídeo",  descricao: "O conteúdo de maior alcance do meu portfólio até agora." }
         ],
         depoimentosTitulo: "O que as <em>marcas</em> dizem",
+        // logo: opcional (imagem da pasta "logos"). Sem logo, aparece a inicial.
         depoimentos: [
-          { texto: "Ela entendeu o briefing de primeira e entregou vídeos com uma naturalidade que nenhuma produtora tinha conseguido. O anúncio virou o melhor da nossa conta.", nome: "Mariana Costa", empresa: "Gerente de Marketing, Aurora Cosméticos", gradiente: G.pessego },
-          { texto: "Prazo cumprido, roteiro aprovado sem retrabalho e cortes prontos para testar. É raro encontrar tanto profissionalismo junto com tanta criatividade.", nome: "Rafael Lima", empresa: "Head de Growth, Casa Lume", gradiente: G.royal },
-          { texto: "Recontratamos todo mês. Os vídeos geram comentários de clientes perguntando onde comprar, e isso não tem preço para uma marca pequena como a nossa.", nome: "Juliana Alves", empresa: "Fundadora, Sabor da Vila", gradiente: G.ambar }
+          { texto: "Trabalhar com a Tamires foi ótimo. Ela entregou no prazo, seguiu o briefing com atenção e trouxe naturalidade ao conteúdo. Uma parceria eficiente e muito bem conduzida.", nome: "Campanha de awareness", empresa: "Pelmex+", logo: "logos/pelmex.jpg" },
+          { texto: "Roteiro e gravação que acertaram em cheio no que estávamos precisando. Um vídeo bem estruturado, pensado nos detalhes. Nós amamos!", nome: "Campanha de awareness", empresa: "Pelmex+", logo: "logos/pelmex.jpg" },
+          { texto: "Super simpática e prestativa. Atendeu todas as minhas necessidades, é bem conectada com as redes sociais e o vídeo ficou perfeito! Super recomendo!", nome: "Harmonização facial e corporal", empresa: "IKB Clinic", logo: "" },
+          { texto: "Tamires entregou um conteúdo super legal e além de tudo super atenciosa. Entrega rápida.", nome: "Drinks: apresentação e receitas", empresa: "Tropical Especiarias", logo: "logos/tropical.jpg" },
+          { texto: "Vídeo entregue no prazo, de acordo com roteiro, ela foi muito solícita. Ótimo!!", nome: "Campanha Dia dos Namorados", empresa: "Rahra Semijoias", logo: "logos/rahra.jpg" },
+          { texto: "Super dedicada e entregou o trabalho super rápido!", nome: "Campanha moda circular", empresa: "Relove", logo: "logos/relove.jpg" },
+          { texto: "Conteúdo maravilhoso e impecável!", nome: "Projeto Chama Congelante", empresa: "Chama Congelante", logo: "logos/chama-congelante.jpg" },
+          { texto: "A Tamires foi maravilhosa!!", nome: "Tratamento de gordura localizada", empresa: "Carolina Gonçalves", logo: "" }
         ]
       },
 
@@ -1456,11 +1833,11 @@
       contato: {
         sobretitulo: "Contato",
         titulo: "Bora criar <em>juntos</em>?",
-        descricao: "Me conta sobre o seu produto e o seu objetivo. Respondo em até 24 horas úteis com uma proposta sob medida para a sua marca.",
-        email: "seuemail@email.com",
-        whatsapp: "(00) 00000-0000",
-        instagram: "@seuusuario",
-        mensagemWhatsApp: "Olá! Vi seu portfólio e quero conversar sobre um projeto de conteúdo.",
+        descricao: "Me conta sobre o seu produto e o seu objetivo. Vou adorar criar um conteúdo de valor para o seu negócio, com uma proposta sob medida para a sua marca.",
+        email: "contatotamiresnishimura@gmail.com",
+        whatsapp: "(12) 99644-2988",
+        instagram: "@tamiresnishimura",
+        mensagemWhatsApp: "Olá, Tamires! Vi seu portfólio e quero conversar sobre um projeto de conteúdo.",
         formTitulo: "Envie uma mensagem",
         // Como o formulário funciona:
         // "mailto"   = abre o programa de e-mail da pessoa com a mensagem já preenchida.
@@ -1472,10 +1849,9 @@
 
       // EDITE AQUI: suas redes sociais (aparecem no rodapé).
       redes: [
-        { nome: "Instagram", link: "https://instagram.com/seuusuario" },
-        { nome: "TikTok",    link: "https://tiktok.com/@seuusuario" },
-        { nome: "YouTube",   link: "https://youtube.com/@seuusuario" },
-        { nome: "LinkedIn",  link: "https://linkedin.com/in/seuusuario" }
+        { nome: "Instagram", link: "https://www.instagram.com/tamiresnishimura/" },
+        { nome: "YouTube",   link: "https://www.youtube.com/@tamiresnishimura4817" },
+        { nome: "WhatsApp",  link: "https://wa.me/5512996442988" }
       ],
 
       // EDITE AQUI: frase do rodapé.
@@ -1505,10 +1881,27 @@
     // Mostra a foto real se existir; senão, o bloco em gradiente.
     function midia(item) {
       if (item.foto) {
-        return `<img class="midia" src="${esc(item.foto)}" alt="${esc(item.alt)}" loading="lazy">`;
+        return `<img class="midia" src="${esc(item.foto)}" alt="${esc(item.alt)}" loading="lazy" decoding="async">`;
       }
       return `<div class="midia" role="img" aria-label="${esc(item.alt)}" style="background-image:${item.gradiente}"></div>`;
     }
+
+    // Pega o código do vídeo a partir de qualquer link do YouTube.
+    function idDoVideo(link) {
+      const m = String(link).match(/(?:shorts\/|youtu\.be\/|[?&]v=|embed\/)([A-Za-z0-9_-]{11})/);
+      return m ? m[1] : "";
+    }
+
+    // Capa do vídeo: pasta "capas" primeiro, depois a capa do YouTube.
+    function capaDoVideo(id, alt, capaPropria) {
+      const src = capaPropria || `capas/${id}.jpg`;
+      return `<img class="midia" src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async" data-id="${id}" onerror="trocarCapa(this)">`;
+    }
+    window.trocarCapa = function (img) {
+      const etapa = Number(img.dataset.etapa || 0);
+      if (etapa === 0) { img.dataset.etapa = "1"; img.src = `https://i.ytimg.com/vi/${img.dataset.id}/oar2.jpg`; }
+      else if (etapa === 1) { img.dataset.etapa = "2"; img.src = `https://i.ytimg.com/vi/${img.dataset.id}/hqdefault.jpg`; }
+    };
 
     const icones = {
       check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8 12.5 2.5 2.5L16 9.5"/></svg>',
@@ -1535,10 +1928,10 @@
     $("#logo").innerHTML = `${esc(NOME)}<span>.</span>`;
 
     /* ---------- Capa ---------- */
-    $("#capa-midia").innerHTML = midia(CONFIG.capa.imagem);
+    $("#capa-midia").innerHTML = midia(CONFIG.capa.imagem).replace('loading="lazy"', 'fetchpriority="high"');
     $("#capa-numeros").innerHTML = CONFIG.capa.numeros
       .map((n) => `<li><strong>${esc(n.valor)}</strong><span>${esc(n.rotulo)}</span></li>`).join("");
-    const listaMarcas = CONFIG.marcas.map((m) => `<li>${esc(m)}</li>`).join("");
+    const listaMarcas = CONFIG.marcas.faixa.map((m) => `<li>${esc(m)}</li>`).join("");
     $("#marcas").innerHTML = listaMarcas;
     $("#marcas-copia").innerHTML = listaMarcas;
 
@@ -1550,62 +1943,120 @@
       .map((e, i) => `<li class="reveal" style="--atraso:${i * 60}ms">${icones.check}<span>${esc(e)}</span></li>`).join("");
 
     /* ---------- Destaques ---------- */
-    $("#destaques-lista").innerHTML = CONFIG.destaques.itens.map((d, i) => `
-      <a class="card-video reveal" style="--atraso:${i * 120}ms" href="${esc(d.link)}" target="_blank" rel="noopener noreferrer">
+    $("#destaques-lista").innerHTML = CONFIG.destaques.itens.map((d, i) => {
+      const id = idDoVideo(d.link);
+      return `
+      <a class="card-video reveal" style="--atraso:${i * 100}ms" href="${esc(d.link)}" target="_blank" rel="noopener noreferrer" data-video="${id}" data-titulo="${esc(d.titulo)}">
         <div class="card-capa">
-          ${midia(d.capa)}
-          <span class="card-formato">${esc(d.formato)}</span>
+          ${capaDoVideo(id, `Capa do vídeo para ${d.titulo}`, d.capa)}
+          <span class="card-selo${d.ouro ? " ouro" : ""}">${esc(d.selo)}</span>
           <span class="play">${icones.play}</span>
         </div>
-        <p class="card-numero">${esc(d.numero)}</p>
-        <p class="card-rotulo">${esc(d.rotulo)}</p>
-        <h3 class="card-titulo">${esc(d.titulo)}</h3>
+        ${d.numero
+          ? `<p class="card-numero">${esc(d.numero)}</p><p class="card-rotulo">${esc(d.rotulo)}</p><h3 class="card-titulo">${esc(d.titulo)}</h3>`
+          : `<h3 class="card-numero">${esc(d.titulo)}</h3><p class="card-rotulo">${esc(d.rotulo || d.selo)}</p>`}
         <p class="card-contexto">${esc(d.contexto)}</p>
-        <span class="visualmente-oculto">(abre o vídeo em uma nova aba)</span>
-      </a>`).join("");
+      </a>`;
+    }).join("");
 
-    /* ---------- Trabalhos com filtro ---------- */
-    const itensTrabalho = CONFIG.trabalhos.itens;
-    const categorias = [...new Set(itensTrabalho.map((t) => t.categoria))];
+    /* ---------- Trabalhos com filtro e "Ver mais" ---------- */
+    const nichos = CONFIG.trabalhos.nichos;
+    const porPagina = CONFIG.trabalhos.porPagina || 20;
+    // Em "Todos", os vídeos se alternam entre os nichos para mostrar variedade.
+    const todosVideos = [];
+    const maiorNicho = Math.max(...nichos.map((n) => n.videos.length));
+    for (let i = 0; i < maiorNicho; i++) {
+      nichos.forEach((n) => { if (n.videos[i]) todosVideos.push({ ...n.videos[i], nicho: n.nome, id: idDoVideo(n.videos[i].link) }); });
+    }
+    $("#trabalhos-descricao").textContent = CONFIG.trabalhos.descricao
+      .replace("{total}", todosVideos.length).replace("{nichos}", nichos.length);
 
-    $("#galeria").innerHTML = itensTrabalho.map((t, i) => `
-      <li class="trabalho reveal" style="--atraso:${(i % 4) * 80}ms" data-categoria="${esc(t.categoria)}">
-        <figure>
-          <div class="moldura">${midia(t)}</div>
-          <figcaption>
-            <p class="trabalho-categoria">${esc(t.categoria)}</p>
-            <p class="trabalho-titulo">${esc(t.titulo)}</p>
-            <p class="trabalho-marca">${esc(t.marca)}</p>
-          </figcaption>
-        </figure>
-      </li>`).join("");
+    let filtroAtual = "*";
+    let limite = porPagina;
+    const galeria = $("#galeria");
+    const verMais = $("#ver-mais");
+
+    function videosDoFiltro() {
+      return filtroAtual === "*" ? todosVideos : todosVideos.filter((v) => v.nicho === filtroAtual);
+    }
+
+    function cardTrabalho(v, animar) {
+      return `
+      <li>
+        <a class="trabalho${animar ? " surgir" : ""}" href="${esc(v.link)}" target="_blank" rel="noopener noreferrer" data-video="${v.id}" data-titulo="${esc(v.marca + ": " + v.titulo)}">
+          <div class="moldura">
+            ${capaDoVideo(v.id, `Capa do vídeo ${v.marca}: ${v.titulo}`)}
+            <span class="mini-play">${icones.play}</span>
+          </div>
+          <div class="trabalho-legenda">
+            <p class="trabalho-marca">${esc(v.marca)}</p>
+            <p class="trabalho-titulo">${esc(v.titulo)}</p>
+          </div>
+        </a>
+      </li>`;
+    }
+
+    function desenharGaleria(desde) {
+      const lista = videosDoFiltro();
+      const visiveis = lista.slice(0, limite);
+      if (desde > 0) {
+        galeria.insertAdjacentHTML("beforeend", visiveis.slice(desde).map((v) => cardTrabalho(v, true)).join(""));
+      } else {
+        galeria.innerHTML = visiveis.map((v) => cardTrabalho(v, true)).join("");
+      }
+      const restam = lista.length - visiveis.length;
+      verMais.hidden = restam <= 0;
+      verMais.textContent = `Ver mais vídeos (${restam})`;
+    }
 
     const filtros = $("#filtros");
-    filtros.innerHTML = [CONFIG.trabalhos.rotuloTodos, ...categorias].map((c, i) =>
-      `<button type="button" class="filtro" data-filtro="${i === 0 ? "*" : esc(c)}" aria-pressed="${i === 0}">${esc(c)}</button>`
-    ).join("");
+    filtros.innerHTML = [{ nome: CONFIG.trabalhos.rotuloTodos, valor: "*", n: todosVideos.length }]
+      .concat(nichos.map((n) => ({ nome: n.nome, valor: n.nome, n: n.videos.length })))
+      .map((f, i) => `<button type="button" class="filtro" data-filtro="${esc(f.valor)}" aria-pressed="${i === 0}">${esc(f.nome)} <small aria-hidden="true">${f.n}</small></button>`)
+      .join("");
 
     filtros.addEventListener("click", (evento) => {
       const botao = evento.target.closest(".filtro");
       if (!botao) return;
-      const escolha = botao.dataset.filtro;
+      filtroAtual = botao.dataset.filtro;
+      limite = porPagina;
       filtros.querySelectorAll(".filtro").forEach((b) => b.setAttribute("aria-pressed", String(b === botao)));
-      let total = 0;
-      document.querySelectorAll(".trabalho").forEach((item) => {
-        const mostrar = escolha === "*" || item.dataset.categoria === escolha;
-        item.hidden = !mostrar;
-        item.classList.remove("surgir");
-        if (mostrar) {
-          total++;
-          item.classList.add("visivel");
-          void item.offsetWidth; // reinicia a animação
-          item.classList.add("surgir");
-        }
-      });
-      $("#filtro-aviso").textContent = escolha === "*"
-        ? `Mostrando todos os ${total} trabalhos.`
-        : `Mostrando ${total} ${total === 1 ? "trabalho" : "trabalhos"} de ${botao.textContent}.`;
+      desenharGaleria(0);
+      const total = videosDoFiltro().length;
+      const nomeFiltro = botao.firstChild.textContent.trim();
+      $("#filtro-aviso").textContent = filtroAtual === "*"
+        ? `Mostrando todos os ${total} vídeos.`
+        : `Mostrando ${total} ${total === 1 ? "vídeo" : "vídeos"} de ${nomeFiltro}.`;
     });
+
+    verMais.addEventListener("click", () => {
+      const antes = limite;
+      limite += porPagina;
+      desenharGaleria(antes);
+      const primeiroNovo = galeria.children[antes] && galeria.children[antes].querySelector("a");
+      if (primeiroNovo) primeiroNovo.focus({ preventScroll: true });
+    });
+
+    desenharGaleria(0);
+
+    /* ---------- Player de vídeo ---------- */
+    const player = $("#player");
+    function abrirVideo(id, titulo) {
+      $("#player-video").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" title="${esc(titulo)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+      $("#player-titulo").textContent = titulo;
+      $("#player-link").href = `https://www.youtube.com/watch?v=${id}`;
+      player.showModal();
+    }
+    document.addEventListener("click", (evento) => {
+      const link = evento.target.closest("[data-video]");
+      if (!link || !link.dataset.video || typeof player.showModal !== "function") return;
+      if (evento.ctrlKey || evento.metaKey || evento.shiftKey || evento.button === 1) return;
+      evento.preventDefault();
+      abrirVideo(link.dataset.video, link.dataset.titulo);
+    });
+    $("#player-fechar").addEventListener("click", () => player.close());
+    player.addEventListener("click", (evento) => { if (evento.target === player) player.close(); });
+    player.addEventListener("close", () => { $("#player-video").innerHTML = ""; });
 
     /* ---------- Serviços ---------- */
     $("#servicos-lista").innerHTML = CONFIG.servicos.itens.map((s, i) => `
@@ -1618,7 +2069,7 @@
         </article>
       </li>`).join("");
 
-    /* ---------- Números, resultados e depoimentos ---------- */
+    /* ---------- Números ---------- */
     const formatar = (n, casas) => n.toLocaleString("pt-BR", { minimumFractionDigits: casas, maximumFractionDigits: casas });
 
     $("#contadores").innerHTML = CONFIG.numeros.contadores.map((c, i) => `
@@ -1628,6 +2079,26 @@
         <span class="contador-rotulo">${esc(c.rotulo)}</span>
       </li>`).join("");
 
+    /* ---------- Parede de logos (logos e selos com nome, misturados) ---------- */
+    const cores = ["", "azul", "", "tinta"];
+    const selos = CONFIG.marcas.semLogo.map((nome, i) => ({ nome, cor: cores[i % cores.length] }));
+    const logos = CONFIG.marcas.logos.slice();
+    const mistura = [];
+    const passo = Math.max(1, Math.round(logos.length / Math.max(1, selos.length)));
+    logos.forEach((l, i) => { mistura.push(l); if ((i + 1) % passo === 0 && selos.length) mistura.push(selos.shift()); });
+    mistura.push(...selos);
+    function itemLogo(m) {
+      if (m.logo) return `<li class="logo-item"><img src="${esc(m.logo)}" alt="${m.nome === "Marca parceira" ? "Logo de marca parceira" : "Logo " + esc(m.nome)}" loading="lazy" decoding="async" width="100" height="100"></li>`;
+      return `<li class="logo-item logo-texto ${m.cor}">${esc(m.nome)}</li>`;
+    }
+    const metade = Math.ceil(mistura.length / 2);
+    [mistura.slice(0, metade), mistura.slice(metade)].forEach((grupo, n) => {
+      const html = grupo.map(itemLogo).join("");
+      $(`#logos-${n + 1}`).innerHTML = html;
+      $(`#logos-${n + 1}-copia`).innerHTML = html.replace(/alt="[^"]*"/g, 'alt=""');
+    });
+
+    /* ---------- Resultados e depoimentos ---------- */
     $("#resultados").innerHTML = CONFIG.numeros.resultados.map((r, i) => `
       <li class="reveal" style="--atraso:${i * 100}ms">
         <article class="resultado">
@@ -1639,12 +2110,13 @@
       </li>`).join("");
 
     $("#depoimentos").innerHTML = CONFIG.numeros.depoimentos.map((d, i) => `
-      <li class="reveal" style="--atraso:${i * 100}ms">
+      <li class="reveal" style="--atraso:${(i % 4) * 90}ms">
         <figure class="depoimento">
+          <p class="estrelas"><span aria-hidden="true">★★★★★</span><span class="visualmente-oculto">Nota 5 de 5</span></p>
           <blockquote><p>${esc(d.texto)}</p></blockquote>
           <figcaption>
-            <span class="avatar">${midia({ foto: d.foto, gradiente: d.gradiente, alt: `Foto de ${d.nome}` })}</span>
-            <span><span class="depoimento-nome">${esc(d.nome)}</span><span class="depoimento-empresa">${esc(d.empresa)}</span></span>
+            <span class="avatar" aria-hidden="true">${d.logo ? `<img src="${esc(d.logo)}" alt="" loading="lazy">` : esc(d.empresa.charAt(0))}</span>
+            <span><span class="depoimento-nome">${esc(d.empresa)}</span><span class="depoimento-empresa">${esc(d.nome)}</span></span>
           </figcaption>
         </figure>
       </li>`).join("");
@@ -1655,13 +2127,13 @@
       if (reduzirMovimento) { el.textContent = formatar(alvo, casas); return; }
       const duracao = 1800;
       const inicio = performance.now();
-      function passo(agora) {
+      function passoAnim(agora) {
         const t = Math.min((agora - inicio) / duracao, 1);
         const suave = 1 - Math.pow(1 - t, 3);
         el.textContent = formatar(alvo * suave, casas);
-        if (t < 1) requestAnimationFrame(passo);
+        if (t < 1) requestAnimationFrame(passoAnim);
       }
-      requestAnimationFrame(passo);
+      requestAnimationFrame(passoAnim);
     }
 
     /* ---------- Contato ---------- */
@@ -1669,7 +2141,7 @@
     let digitosWhats = ct.whatsapp.replace(/\D/g, "");
     if (!digitosWhats.startsWith("55") || digitosWhats.length <= 11) digitosWhats = "55" + digitosWhats;
     const linkWhats = `https://wa.me/${digitosWhats}?text=${encodeURIComponent(ct.mensagemWhatsApp)}`;
-    const linkInsta = `https://instagram.com/${ct.instagram.replace("@", "")}`;
+    const linkInsta = `https://www.instagram.com/${ct.instagram.replace("@", "")}/`;
 
     $("#contato-links").innerHTML = [
       { icone: icones.whatsapp, rotulo: "WhatsApp", valor: ct.whatsapp, link: linkWhats, externo: true },
