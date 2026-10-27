@@ -471,13 +471,13 @@
     }
     .faixa-trilho:hover ul, .logos-linha:hover ul { animation-play-state: paused; }
     .faixa-trilho li {
-      width: 56px; height: 56px;
+      width: 60px; height: 60px;
       flex-shrink: 0;
       border-radius: 50%;
-      overflow: hidden;
-      box-shadow: 0 4px 12px -6px rgba(20, 17, 13, .35);
+      background: var(--branco);
+      border: 1px solid var(--linha);
     }
-    .faixa-trilho img { width: 100%; height: 100%; object-fit: cover; }
+    .faixa-trilho img { width: 100%; height: 100%; object-fit: contain; padding: 15%; }
     @keyframes rolar { to { transform: translateX(-100%); } }
 
     /* =========================================================
@@ -865,15 +865,16 @@
       animation: rolar 110s linear infinite;
     }
     .logos-linha.reversa ul { animation-direction: reverse; }
+    /* Bolinhas claras e iguais; a logo fica solta, sem fundo próprio (arquivos PNG transparentes) */
     .logo-item {
-      width: 100px; height: 100px;
+      width: 104px; height: 104px;
       flex-shrink: 0;
       border-radius: 50%;
-      overflow: hidden;
       background: var(--branco);
-      box-shadow: var(--sombra-leve);
+      border: 1px solid var(--linha);
+      box-shadow: 0 6px 18px -14px rgba(20, 17, 13, .45);
     }
-    .logo-item img { width: 100%; height: 100%; object-fit: cover; }
+    .logo-item img { width: 100%; height: 100%; object-fit: contain; padding: 18%; }
     .logo-texto {
       display: grid;
       place-items: center;
@@ -881,13 +882,10 @@
       text-align: center;
       font-family: "Fraunces", Georgia, serif;
       font-style: italic;
-      font-size: .98rem;
+      font-size: .95rem;
       line-height: 1.12;
       color: var(--tinta);
-      border: 1px solid var(--linha);
     }
-    .logo-texto.azul { background: var(--azul); color: var(--creme); border-color: var(--azul); }
-    .logo-texto.tinta { background: var(--tinta); color: var(--creme); border-color: var(--tinta); }
 
     .resultados {
       display: grid;
@@ -973,7 +971,8 @@
       font-style: italic;
       font-size: 1.2rem;
     }
-    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .avatar:has(img) { background: var(--branco); border: 1px solid var(--linha); }
+    .avatar img { width: 100%; height: 100%; object-fit: contain; padding: 12%; }
     .depoimento-nome { display: block; font-weight: 700; font-size: .92rem; line-height: 1.35; }
     .depoimento-empresa { display: block; font-size: .85rem; color: var(--tinta-suave); }
 
@@ -1499,66 +1498,66 @@
         // Logos (ficam na pasta "logos"). Para incluir uma nova, salve a
         // imagem quadrada na pasta e adicione uma linha { nome, logo }.
         logos: [
-          { nome: "Liz", logo: "logos/liz.jpg" },
-          { nome: "Hering", logo: "logos/hering.jpg" },
-          { nome: "Copacol", logo: "logos/copacol.jpg" },
-          { nome: "Rap10", logo: "logos/rap10.jpg" },
-          { nome: "Zap Imóveis", logo: "logos/zap.jpg" },
-          { nome: "Sabrina Fernandes", logo: "logos/sabrina-fernandes.jpg" },
-          { nome: "Empório Macadâmia", logo: "logos/emporio-macadamia.jpg" },
-          { nome: "Buriti Shopping", logo: "logos/buriti.jpg" },
-          { nome: "5àsec", logo: "logos/5asec.jpg" },
-          { nome: "Relove", logo: "logos/relove.jpg" },
-          { nome: "Tropical Especiarias", logo: "logos/tropical.jpg" },
-          { nome: "Viasete", logo: "logos/viasete.jpg" },
-          { nome: "Bothanica Mineral", logo: "logos/bothanica.jpg" },
-          { nome: "iFinance", logo: "logos/ifinance.jpg" },
-          { nome: "Pelmex+", logo: "logos/pelmex.jpg" },
-          { nome: "Carolina Areco", logo: "logos/carolina-areco.jpg" },
-          { nome: "Essencial Spa", logo: "logos/essencial.jpg" },
-          { nome: "Rancho do Zé João", logo: "logos/rancho-do-ze-joao.jpg" },
-          { nome: "Vinagreen", logo: "logos/vinagreen.jpg" },
-          { nome: "Touti", logo: "logos/touti.jpg" },
-          { nome: "Cajs", logo: "logos/cajs.jpg" },
-          { nome: "Entre Chalés", logo: "logos/entre-chales.jpg" },
-          { nome: "Poli-Pet", logo: "logos/polipet.jpg" },
-          { nome: "Trisanti", logo: "logos/trisanti.jpg" },
-          { nome: "Bem Me Fiz", logo: "logos/bem-me-fiz.jpg" },
-          { nome: "Pharmapele", logo: "logos/pharmapele.jpg" },
-          { nome: "Acqua Lavanderia", logo: "logos/acqua.jpg" },
-          { nome: "Rahra Semijoias", logo: "logos/rahra.jpg" },
-          { nome: "Chama Congelante", logo: "logos/chama-congelante.jpg" },
-          { nome: "Pra Casa", logo: "logos/pra-casa.jpg" },
-          { nome: "Zanin", logo: "logos/zanin.jpg" },
-          { nome: "Focus Educação", logo: "logos/focus.jpg" },
-          { nome: "Digorestte", logo: "logos/digorestte.jpg" },
-          { nome: "Speck Truffle Sauce", logo: "logos/speck.jpg" },
-          { nome: "Carolina Gonçalves", logo: "logos/carolina-goncalves.jpg" },
-          { nome: "Valle Branco Alimentos", logo: "logos/valle-branco.jpg" },
-          { nome: "iÁgua", logo: "logos/iagua.jpg" },
-          { nome: "Carrano", logo: "logos/carrano.jpg" },
-          { nome: "Aya", logo: "logos/aya.jpg" },
-          { nome: "A. Balzaquiana", logo: "logos/balzaquiana.jpg" },
-          { nome: "Amor de Brechó", logo: "logos/amor-de-brecho.jpg" },
-          { nome: "Peçarara Brechó", logo: "logos/pecarara.jpg" },
-          { nome: "Leve Brechó", logo: "logos/leve-brecho.jpg" },
-          { nome: "Burguesinha's Brechó Chic", logo: "logos/burguesinhas.jpg" },
-          { nome: "Bazar da Thatá", logo: "logos/bazar-da-thata.jpg" },
-          { nome: "Blza", logo: "logos/blza.jpg" },
-          { nome: "Georgia Carvalho", logo: "logos/georgia-carvalho.jpg" },
-          { nome: "Unique Star", logo: "logos/unique-star.jpg" },
-          { nome: "RC Consultoria de Beleza", logo: "logos/rc-consultoria.jpg" },
-          { nome: "Amanda Uchôa Studio", logo: "logos/amanda-uchoa.jpg" },
-          { nome: "Eduarda Aquino", logo: "logos/eduarda-aquino.jpg" },
-          { nome: "Única Joias", logo: "logos/unica-joias.jpg" },
-          { nome: "Eleve Pratas", logo: "logos/eleve-pratas.jpg" },
-          { nome: "Birô", logo: "logos/biro.jpg" },
-          { nome: "PDC Culture", logo: "logos/pdc-culture.jpg" },
-          { nome: "Pitaia", logo: "logos/pitaia.jpg" },
-          { nome: "Marca parceira", logo: "logos/marca-folha.jpg" },
-          { nome: "Marca parceira", logo: "logos/marca-ancora.jpg" },
-          { nome: "IKB Clinic", logo: "logos/ikb.jpg" },
-          { nome: "Marca parceira", logo: "logos/marca-geometrica.jpg" }
+          { nome: "Liz", logo: "logos/liz.png" },
+          { nome: "Hering", logo: "logos/hering.png" },
+          { nome: "Copacol", logo: "logos/copacol.png" },
+          { nome: "Rap10", logo: "logos/rap10.png" },
+          { nome: "Zap Imóveis", logo: "logos/zap.png" },
+          { nome: "Sabrina Fernandes", logo: "logos/sabrina-fernandes.png" },
+          { nome: "Empório Macadâmia", logo: "logos/emporio-macadamia.png" },
+          { nome: "Buriti Shopping", logo: "logos/buriti.png" },
+          { nome: "5àsec", logo: "logos/5asec.png" },
+          { nome: "Relove", logo: "logos/relove.png" },
+          { nome: "Tropical Especiarias", logo: "logos/tropical.png" },
+          { nome: "Viasete", logo: "logos/viasete.png" },
+          { nome: "Bothanica Mineral", logo: "logos/bothanica.png" },
+          { nome: "iFinance", logo: "logos/ifinance.png" },
+          { nome: "Pelmex+", logo: "logos/pelmex.png" },
+          { nome: "Carolina Areco", logo: "logos/carolina-areco.png" },
+          { nome: "Essencial Spa", logo: "logos/essencial.png" },
+          { nome: "Rancho do Zé João", logo: "logos/rancho-do-ze-joao.png" },
+          { nome: "Vinagreen", logo: "logos/vinagreen.png" },
+          { nome: "Touti", logo: "logos/touti.png" },
+          { nome: "Cajs", logo: "logos/cajs.png" },
+          { nome: "Entre Chalés", logo: "logos/entre-chales.png" },
+          { nome: "Poli-Pet", logo: "logos/polipet.png" },
+          { nome: "Trisanti", logo: "logos/trisanti.png" },
+          { nome: "Bem Me Fiz", logo: "logos/bem-me-fiz.png" },
+          { nome: "Pharmapele", logo: "logos/pharmapele.png" },
+          { nome: "Acqua Lavanderia", logo: "logos/acqua.png" },
+          { nome: "Rahra Semijoias", logo: "logos/rahra.png" },
+          { nome: "Chama Congelante", logo: "logos/chama-congelante.png" },
+          { nome: "Pra Casa", logo: "logos/pra-casa.png" },
+          { nome: "Zanin", logo: "logos/zanin.png" },
+          { nome: "Focus Educação", logo: "logos/focus.png" },
+          { nome: "Digorestte", logo: "logos/digorestte.png" },
+          { nome: "Speck Truffle Sauce", logo: "logos/speck.png" },
+          { nome: "Carolina Gonçalves", logo: "logos/carolina-goncalves.png" },
+          { nome: "Valle Branco Alimentos", logo: "logos/valle-branco.png" },
+          { nome: "iÁgua", logo: "logos/iagua.png" },
+          { nome: "Carrano", logo: "logos/carrano.png" },
+          { nome: "Aya", logo: "logos/aya.png" },
+          { nome: "A. Balzaquiana", logo: "logos/balzaquiana.png" },
+          { nome: "Amor de Brechó", logo: "logos/amor-de-brecho.png" },
+          { nome: "Peçarara Brechó", logo: "logos/pecarara.png" },
+          { nome: "Leve Brechó", logo: "logos/leve-brecho.png" },
+          { nome: "Burguesinha's Brechó Chic", logo: "logos/burguesinhas.png" },
+          { nome: "Bazar da Thatá", logo: "logos/bazar-da-thata.png" },
+          { nome: "Blza", logo: "logos/blza.png" },
+          { nome: "Georgia Carvalho", logo: "logos/georgia-carvalho.png" },
+          { nome: "Unique Star", logo: "logos/unique-star.png" },
+          { nome: "RC Consultoria de Beleza", logo: "logos/rc-consultoria.png" },
+          { nome: "Amanda Uchôa Studio", logo: "logos/amanda-uchoa.png" },
+          { nome: "Eduarda Aquino", logo: "logos/eduarda-aquino.png" },
+          { nome: "Única Joias", logo: "logos/unica-joias.png" },
+          { nome: "Eleve Pratas", logo: "logos/eleve-pratas.png" },
+          { nome: "Birô", logo: "logos/biro.png" },
+          { nome: "PDC Culture", logo: "logos/pdc-culture.png" },
+          { nome: "Pitaia", logo: "logos/pitaia.png" },
+          { nome: "Marca parceira", logo: "logos/marca-folha.png" },
+          { nome: "Marca parceira", logo: "logos/marca-ancora.png" },
+          { nome: "IKB Clinic", logo: "logos/ikb.png" },
+          { nome: "Marca parceira", logo: "logos/marca-geometrica.png" }
         ],
         // Marcas que ainda não têm logo: aparecem como um selo com o nome.
         // Quando tiver a logo, mova a marca para a lista de cima.
@@ -1800,13 +1799,13 @@
         depoimentosTitulo: "O que as <em>marcas</em> dizem",
         // logo: opcional (imagem da pasta "logos"). Sem logo, aparece a inicial.
         depoimentos: [
-          { texto: "Trabalhar com a Tamires foi ótimo. Ela entregou no prazo, seguiu o briefing com atenção e trouxe naturalidade ao conteúdo. Uma parceria eficiente e muito bem conduzida.", nome: "Campanha de awareness", empresa: "Pelmex+", logo: "logos/pelmex.jpg" },
-          { texto: "Roteiro e gravação que acertaram em cheio no que estávamos precisando. Um vídeo bem estruturado, pensado nos detalhes. Nós amamos!", nome: "Campanha de awareness", empresa: "Pelmex+", logo: "logos/pelmex.jpg" },
-          { texto: "Super simpática e prestativa. Atendeu todas as minhas necessidades, é bem conectada com as redes sociais e o vídeo ficou perfeito! Super recomendo!", nome: "Harmonização facial e corporal", empresa: "IKB Clinic", logo: "logos/ikb.jpg" },
-          { texto: "Tamires entregou um conteúdo super legal e além de tudo super atenciosa. Entrega rápida.", nome: "Drinks: apresentação e receitas", empresa: "Tropical Especiarias", logo: "logos/tropical.jpg" },
-          { texto: "Vídeo entregue no prazo, de acordo com roteiro, ela foi muito solícita. Ótimo!!", nome: "Campanha Dia dos Namorados", empresa: "Rahra Semijoias", logo: "logos/rahra.jpg" },
-          { texto: "Super dedicada e entregou o trabalho super rápido!", nome: "Campanha moda circular", empresa: "Relove", logo: "logos/relove.jpg" },
-          { texto: "Conteúdo maravilhoso e impecável!", nome: "Projeto Chama Congelante", empresa: "Chama Congelante", logo: "logos/chama-congelante.jpg" },
+          { texto: "Trabalhar com a Tamires foi ótimo. Ela entregou no prazo, seguiu o briefing com atenção e trouxe naturalidade ao conteúdo. Uma parceria eficiente e muito bem conduzida.", nome: "Campanha de awareness", empresa: "Pelmex+", logo: "logos/pelmex.png" },
+          { texto: "Roteiro e gravação que acertaram em cheio no que estávamos precisando. Um vídeo bem estruturado, pensado nos detalhes. Nós amamos!", nome: "Campanha de awareness", empresa: "Pelmex+", logo: "logos/pelmex.png" },
+          { texto: "Super simpática e prestativa. Atendeu todas as minhas necessidades, é bem conectada com as redes sociais e o vídeo ficou perfeito! Super recomendo!", nome: "Harmonização facial e corporal", empresa: "IKB Clinic", logo: "logos/ikb.png" },
+          { texto: "Tamires entregou um conteúdo super legal e além de tudo super atenciosa. Entrega rápida.", nome: "Drinks: apresentação e receitas", empresa: "Tropical Especiarias", logo: "logos/tropical.png" },
+          { texto: "Vídeo entregue no prazo, de acordo com roteiro, ela foi muito solícita. Ótimo!!", nome: "Campanha Dia dos Namorados", empresa: "Rahra Semijoias", logo: "logos/rahra.png" },
+          { texto: "Super dedicada e entregou o trabalho super rápido!", nome: "Campanha moda circular", empresa: "Relove", logo: "logos/relove.png" },
+          { texto: "Conteúdo maravilhoso e impecável!", nome: "Projeto Chama Congelante", empresa: "Chama Congelante", logo: "logos/chama-congelante.png" },
           { texto: "A Tamires foi maravilhosa!!", nome: "Tratamento de gordura localizada", empresa: "Carolina Gonçalves", logo: "" }
         ]
       },
@@ -2064,8 +2063,7 @@
       </li>`).join("");
 
     /* ---------- Parede de logos (logos e selos com nome, misturados) ---------- */
-    const cores = ["", "azul", "", "tinta"];
-    const selos = CONFIG.marcas.semLogo.map((nome, i) => ({ nome, cor: cores[i % cores.length] }));
+    const selos = CONFIG.marcas.semLogo.map((nome) => ({ nome, cor: "" }));
     const logos = CONFIG.marcas.logos.slice();
     const mistura = [];
     const passo = Math.max(1, Math.round(logos.length / Math.max(1, selos.length)));
