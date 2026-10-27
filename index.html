@@ -2082,7 +2082,7 @@
     /* ---------- Player de vídeo ---------- */
     const player = $("#player");
     function abrirVideo(id, titulo) {
-      $("#player-video").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" title="${esc(titulo)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+      $("#player-video").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1&cc_load_policy=0&iv_load_policy=3&hl=pt-BR" title="${esc(titulo)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
       $("#player-titulo").textContent = titulo;
       $("#player-link").href = `https://www.youtube.com/watch?v=${id}`;
       player.showModal();
