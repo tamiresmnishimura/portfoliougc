@@ -16,6 +16,11 @@ O conteúdo editável fica no objeto `CONFIG`, no topo do `<script>`.
 - Sempre que trocar uma logo, mude `VERSAO_LOGOS` no `index.html`, senão o navegador continua mostrando a versão antiga (o GitHub Pages manda guardar as imagens em cache).
 - Nenhuma logo pode encostar na borda da bolinha: o pixel visível mais distante do centro deve ficar a no máximo 1,04 meia-largura da imagem.
 
+## Inglês
+
+- O site tem versão em inglês (botão PT/EN). Os textos em inglês ficam em `CONFIG_EN` (conteúdo) e em `TEXTOS.en` (botões, menus, avisos).
+- Sempre que mudar ou incluir um texto em português, atualize também a versão em inglês, na mesma posição da lista.
+
 ## Regras de texto
 
 - Português do Brasil, com acentuação, focado em vender para marcas.
