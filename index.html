@@ -6,13 +6,13 @@
   <!-- EDITE AQUI: título e descrição que aparecem no Google e quando o link
        é compartilhado no WhatsApp, Instagram ou LinkedIn. -->
   <title>Tamires Nishimura | Criadora de conteúdo UGC</title>
-  <meta name="description" content="Portfólio de Tamires Nishimura, criadora de conteúdo UGC: mais de 90 vídeos autênticos para mais de 80 marcas de moda, beleza, gastronomia, casa, viagens e muito mais.">
+  <meta name="description" content="Portfólio de Tamires Nishimura, criadora de conteúdo UGC: mais de 90 vídeos autênticos para mais de 60 marcas de moda, beleza, gastronomia, casa, viagens e muito mais.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:url" content="https://tamiresmnishimura.github.io/portfoliougc/">
   <meta property="og:title" content="Tamires Nishimura | Criadora de conteúdo UGC">
   <meta property="og:description" content="Vídeos autênticos que fazem marcas pararem o scroll, gerarem confiança e venderem mais.">
-  <meta property="og:image" content="https://tamiresmnishimura.github.io/portfoliougc/fotos/capa.jpg">
+  <meta property="og:image" content="https://tamiresmnishimura.github.io/portfoliougc/fotos/sobre.jpg">
   <meta name="theme-color" content="#f3eee9">
 
   <!-- Ícone da aba do navegador (inicial em itálico nas cores do site) -->
@@ -396,26 +396,16 @@
 
     .capa-foto {
       position: relative;
-      isolation: isolate;
+      max-width: 480px;
+      justify-self: center;
+      width: 100%;
     }
-    .capa-foto::before {
-      content: "";
-      position: absolute;
-      inset: 20px -20px -20px 20px;
-      border: 1.5px solid var(--azul);
-      border-radius: var(--raio);
-      z-index: -1;
-    }
-    .capa-foto .moldura {
-      aspect-ratio: 4 / 5;
-      border-radius: var(--raio);
-      overflow: hidden;
-      box-shadow: var(--sombra);
-    }
+    /* A foto da capa já vem recortada, com o cartão e o contorno (fotos/capa.png) */
+    .capa-foto img { width: 100%; height: auto; }
     .selo {
       position: absolute;
       left: -1.75rem;
-      bottom: 2.25rem;
+      bottom: 3.5rem;
       display: flex;
       align-items: center;
       gap: .65rem;
@@ -471,30 +461,23 @@
     }
     .faixa-trilho ul {
       display: flex;
+      align-items: center;
       flex-shrink: 0;
-      gap: 3rem;
-      padding: 0 3rem 0 0;
+      gap: 1.1rem;
+      padding: .2rem 1.1rem .2rem 0;
       margin: 0;
       list-style: none;
-      animation: rolar 60s linear infinite;
+      animation: rolar 90s linear infinite;
     }
     .faixa-trilho:hover ul, .logos-linha:hover ul { animation-play-state: paused; }
     .faixa-trilho li {
-      display: flex;
-      align-items: center;
-      gap: 3rem;
-      font-family: "Fraunces", Georgia, serif;
-      font-style: italic;
-      font-size: 1.3rem;
-      white-space: nowrap;
-      color: var(--tinta);
+      width: 56px; height: 56px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 4px 12px -6px rgba(20, 17, 13, .35);
     }
-    .faixa-trilho li::after {
-      content: "✦";
-      font-style: normal;
-      font-size: .8rem;
-      color: var(--laranja);
-    }
+    .faixa-trilho img { width: 100%; height: 100%; object-fit: cover; }
     @keyframes rolar { to { transform: translateX(-100%); } }
 
     /* =========================================================
@@ -1303,7 +1286,7 @@
           <ul class="capa-numeros reveal" id="capa-numeros" style="--atraso:320ms"></ul>
         </div>
         <div class="capa-foto reveal" style="--atraso:200ms">
-          <div class="moldura" id="capa-midia"></div>
+          <div id="capa-midia"></div>
           <p class="selo" data-cfg="capa.selo"></p>
         </div>
       </div>
@@ -1499,11 +1482,11 @@
         sobretitulo: "Criadora de conteúdo UGC",
         frase: "Crio vídeos autênticos, com cara de gente de verdade, que fazem a sua marca parar o scroll, gerar confiança e vender mais.",
         selo: "Agenda aberta para novas parcerias",
-        imagem: { foto: "fotos/capa.jpg", gradiente: G.royal, alt: `${NOME} sorrindo, de blusa branca e calça jeans, sobre fundo azul` },
+        imagem: { foto: "fotos/capa.png", gradiente: G.royal, alt: `${NOME} sorrindo e abaixando os óculos de sol, de blusa branca de gola alta` },
         // Os três números curtos abaixo dos botões.
         numeros: [
           { valor: "+90",  rotulo: "vídeos no portfólio" },
-          { valor: "+80",  rotulo: "marcas atendidas" },
+          { valor: "+60",  rotulo: "marcas atendidas" },
           { valor: "+10M", rotulo: "views somadas" }
         ],
         rotuloMarcas: "Marcas que confiam"
@@ -1511,8 +1494,7 @@
 
       // EDITE AQUI: marcas.
       marcas: {
-        // Nomes que passam na faixa fina da capa.
-        faixa: ["Colcci", "Hering", "Farm", "Liz", "Copacol", "Rap10", "OLX", "Zap Imóveis", "Perplexity", "Lança Perfume", "Coala", "Buriti Shopping", "5àsec", "Sabrina Fernandes", "Voy", "Empório Macadâmia"],
+        // A faixa fina da capa mostra as logos da lista abaixo.
         tituloLogos: "Marcas que já confiaram no <em>meu trabalho</em>",
         // Logos (ficam na pasta "logos"). Para incluir uma nova, salve a
         // imagem quadrada na pasta e adicione uma linha { nome, logo }.
@@ -1575,12 +1557,12 @@
           { nome: "Pitaia", logo: "logos/pitaia.jpg" },
           { nome: "Marca parceira", logo: "logos/marca-folha.jpg" },
           { nome: "Marca parceira", logo: "logos/marca-ancora.jpg" },
-          { nome: "Marca parceira", logo: "logos/kb.jpg" },
+          { nome: "IKB Clinic", logo: "logos/ikb.jpg" },
           { nome: "Marca parceira", logo: "logos/marca-geometrica.jpg" }
         ],
         // Marcas que ainda não têm logo: aparecem como um selo com o nome.
         // Quando tiver a logo, mova a marca para a lista de cima.
-        semLogo: ["Colcci", "Farm", "Voy", "Moldavita", "Vida Costeira", "Platô", "Whale Houses", "Esperança Presentes", "Santa Essência", "Battagini", "Descubra Cunha", "Lança Perfume", "Lez a Lez", "OLX", "Perplexity", "Coala", "Silvercare", "Lavieen", "Khali", "Hoomy", "The Frozen Palm Tree", "Dale", "EasySIM4U", "Meu Celular", "Padoca Caiupura", "Constlivre", "Tem Vantagem", "EITA"]
+        semLogo: ["Voy", "Moldavita", "Vida Costeira", "Platô", "Whale Houses", "Esperança Presentes", "Santa Essência", "Battagini", "Descubra Cunha"]
       },
 
       // EDITE AQUI: seção Sobre mim.
@@ -1588,7 +1570,7 @@
         sobretitulo: "Sobre mim",
         titulo: "Prazer, eu sou a <em>Tamires</em>",
         etiqueta: "Piquete-SP, com a mala sempre pronta",
-        imagem: { foto: "fotos/sobre.jpg", gradiente: G.pessego, alt: `${NOME} sorrindo e apontando para a câmera em uma sala iluminada` },
+        imagem: { foto: "fotos/sobre.jpg", gradiente: G.pessego, alt: `${NOME} sorrindo, de óculos escuros e camiseta preta com cinto, em frente a uma porta de madeira` },
         paragrafos: [
           "Tenho 32 anos, sou pós-graduada em Gestão de Pessoas pela USP e trabalhei 10 anos com RH antes de me dedicar à criação de conteúdo. Esse olhar treinado para pessoas virou o meu diferencial: eu sei o que faz alguém parar, prestar atenção e confiar.",
           "Moro em Piquete-SP e vivo com uma mala na mão, entre o Vale do Paraíba, Santo André, São Paulo e Salto. Na minha rotina aparecem personagens que o público adora: meu noivo, minhas sobrinhas gêmeas e minha avó, que era costureira.",
@@ -1631,9 +1613,9 @@
           {
             link: "https://youtube.com/shorts/-ubMCwwZWUA",   // LINK DO VÍDEO
             selo: "Viral no TikTok",
-            numero: "Milhões", rotulo: "de views no TikTok",
+            numero: "+8M", rotulo: "views no TikTok",
             titulo: "Copacol",
-            contexto: "Receita com a marca que conquistou o público do TikTok."
+            contexto: "Receita com a marca que alcançou mais de 8 milhões de pessoas."
           },
           {
             link: "https://youtube.com/shorts/pqKJMhF41ao",   // LINK DO VÍDEO
@@ -1676,12 +1658,12 @@
           ]},
           { nome: "Provadores", videos: [
             { marca: "Viasete", titulo: "Provador poá", link: "https://youtube.com/shorts/2-9leBRvMAk" },
-            { marca: "Heloíse", titulo: "Saia", link: "https://youtube.com/shorts/7_QSSxzulYY" },
-            { marca: "Lança Perfume", titulo: "Provador", link: "https://youtube.com/shorts/P1VeB78dou0" },
-            { marca: "Óculos", titulo: "Provador de óculos", link: "https://youtube.com/shorts/7qPVIj6gN4I" },
-            { marca: "Lez a Lez", titulo: "Provador", link: "https://youtube.com/shorts/dx60KSNgs3s" },
-            { marca: "Farm", titulo: "Provador", link: "https://youtube.com/shorts/uTvqsHkvDvs" },
-            { marca: "Festa", titulo: "Provador de vestido de festa", link: "https://youtube.com/shorts/3Ql_m36rj5Y" },
+            { marca: "Provador", titulo: "Saia Heloíse", link: "https://youtube.com/shorts/7_QSSxzulYY" },
+            { marca: "Provador", titulo: "Look Lança Perfume", link: "https://youtube.com/shorts/P1VeB78dou0" },
+            { marca: "Provador", titulo: "Óculos", link: "https://youtube.com/shorts/7qPVIj6gN4I" },
+            { marca: "Provador", titulo: "Look Lez a Lez", link: "https://youtube.com/shorts/dx60KSNgs3s" },
+            { marca: "Provador", titulo: "Look Farm", link: "https://youtube.com/shorts/uTvqsHkvDvs" },
+            { marca: "Provador", titulo: "Vestido de festa", link: "https://youtube.com/shorts/3Ql_m36rj5Y" },
             { marca: "Cajs", titulo: "Provador", link: "https://youtube.com/shorts/J6cR6TQh9iQ" }
           ]},
           { nome: "Beleza", videos: [
@@ -1804,7 +1786,7 @@
         descricao: "Conteúdo bonito é bom. Conteúdo bonito que traz retorno é o que faz as marcas voltarem.",
         // valor: número (use ponto para decimal, ex.: 4.9). casas: casas decimais.
         contadores: [
-          { valor: 80, casas: 0, prefixo: "+", sufixo: "",  rotulo: "marcas atendidas" },
+          { valor: 60, casas: 0, prefixo: "+", sufixo: "",  rotulo: "marcas atendidas" },
           { valor: 90, casas: 0, prefixo: "+", sufixo: "",  rotulo: "vídeos no portfólio" },
           { valor: 5,  casas: 1, prefixo: "",  sufixo: "",  rotulo: "de nota em todas as avaliações das marcas" },
           { valor: 8,  casas: 0, prefixo: "+", sufixo: "M", rotulo: "de views no vídeo de maior alcance" }
@@ -1813,14 +1795,14 @@
         resultados: [
           { marca: "Colcci",           metrica: "1º lugar", rotulo: "no concurso da marca",        descricao: "Vídeo com a camiseta da Copa escolhido como o vencedor do concurso." },
           { marca: "Rap10",            metrica: "+2M",      rotulo: "de views no TikTok",          descricao: "Receita prática e rápida que viralizou e levou a marca para milhões de pessoas." },
-          { marca: "Alcance orgânico", metrica: "+8M",      rotulo: "de views em um único vídeo",  descricao: "O conteúdo de maior alcance do meu portfólio até agora." }
+          { marca: "Copacol",          metrica: "+8M",      rotulo: "de views no TikTok",          descricao: "Receita com a marca que se tornou o vídeo de maior alcance do meu portfólio." }
         ],
         depoimentosTitulo: "O que as <em>marcas</em> dizem",
         // logo: opcional (imagem da pasta "logos"). Sem logo, aparece a inicial.
         depoimentos: [
           { texto: "Trabalhar com a Tamires foi ótimo. Ela entregou no prazo, seguiu o briefing com atenção e trouxe naturalidade ao conteúdo. Uma parceria eficiente e muito bem conduzida.", nome: "Campanha de awareness", empresa: "Pelmex+", logo: "logos/pelmex.jpg" },
           { texto: "Roteiro e gravação que acertaram em cheio no que estávamos precisando. Um vídeo bem estruturado, pensado nos detalhes. Nós amamos!", nome: "Campanha de awareness", empresa: "Pelmex+", logo: "logos/pelmex.jpg" },
-          { texto: "Super simpática e prestativa. Atendeu todas as minhas necessidades, é bem conectada com as redes sociais e o vídeo ficou perfeito! Super recomendo!", nome: "Harmonização facial e corporal", empresa: "IKB Clinic", logo: "" },
+          { texto: "Super simpática e prestativa. Atendeu todas as minhas necessidades, é bem conectada com as redes sociais e o vídeo ficou perfeito! Super recomendo!", nome: "Harmonização facial e corporal", empresa: "IKB Clinic", logo: "logos/ikb.jpg" },
           { texto: "Tamires entregou um conteúdo super legal e além de tudo super atenciosa. Entrega rápida.", nome: "Drinks: apresentação e receitas", empresa: "Tropical Especiarias", logo: "logos/tropical.jpg" },
           { texto: "Vídeo entregue no prazo, de acordo com roteiro, ela foi muito solícita. Ótimo!!", nome: "Campanha Dia dos Namorados", empresa: "Rahra Semijoias", logo: "logos/rahra.jpg" },
           { texto: "Super dedicada e entregou o trabalho super rápido!", nome: "Campanha moda circular", empresa: "Relove", logo: "logos/relove.jpg" },
@@ -1928,12 +1910,14 @@
     $("#logo").innerHTML = `${esc(NOME)}<span>.</span>`;
 
     /* ---------- Capa ---------- */
-    $("#capa-midia").innerHTML = midia(CONFIG.capa.imagem).replace('loading="lazy"', 'fetchpriority="high"');
+    $("#capa-midia").innerHTML = `<img src="${esc(CONFIG.capa.imagem.foto)}" alt="${esc(CONFIG.capa.imagem.alt)}" width="730" height="1223" fetchpriority="high">`;
     $("#capa-numeros").innerHTML = CONFIG.capa.numeros
       .map((n) => `<li><strong>${esc(n.valor)}</strong><span>${esc(n.rotulo)}</span></li>`).join("");
-    const listaMarcas = CONFIG.marcas.faixa.map((m) => `<li>${esc(m)}</li>`).join("");
-    $("#marcas").innerHTML = listaMarcas;
-    $("#marcas-copia").innerHTML = listaMarcas;
+    const logosFaixa = CONFIG.marcas.logos.filter((m) => m.nome !== "Marca parceira");
+    $("#marcas").innerHTML = logosFaixa
+      .map((m) => `<li><img src="${esc(m.logo)}" alt="${esc(m.nome)}" width="56" height="56" loading="lazy" decoding="async"></li>`).join("");
+    $("#marcas-copia").innerHTML = logosFaixa
+      .map((m) => `<li><img src="${esc(m.logo)}" alt="" width="56" height="56" loading="lazy" decoding="async"></li>`).join("");
 
     /* ---------- Sobre ---------- */
     $("#sobre-midia").innerHTML = midia(CONFIG.sobre.imagem);
