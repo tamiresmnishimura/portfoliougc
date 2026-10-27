@@ -546,6 +546,15 @@
       font-size: 1.5rem;
       color: var(--tinta) !important;
     }
+    .assinatura a {
+      color: var(--azul);
+      text-decoration: none;
+      border-bottom: 1.5px solid currentColor;
+      transition: color .3s ease;
+    }
+    .assinatura a span { display: inline-block; transition: transform .3s ease; }
+    .assinatura a:hover span { transform: translateX(4px); }
+    .sobre-texto strong { color: var(--tinta); font-weight: 700; }
 
     /* =========================================================
        3. CONTEÚDOS DE DESTAQUE
@@ -1595,21 +1604,23 @@
         titulo: "Prazer, eu sou a <em>Tamires</em>",
         etiqueta: "Piquete-SP, com a mala sempre pronta",
         imagem: { foto: "fotos/sobre.jpg", gradiente: G.pessego, alt: `${NOME} sorrindo, de óculos escuros e camiseta preta com cinto, em frente a uma porta de madeira` },
+        // Para deixar uma palavra em negrito, coloque entre <strong> e </strong>.
         paragrafos: [
-          "Tenho 32 anos, sou pós-graduada em Gestão de Pessoas pela USP e trabalhei 10 anos com RH antes de me dedicar à criação de conteúdo. Esse olhar treinado para pessoas virou o meu diferencial: eu sei o que faz alguém parar, prestar atenção e confiar.",
-          "Moro em Piquete-SP e vivo com uma mala na mão, entre o Vale do Paraíba, Santo André, São Paulo e Salto. Na minha rotina aparecem personagens que o público adora: meu noivo, minhas sobrinhas gêmeas e minha avó, que era costureira.",
-          "Amo moda e consumo consciente, falo sobre tecidos, adoro me cuidar, viajar, comer bem e tomar um bom vinho. É essa verdade que eu levo para cada vídeo da sua marca."
+          "Tenho 32 anos, sou <strong>pós-graduada em Gestão de Pessoas pela USP</strong> e trabalhei 10 anos com RH antes de me dedicar à criação de conteúdo.",
+          "No caminho, também trabalhei em restaurante, em loja de roupa e até como babá durante um intercâmbio. Essa bagagem, do corporativo aos empregos mais diversos e à vida fora do país, virou o meu diferencial: sei me comunicar de forma assertiva, adaptando a linguagem, o cenário e o figurino a cada público.",
+          "Moro em <strong>Piquete-SP</strong> e vivo com uma mala na mão, entre o <strong>Vale do Paraíba</strong>, <strong>Santo André</strong>, <strong>São Paulo</strong> e <strong>Salto</strong>. Na minha rotina aparecem personagens que o público adora: meu noivo, minhas sobrinhas gêmeas e minha avó, que era costureira.",
+          "Amo <strong>moda</strong> e consumo consciente, falo sobre tecidos, adoro me cuidar, <strong>viajar</strong>, <strong>comer bem</strong> e tomar um bom vinho. É essa verdade que eu levo para cada vídeo da sua marca."
         ],
         entregasTitulo: "O que você recebe comigo",
         entregas: [
           "Roteiro pensado para o objetivo da sua marca",
-          "Gravação com luz natural e cenários reais",
+          "Gravação com luz natural",
           "Edição dinâmica, com legendas e cortes",
           "Arquivos em alta qualidade, prontos para usar",
-          "Ganchos alternativos para testar nos anúncios",
+          "Cenários elegantes e variados para cada proposta",
           "Entrega no prazo e comunicação próxima"
         ],
-        assinatura: "Com carinho, Tamires"
+        assinatura: '<a href="#destaques">Vem ver meus trabalhos <span aria-hidden="true">→</span></a>'
       },
 
       // EDITE AQUI: seus melhores conteúdos.
@@ -1967,7 +1978,7 @@
     /* ---------- Sobre ---------- */
     $("#sobre-midia").innerHTML = midia(CONFIG.sobre.imagem);
     $("#sobre-paragrafos").innerHTML = CONFIG.sobre.paragrafos
-      .map((p, i) => `<p class="reveal" style="--atraso:${i * 80}ms">${esc(p)}</p>`).join("");
+      .map((p, i) => `<p class="reveal" style="--atraso:${i * 80}ms">${p}</p>`).join("");
     $("#entregas").innerHTML = CONFIG.sobre.entregas
       .map((e, i) => `<li class="reveal" style="--atraso:${i * 60}ms">${icones.check}<span>${esc(e)}</span></li>`).join("");
 
