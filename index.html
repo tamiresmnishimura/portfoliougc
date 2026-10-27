@@ -48,6 +48,37 @@
       --foco: var(--azul);
     }
 
+    /* =========================================================
+       TEMA BORDÔ (mais sofisticado). Ativado por CONFIG.tema = "bordo"
+       ou pelo endereço com ?tema=bordo. O azul vira bordô e o laranja,
+       dourado champanhe.
+       ========================================================= */
+    :root[data-tema="bordo"] {
+      --creme: #f5efe9;
+      --creme-escuro: #ede3db;
+      --branco: #fffcf9;
+      --tinta: #1d1315;
+      --tinta-suave: #4f4144;
+      --azul: #6e1f30;
+      --azul-escuro: #521622;
+      --laranja: #b08d57;
+      --pessego: #e8cfa4;
+      --linha: rgba(29, 19, 21, .12);
+    }
+    :root[data-tema="bordo"] .titulo em,
+    :root[data-tema="bordo"] .capa-nome em { font-weight: 300; }
+    :root[data-tema="bordo"] .sobretitulo { letter-spacing: .24em; }
+    :root[data-tema="bordo"] .btn-primario { box-shadow: inset 0 0 0 1px rgba(232, 207, 164, .35); }
+    :root[data-tema="bordo"] .contato { background: linear-gradient(160deg, #6e1f30 0%, #4a1320 100%); }
+    :root[data-tema="bordo"] .contato-icone { color: #6e1f30; }
+    :root[data-tema="bordo"] .card-selo.ouro { background: #d9b56f; }
+    :root[data-tema="bordo"] .form-ok { background: #f4e6e8; }
+    :root[data-tema="bordo"] .aviso { background: #1d1315; color: #f1e3cc; }
+    :root[data-tema="bordo"] .aviso-selo { background: #d9b56f; color: #1d1315; }
+    :root[data-tema="bordo"] .aviso-link { color: #e8cfa4; }
+    :root[data-tema="bordo"] .contador { border-top-color: var(--laranja); }
+    :root[data-tema="bordo"] .resultado { background: linear-gradient(160deg, #2a1a1d 0%, #1d1315 100%); }
+
     *, *::before, *::after { box-sizing: border-box; }
 
     html {
@@ -1675,6 +1706,10 @@
         profissao: "Criadora de conteúdo UGC"
       },
 
+      // EDITE AQUI: cor do site. "azul" (atual) ou "bordo".
+      // Para testar sem mudar o site, abra o endereço com ?tema=bordo no final.
+      tema: "azul",
+
       // EDITE AQUI: faixa de campanha no topo do site (ex.: Black Friday).
       // ativa: true mostra, false esconde. data: o dia da campanha (ano-mês-dia).
       // A faixa some sozinha depois dessa data. {dias} vira a contagem regressiva.
@@ -1878,8 +1913,7 @@
         sobretitulo: "Trabalhos por nicho",
         titulo: "Um olhar para cada <em>nicho</em>",
         // {total} e {nichos} são preenchidos automaticamente.
-        descricao: "São {total} vídeos em {nichos} nichos. Escolha um nicho e veja como adapto a linguagem para conversar com o seu público.",
-        rotuloTodos: "Todos",
+        descricao: "São {total} vídeos em {nichos} nichos, cada um na linguagem do seu público. Veja todos abaixo ou toque num nicho para filtrar.",
         porPagina: 20,
         nichos: [
           { nome: "Moda", videos: [
@@ -2081,7 +2115,7 @@
       // EDITE AQUI: suas redes sociais (aparecem no rodapé).
       redes: [
         { nome: "Instagram", link: "https://www.instagram.com/tamiresnishimura/" },
-        { nome: "YouTube",   link: "https://www.youtube.com/@tamiresnishimura4817" },
+        { nome: "YouTube",   link: "https://www.youtube.com/@tamiresnishimura" },
         { nome: "WhatsApp",  link: "https://wa.me/5512996442988" }
       ],
 
@@ -2150,8 +2184,7 @@
       trabalhos: {
         sobretitulo: "Work by niche",
         titulo: "A fresh angle for every <em>niche</em>",
-        descricao: "{total} videos across {nichos} niches. Pick a niche and see how I adapt the language to speak to your audience.",
-        rotuloTodos: "All",
+        descricao: "{total} videos across {nichos} niches, each speaking its audience's language. Browse them all below or tap a niche to filter.",
         nichos: [
           { nome: "Fashion", videos: [{ titulo: "Bermuda shorts" }, { titulo: "A dress for every day of the week" }, { titulo: "Microfiber up close" }, { titulo: "Sunglasses" }, { titulo: "Swimsuit" }, { titulo: "Alice set" }, { titulo: "Earrings" }, { titulo: "Microfiber line" }, { titulo: "Online fashion" }, { titulo: "What I ordered vs. what I got" }] },
           { nome: "Try-ons", videos: [{ titulo: "Polka dot try-on" }, { marca: "Try-on", titulo: "Heloíse skirt" }, { marca: "Try-on", titulo: "Lança Perfume look" }, { marca: "Try-on", titulo: "Sunglasses" }, { marca: "Try-on", titulo: "Lez a Lez look" }, { marca: "Try-on", titulo: "Farm look" }, { marca: "Try-on", titulo: "Party dress" }, { titulo: "Try-on" }] },
@@ -2279,6 +2312,19 @@
     const IDIOMA = lerIdioma();
     const T = TEXTOS[IDIOMA];
     document.documentElement.lang = IDIOMA === "en" ? "en" : "pt-BR";
+
+    /* ---------- Tema de cor (azul ou bordô) ---------- */
+    const temaUrl = new URLSearchParams(location.search).get("tema");
+    const TEMA = temaUrl === "bordo" || temaUrl === "azul" ? temaUrl : (CONFIG.tema || "azul");
+    if (TEMA === "bordo") {
+      document.documentElement.dataset.tema = "bordo";
+      CONFIG.capa.imagem.foto = "fotos/capa-bordo.png";
+      document.querySelector('meta[name="theme-color"]').content = "#f5efe9";
+      document.querySelector('link[rel="icon"]').href = "data:image/svg+xml," + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#6e1f30"/>' +
+        '<text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Georgia,serif" font-style="italic" font-size="40" fill="#f5efe9">T</text>' +
+        '<circle cx="49" cy="47" r="4" fill="#d9b56f"/></svg>');
+    }
 
     // Junta a tradução com o conteúdo original (listas na mesma ordem)
     function mesclar(base, extra) {
@@ -2462,12 +2508,8 @@
     /* ---------- Trabalhos com filtro e "Ver mais" ---------- */
     const nichos = CONFIG.trabalhos.nichos;
     const porPagina = CONFIG.trabalhos.porPagina || 20;
-    // Em "Todos", os vídeos se alternam entre os nichos para mostrar variedade.
-    const todosVideos = [];
-    const maiorNicho = Math.max(...nichos.map((n) => n.videos.length));
-    for (let i = 0; i < maiorNicho; i++) {
-      nichos.forEach((n) => { if (n.videos[i]) todosVideos.push({ ...n.videos[i], nicho: n.nome, id: idDoVideo(n.videos[i].link) }); });
-    }
+    // Sem filtro, todos os vídeos aparecem agrupados na mesma ordem dos botões de nicho.
+    const todosVideos = nichos.flatMap((n) => n.videos.map((v) => ({ ...v, nicho: n.nome, id: idDoVideo(v.link) })));
     $("#trabalhos-descricao").textContent = CONFIG.trabalhos.descricao
       .replace("{total}", todosVideos.length).replace("{nichos}", nichos.length);
 
@@ -2510,15 +2552,22 @@
     }
 
     const filtros = $("#filtros");
-    filtros.innerHTML = [{ nome: CONFIG.trabalhos.rotuloTodos, valor: "*", n: todosVideos.length }]
-      .concat(nichos.map((n) => ({ nome: n.nome, valor: n.nome, n: n.videos.length })))
-      .map((f, i) => `<button type="button" class="filtro" data-filtro="${esc(f.valor)}" aria-pressed="${i === 0}">${esc(f.nome)} <small aria-hidden="true">${f.n}</small></button>`)
+    filtros.innerHTML = nichos
+      .map((n) => `<button type="button" class="filtro" data-filtro="${esc(n.nome)}" aria-pressed="false">${esc(n.nome)} <small aria-hidden="true">${n.videos.length}</small></button>`)
       .join("");
 
+    // Clicar num nicho mostra só ele; clicar de novo no mesmo volta a mostrar todos.
     filtros.addEventListener("click", (evento) => {
       const botao = evento.target.closest(".filtro");
       if (!botao) return;
-      filtroAtual = botao.dataset.filtro;
+      filtroAtual = filtroAtual === botao.dataset.filtro ? "*" : botao.dataset.filtro;
+      if (filtroAtual === "*") {
+        limite = porPagina;
+        filtros.querySelectorAll(".filtro").forEach((b) => b.setAttribute("aria-pressed", "false"));
+        desenharGaleria(0);
+        $("#filtro-aviso").textContent = T.mostrandoTodos(todosVideos.length);
+        return;
+      }
       limite = porPagina;
       filtros.querySelectorAll(".filtro").forEach((b) => b.setAttribute("aria-pressed", String(b === botao)));
       desenharGaleria(0);
