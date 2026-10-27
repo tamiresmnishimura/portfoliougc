@@ -43,6 +43,8 @@
       --sombra: 0 18px 40px -22px rgba(20, 17, 13, .35);
       --sombra-leve: 0 8px 24px -16px rgba(20, 17, 13, .3);
       --altura-menu: 72px;
+      --altura-aviso: 0px;
+      --altura-topo: calc(var(--altura-menu) + var(--altura-aviso));
       --foco: var(--azul);
     }
 
@@ -120,7 +122,7 @@
        ========================================================= */
     section {
       padding: clamp(4.5rem, 10vw, 8rem) 0;
-      scroll-margin-top: calc(var(--altura-menu) - 1px);
+      scroll-margin-top: calc(var(--altura-topo) - 1px);
     }
 
     .secao-topo {
@@ -275,6 +277,70 @@
     }
     .menu .menu-cta:hover { background: var(--tinta); color: var(--creme); }
 
+    /* Botões de idioma PT / EN */
+    .nav-acoes { display: flex; align-items: center; gap: .5rem; flex-shrink: 0; }
+    .idioma {
+      display: inline-flex;
+      padding: 3px;
+      border: 1px solid var(--linha);
+      border-radius: 999px;
+      background: var(--branco);
+    }
+    .idioma button {
+      font: inherit;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      min-width: 36px;
+      min-height: 30px;
+      padding: 0 .55rem;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--tinta-suave);
+      cursor: pointer;
+    }
+    .idioma button[aria-pressed="true"] { background: var(--tinta); color: var(--creme); }
+
+    /* Faixa de campanha no topo (Black Friday) */
+    .aviso {
+      background: #f2b705;
+      color: var(--tinta);
+      font-size: .8rem;
+    }
+    .aviso-conteudo {
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: .35rem .9rem;
+      padding: .35rem 0;
+      text-align: center;
+    }
+    .aviso-selo {
+      background: var(--tinta);
+      color: #f2b705;
+      font-size: .66rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .25rem .6rem;
+      border-radius: 999px;
+    }
+    .aviso-texto { font-weight: 700; }
+    .aviso-sub { opacity: .85; }
+    .aviso-link { font-weight: 700; color: var(--tinta); text-underline-offset: 3px; }
+    .aviso-link:hover { text-decoration-thickness: 2px; }
+    @media (max-width: 600px) {
+      .logo { font-size: 1.12rem; }
+      .idioma button { min-width: 32px; padding: 0 .4rem; }
+    }
+    @media (max-width: 700px) {
+      .aviso-sub { display: none; }
+      .aviso { font-size: .76rem; }
+    }
+
     .menu-btn {
       display: none;
       flex-direction: column;
@@ -303,7 +369,7 @@
       .menu-btn { display: flex; }
       .menu {
         position: fixed;
-        top: var(--altura-menu);
+        top: var(--altura-topo);
         left: 0; right: 0;
         flex-direction: column;
         align-items: stretch;
@@ -311,7 +377,7 @@
         padding: .5rem 1.25rem 2rem;
         background: var(--creme);
         box-shadow: 0 24px 40px -24px rgba(20, 17, 13, .35);
-        max-height: calc(100vh - var(--altura-menu));
+        max-height: calc(100vh - var(--altura-topo));
         overflow-y: auto;
         opacity: 0;
         visibility: hidden;
@@ -340,7 +406,7 @@
        1. CAPA
        ========================================================= */
     .capa {
-      padding-top: calc(var(--altura-menu) + clamp(2rem, 6vw, 4.5rem));
+      padding-top: calc(var(--altura-topo) + clamp(2rem, 6vw, 4.5rem));
       padding-bottom: 0;
     }
 
@@ -603,7 +669,7 @@
       padding: .4rem .75rem;
       border-radius: 999px;
     }
-    .card-selo.ouro { background: var(--laranja); color: var(--tinta); }
+    .card-selo.ouro { background: #ffd43b; color: var(--tinta); box-shadow: 0 4px 14px -6px rgba(20, 17, 13, .45); }
     .play {
       position: absolute;
       top: 50%; left: 50%;
@@ -670,6 +736,110 @@
       .destaques-grid::-webkit-scrollbar { display: none; }
       .destaques-grid .card-video { flex: 0 0 min(280px, 72%); scroll-snap-align: start; }
       .deslize { display: block; }
+    }
+
+    /* Carrossel dos destaques: vídeo do centro em evidência, vizinhos esmaecidos */
+    .destaques-layout {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+    }
+    .destaques-texto { margin-bottom: 0; }
+    .carrossel { position: relative; }
+    .carrossel-palco {
+      display: grid;
+      justify-items: center;
+      overflow: hidden;
+      padding: .5rem 0 1rem;
+      touch-action: pan-y;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+    }
+    .slide {
+      grid-area: 1 / 1;
+      width: min(280px, 64vw);
+      text-align: center;
+      transform: translateX(calc(var(--d, 0) * 82%)) scale(.84);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .6s cubic-bezier(.2, .7, .2, 1), opacity .6s ease;
+      user-select: none;
+    }
+    .slide.vizinho { opacity: .38; pointer-events: auto; cursor: pointer; }
+    .slide.ativo { opacity: 1; transform: translateX(0) scale(1); pointer-events: auto; z-index: 2; }
+    .slide-marca {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: .9rem;
+    }
+    .slide .card-capa { display: block; }
+    .slide .card-capa img { -webkit-user-drag: none; }
+    .slide.ativo .card-capa:hover .midia { transform: scale(1.04); }
+    .slide.ativo .card-capa:hover .play { background: var(--azul); color: #fff; }
+    .slide-dados { margin: 1.1rem 0 0; }
+    .slide-dados div {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: .7rem 0;
+      border-bottom: 1px solid var(--linha);
+      text-align: left;
+    }
+    .slide-dados dt {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--tinta-suave);
+    }
+    .slide-dados dd {
+      margin: 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: var(--azul);
+      white-space: nowrap;
+    }
+    .slide-contexto { margin-top: .8rem; font-size: .9rem; line-height: 1.5; color: var(--tinta-suave); }
+    .slide:not(.ativo) .slide-dados, .slide:not(.ativo) .slide-contexto { visibility: hidden; }
+    .carrossel-seta {
+      position: absolute;
+      top: 42%;
+      z-index: 3;
+      width: 44px; height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid var(--linha);
+      background: var(--branco);
+      color: var(--tinta);
+      box-shadow: var(--sombra-leve);
+      cursor: pointer;
+      transition: background-color .3s ease, color .3s ease;
+    }
+    .carrossel-seta svg { width: 20px; height: 20px; }
+    .carrossel-seta:hover { background: var(--tinta); color: var(--creme); }
+    .carrossel-seta.anterior { left: calc(50% - min(280px, 64vw) / 2 - 22px); }
+    .carrossel-seta.proxima { right: calc(50% - min(280px, 64vw) / 2 - 22px); }
+    .carrossel-pontos { display: flex; justify-content: center; gap: .5rem; margin-top: .5rem; }
+    .ponto {
+      width: 10px; height: 10px;
+      padding: 0;
+      border-radius: 999px;
+      border: 0;
+      background: rgba(20, 17, 13, .2);
+      cursor: pointer;
+      transition: width .3s ease, background-color .3s ease;
+    }
+    .ponto[aria-current="true"] { width: 26px; background: var(--azul); }
+    @media (max-width: 880px) {
+      .destaques-layout { grid-template-columns: minmax(0, 1fr); }
+      .carrossel-palco { margin-inline: -1.25rem; }
     }
 
     /* =========================================================
@@ -1258,28 +1428,43 @@
 </head>
 
 <body>
-  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+  <a class="pular" href="#conteudo" data-i18n="pular">Pular para o conteúdo</a>
 
   <!-- ============ MENU FIXO ============ -->
   <header class="topo" id="topo">
-    <nav class="nav container" aria-label="Navegação principal">
+    <!-- Faixa de campanha (ex.: Black Friday). Configure em CONFIG.campanha. -->
+    <div class="aviso" id="aviso" hidden>
+      <div class="container aviso-conteudo">
+        <span class="aviso-selo" id="aviso-selo"></span>
+        <span class="aviso-texto" id="aviso-texto"></span>
+        <span class="aviso-sub" id="aviso-sub"></span>
+        <a class="aviso-link" id="aviso-link" href="#contato"></a>
+      </div>
+    </div>
+    <nav class="nav container" aria-label="Navegação principal" data-i18n-aria="navPrincipal">
       <a href="#inicio" class="logo" id="logo"></a>
-      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
-        <span></span><span></span><span></span>
-      </button>
       <ul class="menu" id="menu">
-        <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#destaques">Destaques</a></li>
-        <li><a href="#trabalhos">Trabalhos</a></li>
-        <li><a href="#servicos">Serviços</a></li>
-        <li><a href="#numeros">Números</a></li>
-        <li><a href="#contato" class="menu-cta">Contato</a></li>
+        <li><a href="#sobre" data-i18n="menuSobre">Sobre</a></li>
+        <li><a href="#destaques" data-i18n="menuDestaques">Destaques</a></li>
+        <li><a href="#trabalhos" data-i18n="menuTrabalhos">Trabalhos</a></li>
+        <li><a href="#servicos" data-i18n="menuServicos">Serviços</a></li>
+        <li><a href="#numeros" data-i18n="menuNumeros">Números</a></li>
+        <li><a href="#contato" class="menu-cta" data-i18n="menuContato">Contato</a></li>
       </ul>
+      <div class="nav-acoes">
+        <div class="idioma" role="group" aria-label="Idioma" data-i18n-aria="idioma">
+          <button type="button" data-idioma="pt" lang="pt-BR">PT</button>
+          <button type="button" data-idioma="en" lang="en">EN</button>
+        </div>
+        <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </nav>
   </header>
 
   <main id="conteudo">
-    <noscript><p class="container" style="padding-top:100px">Ative o JavaScript do navegador para ver o portfólio completo.</p></noscript>
+    <noscript><p class="container" style="padding-top:100px">Ative o JavaScript do navegador para ver o portfólio completo. / Please enable JavaScript to see the full portfolio.</p></noscript>
 
     <!-- ============ 1. CAPA ============ -->
     <section class="capa" id="inicio" aria-labelledby="capa-nome">
@@ -1289,8 +1474,8 @@
           <h1 class="capa-nome reveal" id="capa-nome" style="--atraso:80ms"></h1>
           <p class="capa-frase reveal" data-cfg="capa.frase" style="--atraso:160ms"></p>
           <div class="botoes reveal" style="--atraso:240ms">
-            <a href="#contato" class="btn btn-primario">Falar comigo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            <a href="#trabalhos" class="btn btn-secundario">Ver os trabalhos</a>
+            <a href="#contato" class="btn btn-primario"><span data-i18n="falarComigo">Falar comigo</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a href="#trabalhos" class="btn btn-secundario" data-i18n="verTrabalhos">Ver os trabalhos</a>
           </div>
           <ul class="capa-numeros reveal" id="capa-numeros" style="--atraso:320ms"></ul>
         </div>
@@ -1329,14 +1514,18 @@
 
     <!-- ============ 3. CONTEÚDOS DE DESTAQUE ============ -->
     <section class="destaques" id="destaques" aria-labelledby="destaques-titulo">
-      <div class="container">
-        <div class="secao-topo">
+      <div class="container destaques-layout">
+        <div class="secao-topo destaques-texto">
           <p class="sobretitulo reveal" data-cfg="destaques.sobretitulo"></p>
           <h2 class="titulo reveal" id="destaques-titulo" data-cfg="destaques.titulo"></h2>
           <p class="lead reveal" data-cfg="destaques.descricao"></p>
         </div>
-        <div class="destaques-grid" id="destaques-lista"></div>
-        <p class="deslize" aria-hidden="true">Deslize para ver mais →</p>
+        <div class="carrossel reveal" id="carrossel" role="region" aria-roledescription="carrossel" aria-labelledby="destaques-titulo">
+          <div class="carrossel-palco" id="carrossel-palco" aria-live="polite"></div>
+          <button type="button" class="carrossel-seta anterior" id="carrossel-anterior" aria-label="Vídeo anterior" data-i18n-aria="anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+          <button type="button" class="carrossel-seta proxima" id="carrossel-proxima" aria-label="Próximo vídeo" data-i18n-aria="proximo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+          <div class="carrossel-pontos" id="carrossel-pontos"></div>
+        </div>
       </div>
     </section>
 
@@ -1348,7 +1537,7 @@
           <h2 class="titulo reveal" id="trabalhos-titulo" data-cfg="trabalhos.titulo"></h2>
           <p class="lead reveal" id="trabalhos-descricao"></p>
         </div>
-        <div class="filtros reveal" id="filtros" role="group" aria-label="Filtrar trabalhos por nicho"></div>
+        <div class="filtros reveal" id="filtros" role="group" aria-label="Filtrar trabalhos por nicho" data-i18n-aria="filtrar"></div>
         <p class="visualmente-oculto" id="filtro-aviso" aria-live="polite"></p>
         <ul class="galeria" id="galeria"></ul>
         <div class="mais"><button type="button" class="btn btn-secundario" id="ver-mais"></button></div>
@@ -1407,21 +1596,21 @@
         <form class="formulario reveal" id="formulario" novalidate aria-labelledby="form-titulo">
           <h3 id="form-titulo" data-cfg="contato.formTitulo"></h3>
           <div class="campo">
-            <label for="nome">Seu nome</label>
+            <label for="nome" data-i18n="formNome">Seu nome</label>
             <input id="nome" name="nome" type="text" autocomplete="name" required aria-describedby="erro-nome">
             <p class="erro" id="erro-nome"></p>
           </div>
           <div class="campo">
-            <label for="email">Seu e-mail</label>
+            <label for="email" data-i18n="formEmail">Seu e-mail</label>
             <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="erro-email">
             <p class="erro" id="erro-email"></p>
           </div>
           <div class="campo">
-            <label for="mensagem">Conte sobre o seu projeto</label>
+            <label for="mensagem" data-i18n="formMensagem">Conte sobre o seu projeto</label>
             <textarea id="mensagem" name="mensagem" required aria-describedby="erro-mensagem"></textarea>
             <p class="erro" id="erro-mensagem"></p>
           </div>
-          <button type="submit" class="btn btn-primario">Enviar mensagem <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button type="submit" class="btn btn-primario"><span data-i18n="formEnviar">Enviar mensagem</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           <p class="form-ok" id="form-ok" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -1436,23 +1625,22 @@
           <p class="rodape-nome" id="rodape-nome"></p>
           <p class="rodape-frase" data-cfg="rodape.frase"></p>
         </div>
-        <nav aria-label="Redes sociais">
+        <nav aria-label="Redes sociais" data-i18n-aria="redesSociais">
           <ul class="redes" id="redes"></ul>
         </nav>
       </div>
       <div class="rodape-base">
         <p id="direitos"></p>
-        <a href="#inicio">Voltar ao topo ↑</a>
+        <a href="#inicio" data-i18n="voltarTopo">Voltar ao topo ↑</a>
       </div>
     </div>
   </footer>
 
   <!-- Player que abre os vídeos do YouTube por cima da página -->
-  <dialog class="player" id="player" aria-labelledby="player-titulo">
+  <dialog class="player" id="player" aria-label="Vídeo" data-i18n-aria="player">
     <div class="player-caixa">
-      <button class="player-fechar" id="player-fechar" type="button" aria-label="Fechar vídeo">×</button>
+      <button class="player-fechar" id="player-fechar" type="button" aria-label="Fechar vídeo" data-i18n-aria="fecharVideo">×</button>
       <div class="player-video" id="player-video"></div>
-      <p class="player-info"><strong id="player-titulo"></strong><a id="player-link" href="#" target="_blank" rel="noopener noreferrer">Abrir no YouTube</a></p>
     </div>
   </dialog>
 
@@ -1485,6 +1673,21 @@
       // EDITE AQUI: dados gerais (aparecem na aba do navegador).
       perfil: {
         profissao: "Criadora de conteúdo UGC"
+      },
+
+      // EDITE AQUI: faixa de campanha no topo do site (ex.: Black Friday).
+      // ativa: true mostra, false esconde. data: o dia da campanha (ano-mês-dia).
+      // A faixa some sozinha depois dessa data. {dias} vira a contagem regressiva.
+      campanha: {
+        ativa: true,
+        data: "2026-11-27",
+        selo: "Black Friday",
+        texto: "Faltam {dias} dias pra Black Friday",
+        textoUmDia: "Falta 1 dia pra Black Friday",
+        textoHoje: "É hoje: Black Friday!",
+        sub: "reserve a sua agenda de novembro",
+        link: "reservar agenda →",
+        mensagemWhatsApp: "Olá, Tamires! Quero reservar uma data na sua agenda para a Black Friday."
       },
 
       // EDITE AQUI: textos da capa (primeira tela do site).
@@ -1606,10 +1809,10 @@
         imagem: { foto: "fotos/sobre.jpg", gradiente: G.pessego, alt: `${NOME} sorrindo, de óculos escuros e camiseta preta com cinto, em frente a uma porta de madeira` },
         // Para deixar uma palavra em negrito, coloque entre <strong> e </strong>.
         paragrafos: [
-          "Tenho 32 anos, sou <strong>pós-graduada em Gestão de Pessoas pela USP</strong> e trabalhei 10 anos com RH antes de me dedicar à criação de conteúdo.",
-          "No caminho, também trabalhei em restaurante, em loja de roupa e até como babá durante um intercâmbio. Essa bagagem, do corporativo aos empregos mais diversos e à vida fora do país, virou o meu diferencial: sei me comunicar de forma assertiva, adaptando a linguagem, o cenário e o figurino a cada público.",
-          "Moro em <strong>Piquete-SP</strong> e vivo com uma mala na mão, entre o <strong>Vale do Paraíba</strong>, <strong>Santo André</strong>, <strong>São Paulo</strong> e <strong>Salto</strong>. Na minha rotina aparecem personagens que o público adora: meu noivo, minhas sobrinhas gêmeas e minha avó, que era costureira.",
-          "Amo <strong>moda</strong> e consumo consciente, falo sobre tecidos, adoro me cuidar, <strong>viajar</strong>, <strong>comer bem</strong> e tomar um bom vinho. É essa verdade que eu levo para cada vídeo da sua marca."
+          "Tenho 32 anos, sou <strong>pós-graduada em Gestão de Pessoas</strong> pela USP e trabalhei 10 anos com RH antes de me dedicar à criação de conteúdo.",
+          "No caminho, também trabalhei em restaurante, em loja de roupa e até como babá durante um intercâmbio. Essa bagagem, do corporativo aos empregos mais diversos e à vida fora do país, virou o meu diferencial: <strong>sei me comunicar de forma assertiva</strong> de acordo com cada público.",
+          "Moro em <strong>Piquete-SP</strong> e vivo com uma mala na mão, entre o <strong>Vale do Paraíba</strong>, <strong>Santo André</strong>, <strong>São Paulo</strong> e <strong>Salto</strong>. Na minha rotina aparecem personagens que o público adora: meu noivo, minhas sobrinhas gêmeas e minha avó, que era costureira, e os vídeos com ela me fizeram viralizar nas redes sociais.",
+          "Amo <strong>moda</strong> e consumo consciente, falo sobre <strong>tecidos</strong>, adoro me cuidar, <strong>viajar</strong>, <strong>comer bem</strong> e tomar um bom vinho. É essa verdade que eu levo para cada vídeo da sua marca."
         ],
         entregasTitulo: "O que você recebe comigo",
         entregas: [
@@ -1888,12 +2091,221 @@
       }
     };
 
+    // EDITE AQUI: versão em inglês. Só os textos ficam aqui; links, logos e
+    // fotos vêm da versão em português. As listas seguem a mesma ordem da
+    // versão em português (o 1º item daqui traduz o 1º item de lá).
+    const CONFIG_EN = {
+      perfil: { profissao: "UGC Content Creator" },
+      campanha: {
+        texto: "{dias} days until Black Friday",
+        textoUmDia: "1 day until Black Friday",
+        textoHoje: "Black Friday is today!",
+        sub: "book your November slot",
+        link: "book now →",
+        mensagemWhatsApp: "Hi Tamires! I'd like to book a slot for Black Friday content."
+      },
+      capa: {
+        sobretitulo: "UGC Content Creator",
+        frase: "I create authentic videos that feel like real people talking, the kind that make your brand stop the scroll, build trust and sell more.",
+        selo: "Booking new partnerships",
+        imagem: { alt: "Tamires Nishimura smiling and lowering her sunglasses, wearing a white turtleneck" },
+        numeros: [{ rotulo: "videos in portfolio" }, { rotulo: "brands served" }, { rotulo: "combined views" }],
+        rotuloMarcas: "Trusted by"
+      },
+      marcas: { tituloLogos: "Brands that have <em>trusted my work</em>" },
+      sobre: {
+        sobretitulo: "About me",
+        titulo: "Nice to meet you, I'm <em>Tamires</em>",
+        etiqueta: "Piquete, Brazil, suitcase always packed",
+        imagem: { alt: "Tamires Nishimura smiling, wearing sunglasses and a belted black t-shirt, in front of a wooden door" },
+        paragrafos: [
+          "I'm 32, I hold a <strong>postgraduate degree in People Management</strong> from the University of São Paulo (USP) and spent 10 years in HR before devoting myself to content creation.",
+          "Along the way I also worked in a restaurant, in a clothing store and even as a nanny during an exchange program abroad. That journey, from corporate life to very different jobs and living overseas, became my edge: <strong>I know how to communicate assertively</strong> with each audience.",
+          "I live in <strong>Piquete, São Paulo</strong>, and I'm always on the road between the <strong>Paraíba Valley</strong>, <strong>Santo André</strong>, <strong>São Paulo</strong> and <strong>Salto</strong>. My routine features characters the audience loves: my fiancé, my twin nieces and my grandmother, a former seamstress, and our videos together went viral on social media.",
+          "I love <strong>fashion</strong> and conscious consumption, I talk about <strong>fabrics</strong>, I enjoy self-care, <strong>travel</strong>, <strong>good food</strong> and a nice glass of wine. That's the authenticity I bring to every video for your brand."
+        ],
+        entregasTitulo: "What you get when we work together",
+        entregas: [
+          "A script built around your brand's goal",
+          "Shot in natural light",
+          "Dynamic editing with captions and cuts",
+          "High-quality files, ready to use",
+          "Elegant, varied settings for every concept",
+          "On-time delivery and close communication"
+        ],
+        assinatura: '<a href="#destaques">See my work <span aria-hidden="true">→</span></a>'
+      },
+      destaques: {
+        sobretitulo: "Featured content",
+        titulo: "Videos that <em>really performed</em>",
+        descricao: "Five pieces of content that show what happens when strategy and authenticity go hand in hand. Tap to watch.",
+        itens: [
+          { selo: "Contest winner", numero: "1st place", rotulo: "in the Colcci contest", contexto: "World Cup look with the Colcci tee, chosen as the contest winner." },
+          { selo: "Viral on TikTok", rotulo: "TikTok views", contexto: "A quick recipe that took the brand to millions of people." },
+          { selo: "Viral on TikTok", rotulo: "TikTok views", contexto: "A recipe with the brand that reached over 8 million people." },
+          { selo: "Lingerie", rotulo: "Bra with a real fit", contexto: "A bra showcased with a focus on comfort and real fit." },
+          { selo: "Before and after", rotulo: "Real-life results", contexto: "A before-and-after showing the product's results in practice." }
+        ]
+      },
+      trabalhos: {
+        sobretitulo: "Work by niche",
+        titulo: "A fresh angle for every <em>niche</em>",
+        descricao: "{total} videos across {nichos} niches. Pick a niche and see how I adapt the language to speak to your audience.",
+        rotuloTodos: "All",
+        nichos: [
+          { nome: "Fashion", videos: [{ titulo: "Bermuda shorts" }, { titulo: "A dress for every day of the week" }, { titulo: "Microfiber up close" }, { titulo: "Sunglasses" }, { titulo: "Swimsuit" }, { titulo: "Alice set" }, { titulo: "Earrings" }, { titulo: "Microfiber line" }, { titulo: "Online fashion" }, { titulo: "What I ordered vs. what I got" }] },
+          { nome: "Try-ons", videos: [{ titulo: "Polka dot try-on" }, { marca: "Try-on", titulo: "Heloíse skirt" }, { marca: "Try-on", titulo: "Lança Perfume look" }, { marca: "Try-on", titulo: "Sunglasses" }, { marca: "Try-on", titulo: "Lez a Lez look" }, { marca: "Try-on", titulo: "Farm look" }, { marca: "Try-on", titulo: "Party dress" }, { titulo: "Try-on" }] },
+          { nome: "Beauty", videos: [{ titulo: "Review" }, { titulo: "Experience" }, { titulo: "Laser at IKB Clinic" }, { titulo: "Duos" }, { titulo: "Project launch" }, { titulo: "Localized fat treatment" }, { titulo: "Presentation" }] },
+          { nome: "Health", videos: [{ titulo: "Weight loss" }, { titulo: "Loyalty program" }, { titulo: "Review" }, { marca: "Gift", titulo: "Chocolate gift" }, { titulo: "Lipedema" }, { titulo: "Protein drink" }, { titulo: "Review" }] },
+          { nome: "Food", videos: [{ titulo: "Sandwich" }, { titulo: "Fishgets" }, { titulo: "Truffle mayo ASMR" }, { titulo: "Experience" }, { titulo: "Roast fillet" }, { titulo: "Pizzeria in Lorena" }, { titulo: "Drinks" }, { marca: "Recipe", titulo: "Peanut butter pancakes" }] },
+          { nome: "Home", videos: [{ titulo: "Launch" }, { titulo: "Dishwashing tip" }, { titulo: "World Cup" }, { titulo: "Review" }, { titulo: "Home finds" }, { titulo: "Gift" }, { titulo: "Launch, part 2" }] },
+          { nome: "Travel", videos: [{ titulo: "Houses in Ubatuba" }, { titulo: "Tourism in Cunha" }, { titulo: "Stay" }, { titulo: "Beach apartment" }, { marca: "Stay", titulo: "Loft tour" }, { titulo: "Experience" }] },
+          { nome: "Twins", videos: [{ titulo: "Kids' fashion" }, { titulo: "Day out with the twins" }, { titulo: "World Cup collection" }, { titulo: "The twins' snack" }, { titulo: "Review" }] },
+          { nome: "Apps", videos: [{ titulo: "AI in everyday life" }, { titulo: "AI browser" }, { titulo: "App" }, { titulo: "AI search" }, { titulo: "Review" }, { titulo: "Benefits club" }, { titulo: "Tips" }, { titulo: "App" }, { titulo: "Circular fashion" }] },
+          { nome: "Special dates", videos: [{ titulo: "Carnival" }, { titulo: "Valentine's Day" }, { titulo: "Mother's Day" }, { titulo: "Valentine's Day" }, { titulo: "Valentine's Day" }, { titulo: "Mother's Day 2025" }] },
+          { nome: "International", videos: [{ titulo: "Narrated version" }, { titulo: "Travel SIM" }, { titulo: "Ice cream shop in Florida" }, { titulo: "Açaí" }, { titulo: "Meme" }, { titulo: "Spoken version" }, { titulo: "Days of the week" }] },
+          { nome: "Black Friday", videos: [{ titulo: "Black Friday" }, { titulo: "Early Black Friday" }, { titulo: "Sale" }, { titulo: "Bazaar" }] },
+          { nome: "Other", videos: [{ titulo: "Finance" }, { titulo: "Buy and sell" }, { titulo: "Courses" }, { titulo: "Pets" }, { titulo: "Home search" }, { titulo: "Finance, part 2" }, { titulo: "Car dealership" }] }
+        ]
+      },
+      servicos: {
+        sobretitulo: "How I can help",
+        titulo: "Services built to <em>sell</em>",
+        descricao: "From script to final file, I handle every step so you get content that's ready to use and scale.",
+        itens: [
+          { titulo: "UGC video", descricao: "Vertical videos with a script, a strong hook and natural language, ready for ads or organic posts.", detalhe: "Reels, TikTok and ads" },
+          { titulo: "Ad cuts", descricao: "Variations of the same video with different hooks and calls to action, so you can test and scale what sells best.", detalhe: "Ideal for paid traffic" },
+          { titulo: "Product photos", descricao: "Photos in natural light and real settings, perfect for websites, marketplaces and social media.", detalhe: "For websites, marketplaces and social" },
+          { titulo: "Unboxing and try-on", descricao: "The experience of opening and trying the product for the first time, with details and a genuine reaction.", detalhe: "Ideal for fashion and launches" },
+          { titulo: "Posting on my profile", descricao: "Content posted on my profile, reaching an engaged audience that trusts my recommendations.", detalhe: "Instagram and TikTok" },
+          { titulo: "Monthly package", descricao: "A content routine so your brand never runs out of fresh creatives, with priority booking.", detalhe: "For brands that advertise every month" }
+        ]
+      },
+      numeros: {
+        sobretitulo: "Numbers and testimonials",
+        titulo: "Results that <em>speak</em> for me",
+        descricao: "Beautiful content is good. Beautiful content that brings results is what makes brands come back.",
+        contadores: [{ rotulo: "brands served" }, { rotulo: "videos in portfolio" }, { rotulo: "rating in every brand review" }, { rotulo: "views on my top-reaching video" }],
+        resultadosTitulo: "Campaign <em>results</em>",
+        resultados: [
+          { metrica: "1st place", rotulo: "in the brand's contest", descricao: "The video with the World Cup tee was chosen as the contest winner." },
+          { rotulo: "TikTok views", descricao: "A quick, practical recipe that went viral and took the brand to millions of people." },
+          { rotulo: "TikTok views", descricao: "A recipe with the brand that became the top-reaching video in my portfolio." }
+        ],
+        depoimentosTitulo: "What <em>brands</em> say",
+        depoimentos: [
+          { texto: "Tamires always delivers great content! We love working with her, and this time was no different. Congrats on the content, Ta!", nome: "White Tea" },
+          { texto: "I loved working with you! The content felt so natural, exactly the way we believe UGC should be. Your speed was unreal (a perfect score) and you were extremely helpful the whole time. I definitely want to repeat this partnership.", nome: "UGC campaign" },
+          { texto: "Working with Tamires was great. She delivered on time, followed the brief carefully and brought a natural feel to the content. An efficient, very well-run partnership." },
+          { texto: "No words for the content Tamires delivered: super punctual, beautifully polished, a lovely setting, zero flaws. We were enchanted! 💖", nome: "Jolly romper" },
+          { texto: "Once again, our thanks: thank you so much for the partnership and the great content! 💚", nome: "Delivery campaign" },
+          { texto: "A script and shoot that hit exactly what we needed. A well-structured video, thought out down to the details. We loved it!", nome: "Awareness campaign" },
+          { texto: "An amazing, very creative creator with an impeccable sense of aesthetics; photos and videos beyond expectations!", nome: "UGC launch campaign" },
+          { texto: "It was great working with Tamires. She met every deadline, delivered quality work and kept communication very clear throughout the campaign. She showed professionalism and dedication at every step. Highly recommended for future projects!", nome: "Undergraduate, graduate and exam prep" },
+          { texto: "Tamires was great to work with, delivered the material on time and the video is performing really well!", nome: "Coconut Laundry line launch" },
+          { texto: "Super friendly and helpful. She met all my needs, is very in tune with social media and the video turned out perfect! Highly recommend!", nome: "Facial and body aesthetics" },
+          { texto: "Tamires delivered dynamic, high-quality content, a perfect 10!", nome: "White Tea laundry line" },
+          { texto: "Tamires delivered really cool content and on top of that was super attentive. Fast delivery.", nome: "Drinks: presentation and recipes" },
+          { texto: "Video delivered on time, following the script, and she was very helpful. Great!!", nome: "Valentine's Day campaign" },
+          { texto: "Tamires was great, we loved the content! 10 out of 10", nome: "Kitchen kit" },
+          { texto: "Super dedicated and delivered the work really fast!", nome: "Circular fashion campaign" },
+          { texto: "Wonderful, flawless content!", nome: "Chama Congelante project" },
+          { texto: "Tamires was wonderful!!", nome: "Localized fat treatment" }
+        ]
+      },
+      contato: {
+        sobretitulo: "Contact",
+        titulo: "Shall we create <em>together</em>?",
+        descricao: "Tell me about your product and your goal. I'd love to create valuable content for your business, with a proposal tailored to your brand.",
+        mensagemWhatsApp: "Hi Tamires! I saw your portfolio and would like to talk about a content project.",
+        formTitulo: "Send a message",
+        assuntoEmail: "Partnership proposal from your portfolio",
+        mensagemSucesso: "Thanks for your message! Your email app has opened with everything filled in. Just hit send and I'll get back to you soon."
+      },
+      rodape: { frase: "Authentic UGC content for brands that want to be remembered and chosen." }
+    };
+
     /* ==================================================================
        FIM DA ÁREA DE EDIÇÃO
        Daqui para baixo é o funcionamento do site. Não precisa mexer.
        ================================================================== */
 
     document.documentElement.classList.add("js");
+
+    /* ---------- Idioma (PT / EN) ---------- */
+    const TEXTOS = {
+      pt: {
+        locale: "pt-BR", pular: "Pular para o conteúdo", navPrincipal: "Navegação principal", idioma: "Idioma",
+        menuSobre: "Sobre", menuDestaques: "Destaques", menuTrabalhos: "Trabalhos", menuServicos: "Serviços", menuNumeros: "Números", menuContato: "Contato",
+        abrirMenu: "Abrir menu", fecharMenu: "Fechar menu",
+        falarComigo: "Falar comigo", verTrabalhos: "Ver os trabalhos", filtrar: "Filtrar trabalhos por nicho",
+        anterior: "Vídeo anterior", proximo: "Próximo vídeo", player: "Vídeo", fecharVideo: "Fechar vídeo",
+        capaVideo: "Capa do vídeo", verMaisVideos: (n) => `Ver mais vídeos (${n})`,
+        mostrandoTodos: (n) => `Mostrando todos os ${n} vídeos.`,
+        mostrando: (n, nome) => `Mostrando ${n} ${n === 1 ? "vídeo" : "vídeos"} de ${nome}.`,
+        nota: "Nota 5 de 5", verMaisDep: (n) => `Ver mais depoimentos (${n})`,
+        logo: "Logo", logoParceira: "Logo de marca parceira", novaAba: "(abre em uma nova aba)",
+        formNome: "Seu nome", formEmail: "Seu e-mail", formMensagem: "Conte sobre o seu projeto", formEnviar: "Enviar mensagem",
+        erroNome: "Conta pra mim o seu nome.", erroEmail: "Digite um e-mail válido, por exemplo nome@empresa.com.", erroMensagem: "Escreva uma mensagem com pelo menos 10 caracteres.",
+        emailNome: "Nome", emailEmail: "E-mail",
+        obrigado: (nome, email) => `Obrigada, ${nome}! Recebi sua mensagem e respondo em breve no e-mail ${email}.`,
+        redesSociais: "Redes sociais", voltarTopo: "Voltar ao topo ↑", direitos: "Todos os direitos reservados."
+      },
+      en: {
+        locale: "en-US", pular: "Skip to content", navPrincipal: "Main navigation", idioma: "Language",
+        menuSobre: "About", menuDestaques: "Highlights", menuTrabalhos: "Work", menuServicos: "Services", menuNumeros: "Numbers", menuContato: "Contact",
+        abrirMenu: "Open menu", fecharMenu: "Close menu",
+        falarComigo: "Let's talk", verTrabalhos: "See my work", filtrar: "Filter work by niche",
+        anterior: "Previous video", proximo: "Next video", player: "Video", fecharVideo: "Close video",
+        capaVideo: "Video cover", verMaisVideos: (n) => `See more videos (${n})`,
+        mostrandoTodos: (n) => `Showing all ${n} videos.`,
+        mostrando: (n, nome) => `Showing ${n} ${n === 1 ? "video" : "videos"} in ${nome}.`,
+        nota: "Rated 5 out of 5", verMaisDep: (n) => `See more testimonials (${n})`,
+        logo: "Logo", logoParceira: "Partner brand logo", novaAba: "(opens in a new tab)",
+        formNome: "Your name", formEmail: "Your email", formMensagem: "Tell me about your project", formEnviar: "Send message",
+        erroNome: "Please tell me your name.", erroEmail: "Enter a valid email, for example name@company.com.", erroMensagem: "Write a message with at least 10 characters.",
+        emailNome: "Name", emailEmail: "Email",
+        obrigado: (nome, email) => `Thank you, ${nome}! I got your message and will reply soon at ${email}.`,
+        redesSociais: "Social media", voltarTopo: "Back to top ↑", direitos: "All rights reserved."
+      }
+    };
+
+    function lerIdioma() {
+      const daUrl = new URLSearchParams(location.search).get("lang");
+      if (daUrl === "en" || daUrl === "pt") return daUrl;
+      try { const salvo = localStorage.getItem("idioma"); if (salvo === "en" || salvo === "pt") return salvo; } catch (e) { /* sem acesso ao armazenamento */ }
+      return (navigator.language || "pt").toLowerCase().startsWith("pt") ? "pt" : "en";
+    }
+    const IDIOMA = lerIdioma();
+    const T = TEXTOS[IDIOMA];
+    document.documentElement.lang = IDIOMA === "en" ? "en" : "pt-BR";
+
+    // Junta a tradução com o conteúdo original (listas na mesma ordem)
+    function mesclar(base, extra) {
+      if (extra === undefined) return base;
+      if (Array.isArray(base) && Array.isArray(extra)) return base.map((b, i) => (i < extra.length ? mesclar(b, extra[i]) : b));
+      if (base && extra && typeof base === "object" && typeof extra === "object") {
+        const r = { ...base };
+        Object.keys(extra).forEach((k) => { r[k] = mesclar(base[k], extra[k]); });
+        return r;
+      }
+      return extra;
+    }
+    if (IDIOMA === "en") Object.assign(CONFIG, mesclar(CONFIG, CONFIG_EN));
+
+    document.querySelectorAll("[data-i18n]").forEach((el) => { el.textContent = T[el.dataset.i18n]; });
+    document.querySelectorAll("[data-i18n-aria]").forEach((el) => { el.setAttribute("aria-label", T[el.dataset.i18nAria]); });
+    document.getElementById("menu-btn").setAttribute("aria-label", T.abrirMenu);
+    document.querySelectorAll(".idioma button").forEach((b) => {
+      b.setAttribute("aria-pressed", String(b.dataset.idioma === IDIOMA));
+      b.addEventListener("click", () => {
+        if (b.dataset.idioma === IDIOMA) return;
+        try { localStorage.setItem("idioma", b.dataset.idioma); } catch (e) { /* segue pela URL */ }
+        const url = new URL(location.href);
+        url.searchParams.set("lang", b.dataset.idioma);
+        location.href = url.toString();
+      });
+    });
 
     const $ = (seletor) => document.querySelector(seletor);
     // Muda a cada atualização das logos, para o navegador não mostrar versões antigas guardadas.
@@ -1982,22 +2394,70 @@
     $("#entregas").innerHTML = CONFIG.sobre.entregas
       .map((e, i) => `<li class="reveal" style="--atraso:${i * 60}ms">${icones.check}<span>${esc(e)}</span></li>`).join("");
 
-    /* ---------- Destaques ---------- */
-    $("#destaques-lista").innerHTML = CONFIG.destaques.itens.map((d, i) => {
+    /* ---------- Destaques em carrossel ---------- */
+    const itensDestaque = CONFIG.destaques.itens;
+    const palco = $("#carrossel-palco");
+    palco.innerHTML = itensDestaque.map((d, i) => {
       const id = idDoVideo(d.link);
       return `
-      <a class="card-video reveal" style="--atraso:${i * 100}ms" href="${esc(d.link)}" target="_blank" rel="noopener noreferrer" data-video="${id}" data-titulo="${esc(d.titulo)}">
-        <div class="card-capa">
-          ${capaDoVideo(id, `Capa do vídeo para ${d.titulo}`, d.capa)}
+      <article class="slide" data-i="${i}" role="group" aria-roledescription="slide" aria-label="${i + 1} / ${itensDestaque.length}: ${esc(d.titulo)}">
+        <h3 class="slide-marca">${esc(d.titulo)}</h3>
+        <a class="card-capa" href="${esc(d.link)}" target="_blank" rel="noopener noreferrer" data-video="${id}" data-titulo="${esc(d.titulo)}">
+          ${capaDoVideo(id, `${T.capaVideo} ${d.titulo}`, d.capa)}
           <span class="card-selo${d.ouro ? " ouro" : ""}">${esc(d.selo)}</span>
           <span class="play">${icones.play}</span>
-        </div>
-        ${d.numero
-          ? `<p class="card-numero">${esc(d.numero)}</p><p class="card-rotulo">${esc(d.rotulo)}</p><h3 class="card-titulo">${esc(d.titulo)}</h3>`
-          : `<h3 class="card-numero">${esc(d.titulo)}</h3><p class="card-rotulo">${esc(d.rotulo || d.selo)}</p>`}
-        <p class="card-contexto">${esc(d.contexto)}</p>
-      </a>`;
+        </a>
+        <dl class="slide-dados">
+          <div><dt>${esc(d.rotulo || d.selo)}</dt><dd>${esc(d.numero || "")}</dd></div>
+        </dl>
+        <p class="slide-contexto">${esc(d.contexto)}</p>
+      </article>`;
     }).join("");
+    $("#carrossel-pontos").innerHTML = itensDestaque
+      .map((d, i) => `<button type="button" class="ponto" data-ir="${i}" aria-label="${esc(d.titulo)}"></button>`).join("");
+
+    let atual = 0;
+    const slides = [...palco.querySelectorAll(".slide")];
+    function mostrarSlide(n) {
+      const total = slides.length;
+      atual = (n + total) % total;
+      slides.forEach((s, i) => {
+        let d = i - atual;
+        if (d > total / 2) d -= total;
+        if (d < -total / 2) d += total;
+        s.style.setProperty("--d", d);
+        s.classList.toggle("ativo", d === 0);
+        s.classList.toggle("vizinho", Math.abs(d) === 1);
+        s.setAttribute("aria-hidden", d === 0 ? "false" : "true");
+        s.querySelectorAll("a, button").forEach((el) => { el.tabIndex = d === 0 ? 0 : -1; });
+      });
+      $("#carrossel-pontos").querySelectorAll(".ponto").forEach((p, i) => p.setAttribute("aria-current", String(i === atual)));
+    }
+    $("#carrossel-anterior").addEventListener("click", () => mostrarSlide(atual - 1));
+    $("#carrossel-proxima").addEventListener("click", () => mostrarSlide(atual + 1));
+    $("#carrossel-pontos").addEventListener("click", (e) => { const p = e.target.closest(".ponto"); if (p) mostrarSlide(Number(p.dataset.ir)); });
+    // Clicar num vídeo lateral traz ele para o centro (em vez de abrir)
+    palco.addEventListener("click", (e) => {
+      const s = e.target.closest(".slide");
+      if (s && !s.classList.contains("ativo")) { e.preventDefault(); e.stopPropagation(); mostrarSlide(Number(s.dataset.i)); }
+    }, true);
+    $("#carrossel").addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") mostrarSlide(atual - 1);
+      if (e.key === "ArrowRight") mostrarSlide(atual + 1);
+    });
+    // Arrastar para o lado no celular
+    let toqueX = null;
+    let arrastou = false;
+    palco.addEventListener("pointerdown", (e) => { toqueX = e.clientX; arrastou = false; });
+    palco.addEventListener("pointerup", (e) => {
+      if (toqueX === null) return;
+      const dx = e.clientX - toqueX;
+      toqueX = null;
+      if (Math.abs(dx) > 40) { arrastou = true; mostrarSlide(atual + (dx < 0 ? 1 : -1)); }
+    });
+    palco.addEventListener("click", (e) => { if (arrastou) { e.preventDefault(); e.stopPropagation(); arrastou = false; } }, true);
+    palco.addEventListener("dragstart", (e) => e.preventDefault());
+    mostrarSlide(0);
 
     /* ---------- Trabalhos com filtro e "Ver mais" ---------- */
     const nichos = CONFIG.trabalhos.nichos;
@@ -2025,7 +2485,7 @@
       <li>
         <a class="trabalho${animar ? " surgir" : ""}" href="${esc(v.link)}" target="_blank" rel="noopener noreferrer" data-video="${v.id}" data-titulo="${esc(v.marca + ": " + v.titulo)}">
           <div class="moldura">
-            ${capaDoVideo(v.id, `Capa do vídeo ${v.marca}: ${v.titulo}`)}
+            ${capaDoVideo(v.id, `${T.capaVideo} ${v.marca}: ${v.titulo}`)}
             <span class="mini-play">${icones.play}</span>
           </div>
           <div class="trabalho-legenda">
@@ -2046,7 +2506,7 @@
       }
       const restam = lista.length - visiveis.length;
       verMais.hidden = restam <= 0;
-      verMais.textContent = `Ver mais vídeos (${restam})`;
+      verMais.textContent = T.verMaisVideos(restam);
     }
 
     const filtros = $("#filtros");
@@ -2065,8 +2525,8 @@
       const total = videosDoFiltro().length;
       const nomeFiltro = botao.firstChild.textContent.trim();
       $("#filtro-aviso").textContent = filtroAtual === "*"
-        ? `Mostrando todos os ${total} vídeos.`
-        : `Mostrando ${total} ${total === 1 ? "vídeo" : "vídeos"} de ${nomeFiltro}.`;
+        ? T.mostrandoTodos(total)
+        : T.mostrando(total, nomeFiltro);
     });
 
     verMais.addEventListener("click", () => {
@@ -2082,9 +2542,7 @@
     /* ---------- Player de vídeo ---------- */
     const player = $("#player");
     function abrirVideo(id, titulo) {
-      $("#player-video").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1&cc_load_policy=0&iv_load_policy=3&hl=pt-BR" title="${esc(titulo)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
-      $("#player-titulo").textContent = titulo;
-      $("#player-link").href = `https://www.youtube.com/watch?v=${id}`;
+      $("#player-video").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1&cc_load_policy=0&iv_load_policy=3&hl=${T.locale}" title="${esc(titulo)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
       player.showModal();
     }
     document.addEventListener("click", (evento) => {
@@ -2110,7 +2568,7 @@
       </li>`).join("");
 
     /* ---------- Números ---------- */
-    const formatar = (n, casas) => n.toLocaleString("pt-BR", { minimumFractionDigits: casas, maximumFractionDigits: casas });
+    const formatar = (n, casas) => n.toLocaleString(T.locale, { minimumFractionDigits: casas, maximumFractionDigits: casas });
 
     $("#contadores").innerHTML = CONFIG.numeros.contadores.map((c, i) => `
       <li class="contador reveal" style="--atraso:${i * 100}ms">
@@ -2127,7 +2585,7 @@
     logos.forEach((l, i) => { mistura.push(l); if ((i + 1) % passo === 0 && selos.length) mistura.push(selos.shift()); });
     mistura.push(...selos);
     function itemLogo(m) {
-      if (m.logo) return `<li class="logo-item"><img src="${esc(versao(m.logo))}" alt="${m.nome === "Marca parceira" ? "Logo de marca parceira" : "Logo " + esc(m.nome)}" loading="lazy" decoding="async" width="100" height="100"></li>`;
+      if (m.logo) return `<li class="logo-item"><img src="${esc(versao(m.logo))}" alt="${m.nome === "Marca parceira" ? T.logoParceira : T.logo + " " + esc(m.nome)}" loading="lazy" decoding="async" width="100" height="100"></li>`;
       return `<li class="logo-item logo-texto ${m.cor}">${esc(m.nome)}</li>`;
     }
     const metade = Math.ceil(mistura.length / 2);
@@ -2152,7 +2610,7 @@
     $("#depoimentos").innerHTML = CONFIG.numeros.depoimentos.map((d, i) => `
       <li class="reveal" style="--atraso:${(i % 4) * 90}ms"${i >= depVisiveis ? " hidden" : ""}>
         <figure class="depoimento">
-          <p class="estrelas"><span aria-hidden="true">★★★★★</span><span class="visualmente-oculto">Nota 5 de 5</span></p>
+          <p class="estrelas"><span aria-hidden="true">★★★★★</span><span class="visualmente-oculto">${T.nota}</span></p>
           <blockquote><p>${esc(d.texto)}</p></blockquote>
           <figcaption>
             <span class="avatar" aria-hidden="true">${d.logo ? `<img src="${esc(versao(d.logo))}" alt="" loading="lazy">` : esc(d.empresa.charAt(0))}</span>
@@ -2163,7 +2621,7 @@
     const maisDep = $("#mais-depoimentos");
     const escondidos = CONFIG.numeros.depoimentos.length - depVisiveis;
     maisDep.hidden = escondidos <= 0;
-    maisDep.textContent = `Ver mais depoimentos (${escondidos})`;
+    maisDep.textContent = T.verMaisDep(escondidos);
     maisDep.addEventListener("click", () => {
       const itens = [...document.querySelectorAll("#depoimentos > li[hidden]")];
       itens.forEach((li) => { li.hidden = false; li.classList.add("visivel"); });
@@ -2202,15 +2660,15 @@
         <a class="contato-link" href="${esc(c.link)}" ${c.externo ? 'target="_blank" rel="noopener noreferrer"' : ""}>
           <span class="contato-icone">${c.icone}</span>
           <span><small>${c.rotulo}</small><strong>${esc(c.valor)}</strong></span>
-          ${c.externo ? '<span class="visualmente-oculto">(abre em uma nova aba)</span>' : ""}
+          ${c.externo ? `<span class="visualmente-oculto">${T.novaAba}</span>` : ""}
         </a>
       </li>`).join("");
 
     const form = $("#formulario");
     const regras = [
-      { id: "nome",     valida: (v) => v.trim().length >= 2, erro: "Conta pra mim o seu nome." },
-      { id: "email",    valida: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()), erro: "Digite um e-mail válido, por exemplo nome@empresa.com." },
-      { id: "mensagem", valida: (v) => v.trim().length >= 10, erro: "Escreva uma mensagem com pelo menos 10 caracteres." }
+      { id: "nome",     valida: (v) => v.trim().length >= 2, erro: T.erroNome },
+      { id: "email",    valida: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()), erro: T.erroEmail },
+      { id: "mensagem", valida: (v) => v.trim().length >= 10, erro: T.erroMensagem }
     ];
 
     form.addEventListener("submit", (evento) => {
@@ -2230,20 +2688,46 @@
       const mensagem = form.mensagem.value.trim();
 
       if (ct.modoFormulario === "mailto") {
-        const corpo = `Nome: ${nome}\nE-mail: ${email}\n\n${mensagem}`;
+        const corpo = `${T.emailNome}: ${nome}\n${T.emailEmail}: ${email}\n\n${mensagem}`;
         window.location.href = `mailto:${ct.email}?subject=${encodeURIComponent(ct.assuntoEmail)}&body=${encodeURIComponent(corpo)}`;
         $("#form-ok").textContent = ct.mensagemSucesso;
       } else {
-        $("#form-ok").textContent = `Obrigada, ${nome}! Recebi sua mensagem e respondo em breve no e-mail ${email}.`;
+        $("#form-ok").textContent = T.obrigado(nome, email);
       }
       form.reset();
       regras.forEach((r) => document.getElementById(r.id).removeAttribute("aria-invalid"));
     });
 
+    /* ---------- Faixa de campanha com contagem regressiva ---------- */
+    const aviso = $("#aviso");
+    const cp = CONFIG.campanha;
+    if (cp && cp.ativa) {
+      const [ano, mes, dia] = cp.data.split("-").map(Number);
+      const hoje = new Date();
+      const diaCampanha = new Date(ano, mes - 1, dia);
+      const dias = Math.round((diaCampanha - new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate())) / 86400000);
+      if (dias >= 0) {
+        $("#aviso-selo").textContent = cp.selo;
+        $("#aviso-texto").textContent = dias > 1 ? cp.texto.replace("{dias}", dias) : dias === 1 ? cp.textoUmDia : cp.textoHoje;
+        $("#aviso-sub").textContent = cp.sub;
+        const linkAviso = $("#aviso-link");
+        linkAviso.textContent = cp.link;
+        linkAviso.href = `https://wa.me/${digitosWhats}?text=${encodeURIComponent(cp.mensagemWhatsApp)}`;
+        linkAviso.target = "_blank";
+        linkAviso.rel = "noopener noreferrer";
+        aviso.hidden = false;
+      }
+    }
+    function medirAviso() {
+      document.documentElement.style.setProperty("--altura-aviso", aviso.hidden ? "0px" : `${aviso.offsetHeight}px`);
+    }
+    medirAviso();
+    window.addEventListener("resize", medirAviso);
+
     /* ---------- Rodapé ---------- */
     $("#redes").innerHTML = CONFIG.redes
-      .map((r) => `<li><a href="${esc(r.link)}" target="_blank" rel="noopener noreferrer">${esc(r.nome)}<span class="visualmente-oculto"> (abre em uma nova aba)</span></a></li>`).join("");
-    $("#direitos").textContent = `© ${new Date().getFullYear()} ${NOME}. Todos os direitos reservados.`;
+      .map((r) => `<li><a href="${esc(r.link)}" target="_blank" rel="noopener noreferrer">${esc(r.nome)}<span class="visualmente-oculto"> ${T.novaAba}</span></a></li>`).join("");
+    $("#direitos").textContent = `© ${new Date().getFullYear()} ${NOME}. ${T.direitos}`;
 
     /* ---------- Menu: fundo ao rolar e menu-sanduíche ---------- */
     const topo = $("#topo");
@@ -2256,7 +2740,7 @@
 
     function abrirMenu(abrir) {
       menuBtn.setAttribute("aria-expanded", String(abrir));
-      menuBtn.setAttribute("aria-label", abrir ? "Fechar menu" : "Abrir menu");
+      menuBtn.setAttribute("aria-label", abrir ? T.fecharMenu : T.abrirMenu);
       menu.classList.toggle("aberto", abrir);
       topo.classList.toggle("menu-aberto", abrir);
     }
