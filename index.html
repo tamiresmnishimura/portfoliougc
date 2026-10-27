@@ -467,17 +467,17 @@
       padding: .2rem 1.1rem .2rem 0;
       margin: 0;
       list-style: none;
-      animation: rolar 90s linear infinite;
+      animation: rolar 150s linear infinite;
     }
     .faixa-trilho:hover ul, .logos-linha:hover ul { animation-play-state: paused; }
     .faixa-trilho li {
-      width: 60px; height: 60px;
+      width: 92px; height: 92px;
       flex-shrink: 0;
       border-radius: 50%;
       background: var(--branco);
       border: 1px solid var(--linha);
     }
-    .faixa-trilho img { width: 100%; height: 100%; object-fit: contain; padding: 15%; }
+    .faixa-trilho img { width: 100%; height: 100%; object-fit: contain; padding: 11%; }
     @keyframes rolar { to { transform: translateX(-100%); } }
 
     /* =========================================================
@@ -862,19 +862,19 @@
       padding: .5rem 1.1rem .75rem 0;
       margin: 0;
       list-style: none;
-      animation: rolar 110s linear infinite;
+      animation: rolar 170s linear infinite;
     }
     .logos-linha.reversa ul { animation-direction: reverse; }
     /* Bolinhas claras e iguais; a logo fica solta, sem fundo próprio (arquivos PNG transparentes) */
     .logo-item {
-      width: 104px; height: 104px;
+      width: 128px; height: 128px;
       flex-shrink: 0;
       border-radius: 50%;
       background: var(--branco);
       border: 1px solid var(--linha);
       box-shadow: 0 6px 18px -14px rgba(20, 17, 13, .45);
     }
-    .logo-item img { width: 100%; height: 100%; object-fit: contain; padding: 18%; }
+    .logo-item img { width: 100%; height: 100%; object-fit: contain; padding: 12%; }
     .logo-texto {
       display: grid;
       place-items: center;
@@ -1240,7 +1240,8 @@
       .faixa-marcas { flex-direction: column; align-items: stretch; gap: 1rem; }
       .faixa-rotulo { padding-left: 0; text-align: center; }
       .contadores { gap: 2rem 1.25rem; }
-      .logo-item { width: 84px; height: 84px; }
+      .logo-item { width: 104px; height: 104px; }
+      .faixa-trilho li { width: 76px; height: 76px; }
       .logo-texto { font-size: .85rem; padding: .6rem; }
       .rodape-topo { flex-direction: column; align-items: flex-start; }
     }
@@ -1559,7 +1560,7 @@
           { nome: "Aya", logo: "logos/aya.png" },
           { nome: "A. Balzaquiana", logo: "logos/balzaquiana.png" },
           { nome: "Amor de Brechó", logo: "logos/amor-de-brecho.png" },
-          { nome: "Peçarara Brechó", logo: "logos/pecarara.png" },
+          { nome: "Peça Rara Brechó", logo: "logos/pecarara.png" },
           { nome: "Leve Brechó", logo: "logos/leve-brecho.png" },
           { nome: "Burguesinha's Brechó Chic", logo: "logos/burguesinhas.png" },
           { nome: "Bazar da Thatá", logo: "logos/bazar-da-thata.png" },
@@ -1574,14 +1575,17 @@
           { nome: "Birô", logo: "logos/biro.png" },
           { nome: "PDC Culture", logo: "logos/pdc-culture.png" },
           { nome: "Pitaia", logo: "logos/pitaia.png" },
-          { nome: "Marca parceira", logo: "logos/marca-folha.png" },
+          { nome: "Espaço Laser", logo: "logos/marca-folha.png" },
           { nome: "Marca parceira", logo: "logos/marca-ancora.png" },
           { nome: "IKB Clinic", logo: "logos/ikb.png" },
           { nome: "Marca parceira", logo: "logos/marca-geometrica.png" }
         ],
         // Marcas que ainda não têm logo: aparecem como um selo com o nome.
         // Quando tiver a logo, mova a marca para a lista de cima.
-        semLogo: []
+        semLogo: [],
+        // Ordem: 3 logos sorteadas abrem a faixa e, logo depois, estas (as mais conhecidas).
+        // Use o nome exatamente como está na lista de logos acima.
+        primeiras: ["Liz", "Coala", "Zap Imóveis", "OLX", "Rap10", "Vinagreen", "Copacol", "Buriti Shopping", "5àsec", "Burguesinha's Brechó Chic", "Peça Rara Brechó", "Espaço Laser", "Hoomy", "Poli-Pet", "Pelmex+", "Pharmapele", "Hering", "Carrano"]
       },
 
       // EDITE AQUI: seção Sobre mim.
@@ -1932,11 +1936,18 @@
     $("#capa-midia").innerHTML = `<img src="${esc(CONFIG.capa.imagem.foto)}" alt="${esc(CONFIG.capa.imagem.alt)}" width="730" height="1223" fetchpriority="high">`;
     $("#capa-numeros").innerHTML = CONFIG.capa.numeros
       .map((n) => `<li><strong>${esc(n.valor)}</strong><span>${esc(n.rotulo)}</span></li>`).join("");
-    const logosFaixa = CONFIG.marcas.logos.filter((m) => m.nome !== "Marca parceira");
+    // Ordem das logos: 3 sorteadas, depois as mais conhecidas, depois o resto
+    const primeiras = CONFIG.marcas.primeiras || [];
+    const conhecidas = primeiras.map((n) => CONFIG.marcas.logos.find((l) => l.nome === n)).filter(Boolean);
+    const demais = CONFIG.marcas.logos.filter((l) => !primeiras.includes(l.nome));
+    const sorteadas = demais.filter((l) => l.nome !== "Marca parceira").sort(() => Math.random() - 0.5).slice(0, 3);
+    const logosOrdenados = sorteadas.concat(conhecidas, demais.filter((l) => !sorteadas.includes(l)));
+
+    const logosFaixa = logosOrdenados.filter((m) => m.nome !== "Marca parceira");
     $("#marcas").innerHTML = logosFaixa
-      .map((m) => `<li><img src="${esc(m.logo)}" alt="${esc(m.nome)}" width="56" height="56" loading="lazy" decoding="async"></li>`).join("");
+      .map((m) => `<li><img src="${esc(m.logo)}" alt="${esc(m.nome)}" width="92" height="92" loading="lazy" decoding="async"></li>`).join("");
     $("#marcas-copia").innerHTML = logosFaixa
-      .map((m) => `<li><img src="${esc(m.logo)}" alt="" width="56" height="56" loading="lazy" decoding="async"></li>`).join("");
+      .map((m) => `<li><img src="${esc(m.logo)}" alt="" width="92" height="92" loading="lazy" decoding="async"></li>`).join("");
 
     /* ---------- Sobre ---------- */
     $("#sobre-midia").innerHTML = midia(CONFIG.sobre.imagem);
@@ -2084,7 +2095,7 @@
 
     /* ---------- Parede de logos (logos e selos com nome, misturados) ---------- */
     const selos = CONFIG.marcas.semLogo.map((nome) => ({ nome, cor: "" }));
-    const logos = CONFIG.marcas.logos.slice();
+    const logos = logosOrdenados.slice();
     const mistura = [];
     const passo = Math.max(1, Math.round(logos.length / Math.max(1, selos.length)));
     logos.forEach((l, i) => { mistura.push(l); if ((i + 1) % passo === 0 && selos.length) mistura.push(selos.shift()); });
