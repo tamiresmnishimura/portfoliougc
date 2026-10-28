@@ -160,7 +160,7 @@
        ELEMENTOS COMUNS
        ========================================================= */
     section {
-      padding: clamp(3rem, 6vw, 5rem) 0;
+      padding: clamp(2.25rem, 4.5vw, 3.5rem) 0;
       scroll-margin-top: calc(var(--altura-topo) - 1px);
     }
 
@@ -790,7 +790,7 @@
       display: grid;
       justify-items: center;
       overflow: hidden;
-      padding: .5rem 0 1rem;
+      padding: .5rem 0 .5rem;
       touch-action: pan-y;
       -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
       mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
@@ -844,7 +844,7 @@
       color: var(--azul);
       white-space: nowrap;
     }
-    .slide-contexto { margin-top: .8rem; font-size: .9rem; line-height: 1.5; color: var(--tinta-suave); }
+    .slide-contexto { margin: .7rem -3rem 0; font-size: .84rem; line-height: 1.45; color: var(--tinta-suave); }
     .slide:not(.ativo) .slide-dados, .slide:not(.ativo) .slide-contexto { visibility: hidden; }
     .carrossel-seta {
       position: absolute;
@@ -1107,9 +1107,11 @@
        5. COMO EU TE AJUDO
        ========================================================= */
     .servicos { background: var(--branco); }
+    @media (max-width: 1000px) { .servicos-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+    @media (max-width: 600px) { .servicos-grid { grid-template-columns: minmax(0, 1fr) !important; } }
     .servicos-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: clamp(1rem, 2vw, 1.5rem);
       list-style: none;
       margin: 0;
@@ -1677,8 +1679,6 @@
           <p class="sobretitulo reveal" data-cfg="sobre.sobretitulo"></p>
           <h2 class="titulo reveal" id="sobre-titulo" data-cfg="sobre.titulo"></h2>
           <div id="sobre-paragrafos" style="display:grid;gap:1rem"></div>
-          <h3 class="entregas-titulo reveal" data-cfg="sobre.entregasTitulo"></h3>
-          <ul class="entregas" id="entregas"></ul>
           <p class="assinatura reveal" data-cfg="sobre.assinatura"></p>
         </div>
       </div>
@@ -1753,7 +1753,6 @@
         <div class="secao-topo">
           <p class="sobretitulo reveal" data-cfg="servicos.sobretitulo"></p>
           <h2 class="titulo reveal" id="servicos-titulo" data-cfg="servicos.titulo"></h2>
-          <p class="lead reveal" data-cfg="servicos.descricao"></p>
         </div>
         <ul class="servicos-grid" id="servicos-lista"></ul>
       </div>
@@ -1776,9 +1775,6 @@
       </div>
 
       <div class="container">
-        <h3 class="subtitulo reveal" data-cfg="numeros.resultadosTitulo"></h3>
-        <ul class="resultados" id="resultados"></ul>
-
         <h3 class="subtitulo reveal" data-cfg="numeros.depoimentosTitulo"></h3>
         <ul class="depoimentos" id="depoimentos"></ul>
         <div class="mais"><button type="button" class="btn btn-secundario" id="mais-depoimentos" hidden></button></div>
@@ -2015,10 +2011,9 @@
         imagem: { foto: "fotos/sobre.jpg", gradiente: G.pessego, alt: `${NOME} sorrindo, de óculos escuros e camiseta preta com cinto, em frente a uma porta de madeira` },
         // Para deixar uma palavra em negrito, coloque entre <strong> e </strong>.
         paragrafos: [
-          "Tenho 32 anos, sou <strong>pós-graduada em Gestão de Pessoas</strong> pela USP e trabalhei 10 anos com RH antes de me dedicar à criação de conteúdo.",
-          "No caminho, também trabalhei em restaurante, em loja de roupa e até como babá durante um intercâmbio. Essa bagagem, do corporativo aos empregos mais diversos e à vida fora do país, virou o meu diferencial: <strong>sei me comunicar de forma assertiva</strong> de acordo com cada público.",
-          "Moro em <strong>Piquete-SP</strong> e vivo com uma mala na mão, entre o <strong>Vale do Paraíba</strong>, <strong>Santo André</strong>, <strong>São Paulo</strong> e <strong>Salto</strong>. Na minha rotina aparecem personagens que o público adora: meu noivo, minhas sobrinhas gêmeas e minha avó, que era costureira, e os vídeos com ela me fizeram viralizar nas redes sociais.",
-          "Amo <strong>moda</strong> e consumo consciente, falo sobre <strong>tecidos</strong>, adoro me cuidar, <strong>viajar</strong>, <strong>comer bem</strong> e tomar um bom vinho. É essa verdade que eu levo para cada vídeo da sua marca."
+          "Tenho 32 anos, sou <strong>pós-graduada em Gestão de Pessoas</strong> pela USP e trabalhei 10 anos com RH. Também passei por restaurante, loja de roupa e fui até babá num intercâmbio, e essa bagagem virou o meu diferencial: <strong>sei me comunicar de forma assertiva</strong> com cada público.",
+          "Moro em <strong>Piquete-SP</strong> e vivo com a mala na mão entre o <strong>Vale do Paraíba</strong>, <strong>Santo André</strong>, <strong>São Paulo</strong> e <strong>Salto</strong>. Na rotina aparecem meu noivo, minhas sobrinhas gêmeas e minha avó costureira, com quem viralizei nas redes.",
+          "Amo <strong>moda</strong> e consumo consciente, falo sobre <strong>tecidos</strong>, adoro <strong>viajar</strong>, <strong>comer bem</strong> e um bom vinho. É essa verdade que levo para cada vídeo da sua marca."
         ],
         entregasTitulo: "O que você recebe comigo",
         entregas: [
@@ -2240,11 +2235,9 @@
         titulo: "Serviços pensados para <em>vender</em>",
         descricao: "Do roteiro ao arquivo final, cuido de cada etapa para você receber conteúdo pronto para usar e escalar.",
         itens: [
-          { titulo: "Vídeo UGC",            descricao: "Vídeos verticais com roteiro, gancho forte e linguagem natural, prontos para anúncio ou para o orgânico.", detalhe: "Reels, TikTok e anúncios" },
+          { titulo: "Vídeo UGC",            descricao: "Vídeos verticais com roteiro, gancho forte e linguagem natural, entregues para a marca publicar no próprio perfil ou usar em anúncios.", detalhe: "Para o perfil da marca" },
+          { titulo: "Publicação no meu perfil", descricao: "Conteúdo publicado no meu perfil, alcançando uma audiência que confia nas minhas indicações.", detalhe: "Instagram e TikTok" },
           { titulo: "Corte para anúncio",   descricao: "Variações do mesmo vídeo com ganchos e chamadas diferentes, para você testar e escalar o que mais vende.", detalhe: "Ideal para tráfego pago" },
-          { titulo: "Fotos de produto",     descricao: "Fotos com luz natural e cenário real, perfeitas para site, marketplace e redes sociais.", detalhe: "Para site, marketplace e redes" },
-          { titulo: "Unboxing e provador",  descricao: "A experiência de abrir e experimentar o produto pela primeira vez, com detalhes e uma reação sincera.", detalhe: "Ideal para moda e lançamentos" },
-          { titulo: "Publicação no perfil", descricao: "Conteúdo publicado no meu perfil, alcançando uma audiência engajada que confia nas minhas indicações.", detalhe: "Instagram e TikTok" },
           { titulo: "Pacote mensal",        descricao: "Uma rotina de conteúdo para sua marca nunca ficar sem criativo novo, com prioridade na agenda.", detalhe: "Perfeito para quem anuncia todo mês" }
         ]
       },
@@ -2352,10 +2345,9 @@
         etiqueta: "Piquete, Brazil, suitcase always packed",
         imagem: { alt: "Tamires Nishimura smiling, wearing sunglasses and a belted black t-shirt, in front of a wooden door" },
         paragrafos: [
-          "I'm 32, I hold a <strong>postgraduate degree in People Management</strong> from the University of São Paulo (USP) and spent 10 years in HR before devoting myself to content creation.",
-          "Along the way I also worked in a restaurant, in a clothing store and even as a nanny during an exchange program abroad. That journey, from corporate life to very different jobs and living overseas, became my edge: <strong>I know how to communicate assertively</strong> with each audience.",
-          "I live in <strong>Piquete, São Paulo</strong>, and I'm always on the road between the <strong>Paraíba Valley</strong>, <strong>Santo André</strong>, <strong>São Paulo</strong> and <strong>Salto</strong>. My routine features characters the audience loves: my fiancé, my twin nieces and my grandmother, a former seamstress, and our videos together went viral on social media.",
-          "I love <strong>fashion</strong> and conscious consumption, I talk about <strong>fabrics</strong>, I enjoy self-care, <strong>travel</strong>, <strong>good food</strong> and a nice glass of wine. That's the authenticity I bring to every video for your brand."
+          "I'm 32, I hold a <strong>postgraduate degree in People Management</strong> from the University of São Paulo (USP) and spent 10 years in HR. I've also worked in a restaurant, a clothing store and even as a nanny abroad, and that journey became my edge: <strong>I know how to communicate assertively</strong> with each audience.",
+          "I live in <strong>Piquete, São Paulo</strong>, always on the road between the <strong>Paraíba Valley</strong>, <strong>Santo André</strong>, <strong>São Paulo</strong> and <strong>Salto</strong>. My routine features my fiancé, my twin nieces and my seamstress grandmother, with whom I went viral.",
+          "I love <strong>fashion</strong> and conscious consumption, I talk about <strong>fabrics</strong>, and I enjoy <strong>travel</strong>, <strong>good food</strong> and a nice glass of wine. That's the authenticity I bring to every video for your brand."
         ],
         entregasTitulo: "What you get when we work together",
         entregas: [
@@ -2423,11 +2415,9 @@
         titulo: "Services built to <em>sell</em>",
         descricao: "From script to final file, I handle every step so you get content that's ready to use and scale.",
         itens: [
-          { titulo: "UGC video", descricao: "Vertical videos with a script, a strong hook and natural language, ready for ads or organic posts.", detalhe: "Reels, TikTok and ads" },
+          { titulo: "UGC video", descricao: "Vertical videos with a script, a strong hook and natural language, delivered for the brand to post on its own profile or use in ads.", detalhe: "For the brand's profile" },
+          { titulo: "Posting on my profile", descricao: "Content posted on my profile, reaching an audience that trusts my recommendations.", detalhe: "Instagram and TikTok" },
           { titulo: "Ad cuts", descricao: "Variations of the same video with different hooks and calls to action, so you can test and scale what sells best.", detalhe: "Ideal for paid traffic" },
-          { titulo: "Product photos", descricao: "Photos in natural light and real settings, perfect for websites, marketplaces and social media.", detalhe: "For websites, marketplaces and social" },
-          { titulo: "Unboxing and try-on", descricao: "The experience of opening and trying the product for the first time, with details and a genuine reaction.", detalhe: "Ideal for fashion and launches" },
-          { titulo: "Posting on my profile", descricao: "Content posted on my profile, reaching an engaged audience that trusts my recommendations.", detalhe: "Instagram and TikTok" },
           { titulo: "Monthly package", descricao: "A content routine so your brand never runs out of fresh creatives, with priority booking.", detalhe: "For brands that advertise every month" }
         ]
       },
@@ -2652,9 +2642,6 @@
     $("#sobre-midia").innerHTML = midia(CONFIG.sobre.imagem);
     $("#sobre-paragrafos").innerHTML = CONFIG.sobre.paragrafos
       .map((p, i) => `<p class="reveal" style="--atraso:${i * 80}ms">${p}</p>`).join("");
-    $("#entregas").innerHTML = CONFIG.sobre.entregas
-      .map((e, i) => `<li class="reveal" style="--atraso:${i * 60}ms">${icones.check}<span>${esc(e)}</span></li>`).join("");
-
     /* ---------- Destaques em carrossel ---------- */
     const itensDestaque = CONFIG.destaques.itens;
     const palco = $("#carrossel-palco");
@@ -2910,16 +2897,6 @@
     $("#logos-grade").innerHTML = conhecidas.concat(demais, selos).map(itemLogo).join("");
 
     /* ---------- Resultados e depoimentos ---------- */
-    $("#resultados").innerHTML = CONFIG.numeros.resultados.map((r, i) => `
-      <li class="reveal" style="--atraso:${i * 100}ms">
-        <article class="resultado">
-          <p class="resultado-marca">${esc(r.marca)}</p>
-          <p class="resultado-metrica">${esc(r.metrica)}</p>
-          <p class="resultado-rotulo">${esc(r.rotulo)}</p>
-          <p class="resultado-descricao">${esc(r.descricao)}</p>
-        </article>
-      </li>`).join("");
-
     const depVisiveis = CONFIG.numeros.depoimentosVisiveis || CONFIG.numeros.depoimentos.length;
     $("#depoimentos").innerHTML = CONFIG.numeros.depoimentos.map((d, i) => `
       <li class="reveal" style="--atraso:${(i % 4) * 90}ms"${i >= depVisiveis ? " hidden" : ""}>
