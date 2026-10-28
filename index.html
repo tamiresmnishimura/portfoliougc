@@ -79,11 +79,11 @@
     :root[data-tema="bordo"] .btn-primario { box-shadow: inset 0 0 0 1px rgba(232, 207, 164, .35); }
     :root[data-tema="bordo"] .contato { background: linear-gradient(160deg, #6e1f30 0%, #4a1320 100%); }
     :root[data-tema="bordo"] .contato-icone { color: #6e1f30; }
-    :root[data-tema="bordo"] .card-selo.ouro { background: #d9b56f; }
+    :root[data-tema="bordo"] .card-selo.ouro { background: var(--azul); color: #fff; }
     :root[data-tema="bordo"] .form-ok { background: #f4e6e8; }
-    :root[data-tema="bordo"] .aviso { background: #1d1315; color: #f1e3cc; }
-    :root[data-tema="bordo"] .aviso-selo { background: #d9b56f; color: #1d1315; }
-    :root[data-tema="bordo"] .aviso-link { color: #e8cfa4; }
+    :root[data-tema="bordo"] .aviso { background: #6e1f30; color: #f5efe9; }
+    :root[data-tema="bordo"] .aviso-selo { background: #f5efe9; color: #6e1f30; }
+    :root[data-tema="bordo"] .aviso-link { color: #f1dcb4; }
     :root[data-tema="bordo"] .contador { border-top-color: var(--laranja); }
     :root[data-tema="bordo"] .resultado { background: linear-gradient(160deg, #2a1a1d 0%, #1d1315 100%); }
 
@@ -543,12 +543,12 @@
       border-block: 1px solid var(--linha);
       padding: 1.3rem 0;
       display: flex;
-      align-items: center;
-      gap: 2rem;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
     }
     .faixa-rotulo {
-      flex-shrink: 0;
-      padding-left: max(1.25rem, calc((100vw - 1200px) / 2));
+      text-align: center;
       font-size: .74rem;
       font-weight: 700;
       letter-spacing: .18em;
@@ -967,6 +967,39 @@
     .mais { display: flex; justify-content: center; margin-top: 3rem; }
     @media (max-width: 1100px) { .galeria { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
     /* Título de cada nicho dentro da galeria (quando mostra todos) */
+    .galeria.em-linhas { grid-template-columns: minmax(0, 1fr); gap: clamp(2.5rem, 5vw, 3.5rem); }
+    .nicho-linha { min-width: 0; }
+    .nicho-trilho {
+      list-style: none;
+      margin: 1.25rem 0 0;
+      padding: 0 0 .5rem;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: calc((100% - 4 * 1.25rem) / 5);
+      gap: 1.25rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    .nicho-trilho::-webkit-scrollbar { display: none; }
+    .nicho-trilho > li { scroll-snap-align: start; }
+    .nicho-setas { margin-left: auto; display: flex; gap: .5rem; align-self: center; }
+    .nicho-seta {
+      width: 42px; height: 42px;
+      display: grid; place-items: center;
+      border: 0;
+      border-radius: 50%;
+      background: var(--azul);
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 8px 18px -10px rgba(20, 17, 13, .6);
+      transition: background-color .3s ease, opacity .3s ease, transform .3s ease;
+    }
+    .nicho-seta svg { width: 20px; height: 20px; }
+    .nicho-seta:hover:not(:disabled) { background: var(--azul-escuro); transform: scale(1.06); }
+    .nicho-seta:disabled { opacity: .25; cursor: default; box-shadow: none; }
+    @media (max-width: 1100px) { .nicho-trilho { grid-auto-columns: calc((100% - 3 * 1.25rem) / 4); } }
+    @media (max-width: 700px) { .nicho-trilho { grid-auto-columns: 44%; gap: .85rem; } }
     .galeria-titulo {
       grid-column: 1 / -1;
       display: flex;
@@ -1163,17 +1196,17 @@
       margin-bottom: clamp(4rem, 8vw, 6rem);
     }
     .logos-grade {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: clamp(.7rem, 1.5vw, 1.1rem);
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: clamp(.5rem, 1vw, .8rem);
       list-style: none;
       margin: 0;
       padding: 0;
     }
-    @media (max-width: 600px) {
-      .logos-grade .logo-item { width: calc((100% - 2 * .7rem) / 3); height: auto; aspect-ratio: 1; }
-    }
+    .logos-grade .logo-item { width: 100%; height: auto; aspect-ratio: 1; }
+    .logos-grade .logo-item img { padding: 10%; }
+    @media (max-width: 980px) { .logos-grade { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
+    @media (max-width: 600px) { .logos-grade { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
     .logos-linha ul {
       display: flex;
       flex-shrink: 0;
@@ -1556,8 +1589,6 @@
       .selo { left: .75rem; bottom: 1rem; }
       .sobre-etiqueta { right: .75rem; }
       .entregas { grid-template-columns: minmax(0, 1fr); }
-      .faixa-marcas { flex-direction: column; align-items: stretch; gap: 1rem; }
-      .faixa-rotulo { padding-left: 0; text-align: center; }
       .contadores { gap: 2rem 1.25rem; }
       .logo-item { width: 104px; height: 104px; }
       .faixa-trilho li { width: 76px; height: 76px; }
@@ -2282,7 +2313,6 @@
       redes: [
         { nome: "Instagram", link: "https://www.instagram.com/tamiresnishimura/" },
         { nome: "TikTok",    link: "https://www.tiktok.com/@tamires.nishimura" },
-        { nome: "YouTube",   link: "https://www.youtube.com/@tamiresnishimura" },
         { nome: "WhatsApp",  link: "https://wa.me/5512996442988" }
       ],
 
@@ -2721,28 +2751,46 @@
       </li>`;
     }
 
-    // Mostrando todos, cada nicho ganha um título antes dos seus vídeos.
-    function itensGaleria(lista, de, ate) {
-      return lista.slice(de, ate).map((v, k) => {
-        const i = de + k;
-        const titulo = filtroAtual === "*" && (i === 0 || lista[i - 1].nicho !== v.nicho)
-          ? `<li class="galeria-titulo"><h3>${esc(v.nicho)}</h3><span>${nichos.find((n) => n.nome === v.nicho).videos.length}</span></li>`
-          : "";
-        return titulo + cardTrabalho(v, true);
-      }).join("");
+    // Mostrando todos: cada nicho vira uma linha com título; com mais de 5 vídeos,
+    // a linha rola para o lado e ganha setas.
+    const VIDEOS_POR_LINHA = 5;
+    const seta = (lado) => `<button type="button" class="nicho-seta" data-lado="${lado}" aria-label="${lado < 0 ? T.anterior : T.proximo}"${lado < 0 ? " disabled" : ""}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="${lado < 0 ? "m15 6-6 6 6 6" : "m9 6 6 6-6 6"}"/></svg></button>`;
+
+    function atualizarSetas(trilho) {
+      const linha = trilho.closest(".nicho-linha");
+      const ant = linha.querySelector('[data-lado="-1"]');
+      const prox = linha.querySelector('[data-lado="1"]');
+      if (!ant) return;
+      ant.disabled = trilho.scrollLeft <= 4;
+      prox.disabled = trilho.scrollLeft + trilho.clientWidth >= trilho.scrollWidth - 4;
     }
 
     function desenharGaleria(desde) {
+      if (filtroAtual === "*") {
+        galeria.classList.add("em-linhas");
+        galeria.innerHTML = nichos.map((n) => {
+          const vids = todosVideos.filter((v) => v.nicho === n.nome);
+          const rola = vids.length > VIDEOS_POR_LINHA;
+          return `
+          <li class="nicho-linha">
+            <div class="galeria-titulo"><h3>${esc(n.nome)}</h3><span>${vids.length}</span>${rola ? `<div class="nicho-setas">${seta(-1)}${seta(1)}</div>` : ""}</div>
+            <ul class="nicho-trilho">${vids.map((v) => cardTrabalho(v, false)).join("")}</ul>
+          </li>`;
+        }).join("");
+        galeria.querySelectorAll(".nicho-trilho").forEach((t) => {
+          t.addEventListener("scroll", () => atualizarSetas(t), { passive: true });
+          atualizarSetas(t);
+        });
+        verMais.hidden = true;
+        return;
+      }
+      galeria.classList.remove("em-linhas");
       const lista = videosDoFiltro();
-      // mostrando todos, nunca corta um nicho no meio: vai até o último vídeo dele
-      let fim = Math.min(limite, lista.length);
-      if (filtroAtual === "*") while (fim < lista.length && lista[fim].nicho === lista[fim - 1].nicho) fim++;
-      limite = fim;
       const visiveis = lista.slice(0, limite);
       if (desde > 0) {
-        galeria.insertAdjacentHTML("beforeend", itensGaleria(lista, desde, visiveis.length));
+        galeria.insertAdjacentHTML("beforeend", visiveis.slice(desde).map((v) => cardTrabalho(v, true)).join(""));
       } else {
-        galeria.innerHTML = itensGaleria(lista, 0, visiveis.length);
+        galeria.innerHTML = visiveis.map((v) => cardTrabalho(v, true)).join("");
       }
       const restam = lista.length - visiveis.length;
       verMais.hidden = restam <= 0;
@@ -2783,6 +2831,14 @@
       const primeiroNovo = galeria.querySelectorAll(".trabalho")[antes];
       if (primeiroNovo) primeiroNovo.focus({ preventScroll: true });
     });
+
+    galeria.addEventListener("click", (e) => {
+      const b = e.target.closest(".nicho-seta");
+      if (!b) return;
+      const trilho = b.closest(".nicho-linha").querySelector(".nicho-trilho");
+      trilho.scrollBy({ left: Number(b.dataset.lado) * trilho.clientWidth * 0.8, behavior: reduzirMovimento ? "auto" : "smooth" });
+    });
+    window.addEventListener("resize", () => galeria.querySelectorAll(".nicho-trilho").forEach(atualizarSetas));
 
     desenharGaleria(0);
 
