@@ -160,7 +160,7 @@
        ELEMENTOS COMUNS
        ========================================================= */
     section {
-      padding: clamp(4.5rem, 10vw, 8rem) 0;
+      padding: clamp(3rem, 6vw, 5rem) 0;
       scroll-margin-top: calc(var(--altura-topo) - 1px);
     }
 
@@ -168,7 +168,7 @@
       display: grid;
       gap: 1.1rem;
       max-width: 760px;
-      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
     }
 
     .sobretitulo {
@@ -539,7 +539,7 @@
 
     /* Faixa de marcas */
     .faixa-marcas {
-      margin-top: clamp(4rem, 9vw, 6.5rem);
+      margin-top: clamp(2.5rem, 5vw, 3.5rem);
       border-block: 1px solid var(--linha);
       padding: 1.3rem 0;
       display: flex;
@@ -1037,8 +1037,8 @@
       align-items: center;
     }
     .plataforma + .plataforma {
-      margin-top: clamp(4rem, 8vw, 6rem);
-      padding-top: clamp(4rem, 8vw, 6rem);
+      margin-top: clamp(2.5rem, 5vw, 3.5rem);
+      padding-top: clamp(2.5rem, 5vw, 3.5rem);
       border-top: 1px solid var(--linha);
     }
     .plataforma.tiktok { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); }
@@ -1050,7 +1050,8 @@
       font-size: 1.1rem;
       color: var(--azul);
     }
-    .youtube-videos { display: grid; gap: 1.25rem; }
+    .youtube-videos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+    @media (max-width: 600px) { .youtube-videos { grid-template-columns: minmax(0, 1fr); } }
     .video-longo { display: block; text-decoration: none; color: inherit; border-radius: var(--raio); }
     .video-longo .capa-16x9 {
       position: relative;
@@ -1065,7 +1066,7 @@
     .video-longo:hover .play { background: var(--azul); color: #fff; }
     .video-longo .card-selo { background: #ff0033; color: #fff; }
     .video-longo-legenda { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; padding-top: .9rem; }
-    .video-longo-legenda strong { font-family: "Fraunces", Georgia, serif; font-weight: 400; font-size: 1.25rem; }
+    .video-longo-legenda strong { font-family: "Fraunces", Georgia, serif; font-weight: 400; font-size: 1.05rem; line-height: 1.3; }
     .video-longo-legenda span { font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--azul); white-space: nowrap; }
 
     .tiktok-card {
@@ -1165,7 +1166,7 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: clamp(1.5rem, 3vw, 2.5rem);
       list-style: none;
-      margin: 0 0 clamp(4rem, 8vw, 6rem);
+      margin: 0 0 clamp(2.5rem, 5vw, 3.5rem);
       padding: 0;
     }
     .contador {
@@ -1193,7 +1194,7 @@
     .logos {
       display: grid;
       gap: 1.1rem;
-      margin-bottom: clamp(4rem, 8vw, 6rem);
+      margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
     }
     .logos-grade {
       display: grid;
@@ -1244,7 +1245,7 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: clamp(1rem, 2vw, 1.5rem);
       list-style: none;
-      margin: 0 0 clamp(4rem, 8vw, 6rem);
+      margin: 0 0 clamp(2.5rem, 5vw, 3.5rem);
       padding: 0;
     }
     .resultado {
@@ -2044,7 +2045,7 @@
             selo: "Vencedora do concurso", ouro: true,
             numero: "1º lugar", rotulo: "no concurso da Colcci",
             titulo: "Colcci",
-            contexto: "Look com a camiseta da Copa escolhido como o vencedor do concurso."
+            contexto: "Vídeo escolhido como vencedor do concurso, disputado entre influenciadoras da região."
           },
           {
             link: "https://youtube.com/shorts/vDy_HsxSQ2Y",   // LINK DO VÍDEO
@@ -2065,14 +2066,14 @@
             selo: "Moda íntima",
             rotulo: "Sutiã com caimento real",
             titulo: "Liz",
-            contexto: "Sutiã apresentado com foco em conforto e caimento real."
+            contexto: "Sutiã apresentado com foco em conforto e caimento real, usado há meses em ads."
           },
           {
             link: "https://youtube.com/shorts/NKkCdkueXRw",   // LINK DO VÍDEO
             selo: "Antes e depois",
             rotulo: "Resultado na prática",
             titulo: "Coala",
-            contexto: "Antes e depois que mostra o resultado do produto na prática."
+            contexto: "Vídeo usado no material da marca como inspiração de conteúdo para outros criadores."
           }
         ]
       },
@@ -2083,7 +2084,7 @@
         sobretitulo: "Trabalhos por nicho",
         titulo: "Um olhar para cada <em>nicho</em>",
         // {total} e {nichos} são preenchidos automaticamente.
-        descricao: "São {total} vídeos em {nichos} nichos, cada um na linguagem do seu público. Veja todos abaixo ou toque num nicho para filtrar.",
+        descricao: "Veja todos abaixo ou toque num nicho para filtrar.",
         porPagina: 20,
         nichos: [
           { nome: "Moda", videos: [
@@ -2214,7 +2215,8 @@
         descricao: "Além dos vídeos curtos, também crio conteúdo para o YouTube: vídeos mais longos, com roteiro e ritmo pensados para prender a atenção e apresentar a sua marca com calma e profundidade.",
         nota: "Ideal para reviews completos, tutoriais e anúncios no YouTube Ads.",
         videos: [
-          { link: "https://www.youtube.com/watch?v=t1CntMaf0cc", titulo: "Barriga estufada nunca mais!", marca: "Constlivre" }
+          { link: "https://www.youtube.com/watch?v=t1CntMaf0cc", titulo: "Barriga estufada nunca mais!", marca: "Constlivre" },
+          { link: "https://www.youtube.com/watch?v=6ow-69o2hCY", titulo: "Tour na casa dos sonhos na Granja Viana", marca: "ZAP Imóveis" }
         ]
       },
 
@@ -2371,17 +2373,17 @@
         titulo: "Videos that <em>really performed</em>",
         descricao: "Five pieces of content that show what happens when strategy and authenticity go hand in hand. Tap to watch.",
         itens: [
-          { selo: "Contest winner", numero: "1st place", rotulo: "in the Colcci contest", contexto: "World Cup look with the Colcci tee, chosen as the contest winner." },
+          { selo: "Contest winner", numero: "1st place", rotulo: "in the Colcci contest", contexto: "Video chosen as the contest winner, competing against influencers from the region." },
           { selo: "Viral on TikTok", rotulo: "TikTok views", contexto: "A quick recipe that took the brand to millions of people." },
           { selo: "Viral on TikTok", rotulo: "TikTok views", contexto: "A recipe with the brand that reached over 8 million people." },
-          { selo: "Lingerie", rotulo: "Bra with a real fit", contexto: "A bra showcased with a focus on comfort and real fit." },
-          { selo: "Before and after", rotulo: "Real-life results", contexto: "A before-and-after showing the product's results in practice." }
+          { selo: "Lingerie", rotulo: "Bra with a real fit", contexto: "A bra showcased with a focus on comfort and real fit, running in ads for months." },
+          { selo: "Before and after", rotulo: "Real-life results", contexto: "Video used in the brand's own materials as content inspiration for other creators." }
         ]
       },
       trabalhos: {
         sobretitulo: "Work by niche",
         titulo: "A fresh angle for every <em>niche</em>",
-        descricao: "{total} videos across {nichos} niches, each speaking its audience's language. Browse them all below or tap a niche to filter.",
+        descricao: "Browse them all below or tap a niche to filter.",
         nichos: [
           { nome: "Fashion", videos: [{ titulo: "Bermuda shorts" }, { titulo: "A dress for every day of the week" }, { titulo: "Microfiber up close" }, { titulo: "Sunglasses" }, { titulo: "Swimsuit" }, { titulo: "Alice set" }, { titulo: "Earrings" }, { titulo: "Microfiber line" }, { titulo: "Online fashion" }, { titulo: "What I ordered vs. what I got" }] },
           { nome: "Try-ons", videos: [{ titulo: "Polka dot try-on" }, { marca: "Try-on", titulo: "Heloíse skirt" }, { marca: "Try-on", titulo: "Lança Perfume look" }, { marca: "Try-on", titulo: "Sunglasses" }, { marca: "Try-on", titulo: "Lez a Lez look" }, { marca: "Try-on", titulo: "Farm look" }, { marca: "Try-on", titulo: "Party dress" }, { titulo: "Try-on" }] },
@@ -2403,7 +2405,7 @@
         titulo: "Your brand on <em>YouTube</em>",
         descricao: "Beyond short-form videos, I also create content for YouTube: longer videos with a script and pacing designed to hold attention and present your brand with depth.",
         nota: "Ideal for full reviews, tutorials and YouTube Ads.",
-        videos: [{ titulo: "Say goodbye to bloating!" }]
+        videos: [{ titulo: "Say goodbye to bloating!" }, { titulo: "Dream home tour in Granja Viana" }]
       },
       tiktokShop: {
         sobretitulo: "TikTok Shop",
