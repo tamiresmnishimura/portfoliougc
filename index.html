@@ -1091,8 +1091,6 @@
     .tiktok-itens { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; }
     .tiktok-itens li { display: flex; gap: .7rem; align-items: flex-start; line-height: 1.5; color: rgba(243, 238, 233, .9); }
     .tiktok-itens svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; color: var(--laranja); }
-    .btn-tiktok { justify-self: start; background: var(--creme); color: var(--tinta); }
-    .btn-tiktok:hover { background: #fff; transform: translateY(-2px); }
     @media (max-width: 880px) {
       .plataforma, .plataforma.tiktok { grid-template-columns: minmax(0, 1fr); }
     }
@@ -1598,6 +1596,98 @@
       .logo-texto { font-size: .85rem; padding: .6rem; }
       .rodape-topo { flex-direction: column; align-items: flex-start; }
     }
+    /* =========================================================
+       CAPA COM A FOTO INTEIRA (texto por cima da foto)
+       ========================================================= */
+    .capa { padding-top: 0; }
+    .capa-palco {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      min-height: min(100svh, 920px);
+      display: flex;
+      align-items: center;
+      padding: calc(var(--altura-topo) + 2.5rem) 0 4.5rem;
+      background: #3a0e18;
+      color: #fffaf5;
+    }
+    .capa-palco > .container { flex: none; }
+    .capa-fundo { position: absolute; inset: 0; z-index: -2; }
+    .capa-fundo img { width: 100%; height: 100%; object-fit: cover; object-position: 78% 30%; }
+    /* Bordô só do lado do texto; a foto continua viva à direita */
+    .capa-palco::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(180deg, rgba(40, 10, 17, .55) 0%, rgba(40, 10, 17, 0) 24%),
+        linear-gradient(90deg, rgba(58, 14, 24, .94) 0%, rgba(70, 18, 30, .86) 30%, rgba(90, 24, 38, .5) 48%, rgba(90, 24, 38, 0) 62%);
+    }
+    .capa-palco .capa-grid { grid-template-columns: minmax(0, 1fr); }
+    .capa-palco .capa-texto { max-width: 640px; }
+    .capa-palco .sobretitulo { color: #e8cfa4; }
+    .capa-palco .capa-nome { color: #fffaf5; }
+    .capa-palco .capa-nome em { color: #f1dcb4; }
+    .capa-palco .capa-frase { color: rgba(255, 250, 245, .9); }
+    .capa-palco .btn-primario { background: #fffaf5; color: #6e1f30; box-shadow: none; }
+    .capa-palco .btn-primario:hover { background: #f1dcb4; color: #4a1320; }
+    .capa-palco .btn-secundario { border-color: rgba(255, 250, 245, .75); color: #fffaf5; }
+    .capa-palco .btn-secundario:hover { background: #fffaf5; color: #6e1f30; }
+    .capa-papeis {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      list-style: none;
+      margin: 0;
+      padding: 1.6rem 0 0;
+      border-top: 1px solid rgba(255, 250, 245, .22);
+    }
+    .capa-papeis li {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 1.08rem;
+      line-height: 1;
+      padding: .6rem 1.05rem;
+      border: 1px solid rgba(232, 207, 164, .6);
+      border-radius: 999px;
+      background: rgba(255, 250, 245, .07);
+    }
+    .capa-palco .selo { left: auto; right: clamp(1.25rem, 4vw, 3rem); bottom: 2rem; color: var(--tinta); }
+    .capa .faixa-marcas { margin-top: 0; border-top: 0; }
+    /* Menu claro enquanto está por cima da foto */
+    .topo:not(.rolado):not(.menu-aberto) .logo,
+    .topo:not(.rolado):not(.menu-aberto) .menu a { color: #fffaf5; }
+    .topo:not(.rolado):not(.menu-aberto) .logo span { color: #e8cfa4; }
+    .topo:not(.rolado):not(.menu-aberto) .menu .menu-cta { border-color: rgba(255, 250, 245, .8); }
+    .topo:not(.rolado):not(.menu-aberto) .menu .menu-cta:hover { background: #fffaf5; color: #6e1f30; }
+    .topo:not(.rolado):not(.menu-aberto) .menu a:not(.menu-cta)::after { background: #e8cfa4; }
+    .topo:not(.rolado):not(.menu-aberto) .menu-btn span { background: #fffaf5; }
+    @media (max-width: 880px) {
+      .topo:not(.rolado):not(.menu-aberto) .menu a { color: var(--tinta); }
+    }
+    /* No celular: a foto vertical em cima e o texto logo abaixo do rosto */
+    @media (max-width: 760px) {
+      .capa-palco {
+        min-height: 0;
+        display: block;
+        padding: calc(var(--altura-topo) + 52vh) 0 2.5rem;
+      }
+      .capa-fundo { bottom: auto; height: calc(var(--altura-topo) + 78vh); }
+      .capa-fundo img { object-position: 50% 0; }
+      .capa-palco::before {
+        bottom: auto;
+        height: calc(var(--altura-topo) + 78vh + 2px);
+        background:
+          linear-gradient(180deg, rgba(40, 10, 17, .5) 0%, rgba(40, 10, 17, 0) 16%, rgba(58, 14, 24, 0) 52%, rgba(58, 14, 24, .88) 72%, #3a0e18 100%);
+      }
+      .capa-palco .selo { position: static; display: inline-flex; margin: 1.6rem 1.25rem 0; }
+      .capa-papeis li { font-size: .95rem; padding: .5rem .85rem; }
+    }
+
+    /* TikTok Shop: lista clara e carrossel de vídeos */
+    .tiktok .tiktok-itens li { color: var(--tinta-suave); }
+    .tiktok .btn-tiktok { justify-self: start; }
   </style>
 </head>
 
@@ -1642,6 +1732,8 @@
 
     <!-- ============ 1. CAPA ============ -->
     <section class="capa" id="inicio" aria-labelledby="capa-nome">
+      <div class="capa-palco">
+      <picture class="capa-fundo" id="capa-midia"></picture>
       <div class="container capa-grid">
         <div class="capa-texto">
           <p class="sobretitulo reveal" data-cfg="capa.sobretitulo"></p>
@@ -1651,12 +1743,10 @@
             <a href="#contato" class="btn btn-primario"><span data-i18n="falarComigo">Falar comigo</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <a href="#trabalhos" class="btn btn-secundario" data-i18n="verTrabalhos">Ver os trabalhos</a>
           </div>
-          <ul class="capa-numeros reveal" id="capa-numeros" style="--atraso:320ms"></ul>
+          <ul class="capa-papeis reveal" id="capa-papeis" style="--atraso:320ms"></ul>
         </div>
-        <div class="capa-foto reveal" style="--atraso:200ms">
-          <div id="capa-midia"></div>
-          <p class="selo" data-cfg="capa.selo"></p>
-        </div>
+      </div>
+      <p class="selo reveal" data-cfg="capa.selo" style="--atraso:400ms"></p>
       </div>
 
       <div class="faixa-marcas" aria-labelledby="faixa-rotulo">
@@ -1734,14 +1824,14 @@
             <p class="sobretitulo reveal" data-cfg="tiktokShop.sobretitulo"></p>
             <h2 class="titulo reveal" id="tiktok-titulo" data-cfg="tiktokShop.titulo"></h2>
             <p class="lead reveal" data-cfg="tiktokShop.descricao"></p>
+            <ul class="tiktok-itens reveal" id="tiktok-itens"></ul>
+            <a class="btn btn-primario btn-tiktok reveal" id="tiktok-link" target="_blank" rel="noopener noreferrer"></a>
           </div>
-          <div class="tiktok-card reveal">
-            <div class="tiktok-topo">
-              <span class="tiktok-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span>
-              <span class="tiktok-selo">TikTok Shop</span>
-            </div>
-            <ul class="tiktok-itens" id="tiktok-itens"></ul>
-            <a class="btn btn-tiktok" id="tiktok-link" target="_blank" rel="noopener noreferrer"></a>
+          <div class="carrossel reveal" id="tiktok-carrossel" role="region" aria-roledescription="carrossel" aria-labelledby="tiktok-titulo">
+            <div class="carrossel-palco" aria-live="polite"></div>
+            <button type="button" class="carrossel-seta anterior" aria-label="Vídeo anterior" data-i18n-aria="anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+            <button type="button" class="carrossel-seta proxima" aria-label="Próximo vídeo" data-i18n-aria="proximo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+            <div class="carrossel-pontos"></div>
           </div>
         </div>
       </div>
@@ -1897,14 +1987,11 @@
         sobretitulo: "Criadora de conteúdo UGC",
         frase: "Crio vídeos autênticos, com cara de gente de verdade, que fazem a sua marca parar o scroll, gerar confiança e vender mais.",
         selo: "Agenda aberta para novas parcerias",
-        imagem: { foto: "fotos/capa.png", gradiente: G.royal, alt: `${NOME} sorrindo e abaixando os óculos de sol, de blusa branca de gola alta` },
-        // Os três números curtos abaixo dos botões.
-        numeros: [
-          { valor: "+90",  rotulo: "vídeos no portfólio" },
-          { valor: "+80",  rotulo: "marcas atendidas" },
-          { valor: "+10M", rotulo: "views somadas" }
-        ],
-        rotuloMarcas: "Marcas que confiam"
+        // A foto ocupa a capa inteira: "larga" no computador, "vertical" no celular.
+        imagem: { larga: "fotos/capa-larga.jpg", vertical: "fotos/capa-vertical.jpg", alt: `${NOME} sorrindo e abaixando os óculos de sol, de blusa branca de gola alta` },
+        // As três etiquetas abaixo dos botões.
+        papeis: ["Influenciadora", "UGC Creator", "TikTok Shop Creator"],
+        rotuloMarcas: "+80 marcas que confiam"
       },
 
       // EDITE AQUI: marcas.
@@ -1946,6 +2033,7 @@
           { nome: "Padoca Caiupura", logo: "logos/padoca-caiupura.png" },
           { nome: "Tropical Especiarias", logo: "logos/tropical.png" },
           { nome: "Viasete", logo: "logos/viasete.png" },
+          { nome: "Sloul", logo: "logos/sloul.png" },
           { nome: "Bothanica Mineral", logo: "logos/bothanica.png" },
           { nome: "iFinance", logo: "logos/ifinance.png" },
           { nome: "Pelmex+", logo: "logos/pelmex.png" },
@@ -2228,7 +2316,14 @@
           "Conteúdo para a vitrine da sua loja e para campanhas de afiliados"
         ],
         botao: "Ver meu TikTok",
-        link: "https://www.tiktok.com/@tamires.nishimura"
+        link: "https://www.tiktok.com/@tamires.nishimura",
+        // Vídeos do carrossel ao lado do texto (a capa vem da pasta "capas").
+        videos: [
+          { titulo: "Maiô Karla Vivian",   link: "https://youtube.com/shorts/7Dk4HS4EVGM" },
+          { titulo: "Kit Bolsas",          link: "https://youtube.com/shorts/SH_kv9x7WfI" },
+          { titulo: "Sandália plataforma", link: "https://youtube.com/shorts/CxRKfMFGQPk" },
+          { titulo: "Bolsa Paraty",        link: "https://youtube.com/shorts/qIDm729DXtE" }
+        ]
       },
 
       // EDITE AQUI: seus serviços.
@@ -2337,8 +2432,8 @@
         frase: "I create authentic videos that feel like real people talking, the kind that make your brand stop the scroll, build trust and sell more.",
         selo: "Booking new partnerships",
         imagem: { alt: "Tamires Nishimura smiling and lowering her sunglasses, wearing a white turtleneck" },
-        numeros: [{ rotulo: "videos in portfolio" }, { rotulo: "brands served" }, { rotulo: "combined views" }],
-        rotuloMarcas: "Trusted by"
+        papeis: ["Influencer", "UGC Creator", "TikTok Shop Creator"],
+        rotuloMarcas: "Trusted by +80 brands"
       },
       marcas: { tituloLogos: "Brands that have <em>trusted my work</em>" },
       sobre: {
@@ -2410,7 +2505,8 @@
           "A hook in the first seconds, a demo and a call to buy",
           "Content for your shop showcase and affiliate campaigns"
         ],
-        botao: "See my TikTok"
+        botao: "See my TikTok",
+        videos: [{ titulo: "Karla Vivian swimsuit" }, { titulo: "Bag set" }, { titulo: "Platform sandals" }, { titulo: "Paraty bag" }]
       },
       servicos: {
         sobretitulo: "How I can help",
@@ -2528,7 +2624,6 @@
     if (TEMA !== "bordo") delete document.documentElement.dataset.tema;
     if (TEMA === "bordo") {
       document.documentElement.dataset.tema = "bordo";
-      CONFIG.capa.imagem.foto = "fotos/capa-bordo.png";
       document.querySelector('meta[name="theme-color"]').content = "#f5efe9";
     }
 
@@ -2561,8 +2656,8 @@
 
     const $ = (seletor) => document.querySelector(seletor);
     // Muda a cada atualização das logos, para o navegador não mostrar versões antigas guardadas.
-    const VERSAO_LOGOS = "20261027-3";
-    const VERSAO_CAPAS = "20261028-1";
+    const VERSAO_LOGOS = "20261028-1";
+    const VERSAO_CAPAS = "20261028-2";
     const versao = (src) => (src ? `${src}?v=${VERSAO_LOGOS}` : src);
     const reduzirMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -2625,9 +2720,10 @@
     $("#logo").innerHTML = `${esc(NOME)}<span>.</span>`;
 
     /* ---------- Capa ---------- */
-    $("#capa-midia").innerHTML = `<img src="${esc(CONFIG.capa.imagem.foto)}" alt="${esc(CONFIG.capa.imagem.alt)}" width="730" height="1223" fetchpriority="high">`;
-    $("#capa-numeros").innerHTML = CONFIG.capa.numeros
-      .map((n) => `<li><strong>${esc(n.valor)}</strong><span>${esc(n.rotulo)}</span></li>`).join("");
+    const fotoCapa = CONFIG.capa.imagem;
+    $("#capa-midia").innerHTML = `<source media="(max-width: 760px)" srcset="${esc(fotoCapa.vertical)}">
+      <img src="${esc(fotoCapa.larga)}" alt="${esc(fotoCapa.alt)}" width="2400" height="1350" fetchpriority="high">`;
+    $("#capa-papeis").innerHTML = CONFIG.capa.papeis.map((p) => `<li>${esc(p)}</li>`).join("");
     // Ordem das logos: 3 sorteadas, depois as mais conhecidas, depois o resto
     const primeiras = CONFIG.marcas.primeiras || [];
     const conhecidas = primeiras.map((n) => CONFIG.marcas.logos.find((l) => l.nome === n)).filter(Boolean);
@@ -2645,13 +2741,63 @@
     $("#sobre-midia").innerHTML = midia(CONFIG.sobre.imagem);
     $("#sobre-paragrafos").innerHTML = CONFIG.sobre.paragrafos
       .map((p, i) => `<p class="reveal" style="--atraso:${i * 80}ms">${p}</p>`).join("");
-    /* ---------- Destaques em carrossel ---------- */
-    const itensDestaque = CONFIG.destaques.itens;
-    const palco = $("#carrossel-palco");
-    palco.innerHTML = itensDestaque.map((d, i) => {
-      const id = idDoVideo(d.link);
-      return `
-      <article class="slide" data-i="${i}" role="group" aria-roledescription="slide" aria-label="${i + 1} / ${itensDestaque.length}: ${esc(d.titulo)}">
+    /* ---------- Carrossel (destaques e TikTok Shop) ---------- */
+    // Vídeo do centro em evidência; setas, pontos, teclado e arrastar no celular.
+    function montarCarrossel(raiz, itens, slideHtml) {
+      const palco = raiz.querySelector(".carrossel-palco");
+      const pontos = raiz.querySelector(".carrossel-pontos");
+      palco.innerHTML = itens.map((d, i) => `
+      <article class="slide" data-i="${i}" role="group" aria-roledescription="slide" aria-label="${i + 1} / ${itens.length}: ${esc(d.titulo)}">
+        ${slideHtml(d, idDoVideo(d.link))}
+      </article>`).join("");
+      pontos.innerHTML = itens
+        .map((d, i) => `<button type="button" class="ponto" data-ir="${i}" aria-label="${esc(d.titulo)}"></button>`).join("");
+
+      let atual = 0;
+      const slides = [...palco.querySelectorAll(".slide")];
+      function mostrarSlide(n) {
+        const total = slides.length;
+        atual = (n + total) % total;
+        slides.forEach((s, i) => {
+          let d = i - atual;
+          if (d > total / 2) d -= total;
+          if (d < -total / 2) d += total;
+          s.style.setProperty("--d", d);
+          s.classList.toggle("ativo", d === 0);
+          s.classList.toggle("vizinho", Math.abs(d) === 1);
+          s.setAttribute("aria-hidden", d === 0 ? "false" : "true");
+          s.querySelectorAll("a, button").forEach((el) => { el.tabIndex = d === 0 ? 0 : -1; });
+        });
+        pontos.querySelectorAll(".ponto").forEach((p, i) => p.setAttribute("aria-current", String(i === atual)));
+      }
+      raiz.querySelector(".carrossel-seta.anterior").addEventListener("click", () => mostrarSlide(atual - 1));
+      raiz.querySelector(".carrossel-seta.proxima").addEventListener("click", () => mostrarSlide(atual + 1));
+      pontos.addEventListener("click", (e) => { const p = e.target.closest(".ponto"); if (p) mostrarSlide(Number(p.dataset.ir)); });
+      // Clicar num vídeo lateral traz ele para o centro (em vez de abrir)
+      palco.addEventListener("click", (e) => {
+        const s = e.target.closest(".slide");
+        if (s && !s.classList.contains("ativo")) { e.preventDefault(); e.stopPropagation(); mostrarSlide(Number(s.dataset.i)); }
+      }, true);
+      raiz.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") mostrarSlide(atual - 1);
+        if (e.key === "ArrowRight") mostrarSlide(atual + 1);
+      });
+      // Arrastar para o lado no celular
+      let toqueX = null;
+      let arrastou = false;
+      palco.addEventListener("pointerdown", (e) => { toqueX = e.clientX; arrastou = false; });
+      palco.addEventListener("pointerup", (e) => {
+        if (toqueX === null) return;
+        const dx = e.clientX - toqueX;
+        toqueX = null;
+        if (Math.abs(dx) > 40) { arrastou = true; mostrarSlide(atual + (dx < 0 ? 1 : -1)); }
+      });
+      palco.addEventListener("click", (e) => { if (arrastou) { e.preventDefault(); e.stopPropagation(); arrastou = false; } }, true);
+      palco.addEventListener("dragstart", (e) => e.preventDefault());
+      mostrarSlide(0);
+    }
+
+    montarCarrossel($("#carrossel"), CONFIG.destaques.itens, (d, id) => `
         <h3 class="slide-marca">${esc(d.titulo)}</h3>
         <a class="card-capa" href="${esc(d.link)}" target="_blank" rel="noopener noreferrer" data-video="${id}" data-titulo="${esc(d.titulo)}">
           ${capaDoVideo(id, `${T.capaVideo} ${d.titulo}`, d.capa)}
@@ -2661,54 +2807,15 @@
         <dl class="slide-dados">
           <div><dt>${esc(d.rotulo || d.selo)}</dt><dd>${esc(d.numero || "")}</dd></div>
         </dl>
-        <p class="slide-contexto">${esc(d.contexto)}</p>
-      </article>`;
-    }).join("");
-    $("#carrossel-pontos").innerHTML = itensDestaque
-      .map((d, i) => `<button type="button" class="ponto" data-ir="${i}" aria-label="${esc(d.titulo)}"></button>`).join("");
+        <p class="slide-contexto">${esc(d.contexto)}</p>`);
 
-    let atual = 0;
-    const slides = [...palco.querySelectorAll(".slide")];
-    function mostrarSlide(n) {
-      const total = slides.length;
-      atual = (n + total) % total;
-      slides.forEach((s, i) => {
-        let d = i - atual;
-        if (d > total / 2) d -= total;
-        if (d < -total / 2) d += total;
-        s.style.setProperty("--d", d);
-        s.classList.toggle("ativo", d === 0);
-        s.classList.toggle("vizinho", Math.abs(d) === 1);
-        s.setAttribute("aria-hidden", d === 0 ? "false" : "true");
-        s.querySelectorAll("a, button").forEach((el) => { el.tabIndex = d === 0 ? 0 : -1; });
-      });
-      $("#carrossel-pontos").querySelectorAll(".ponto").forEach((p, i) => p.setAttribute("aria-current", String(i === atual)));
-    }
-    $("#carrossel-anterior").addEventListener("click", () => mostrarSlide(atual - 1));
-    $("#carrossel-proxima").addEventListener("click", () => mostrarSlide(atual + 1));
-    $("#carrossel-pontos").addEventListener("click", (e) => { const p = e.target.closest(".ponto"); if (p) mostrarSlide(Number(p.dataset.ir)); });
-    // Clicar num vídeo lateral traz ele para o centro (em vez de abrir)
-    palco.addEventListener("click", (e) => {
-      const s = e.target.closest(".slide");
-      if (s && !s.classList.contains("ativo")) { e.preventDefault(); e.stopPropagation(); mostrarSlide(Number(s.dataset.i)); }
-    }, true);
-    $("#carrossel").addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") mostrarSlide(atual - 1);
-      if (e.key === "ArrowRight") mostrarSlide(atual + 1);
-    });
-    // Arrastar para o lado no celular
-    let toqueX = null;
-    let arrastou = false;
-    palco.addEventListener("pointerdown", (e) => { toqueX = e.clientX; arrastou = false; });
-    palco.addEventListener("pointerup", (e) => {
-      if (toqueX === null) return;
-      const dx = e.clientX - toqueX;
-      toqueX = null;
-      if (Math.abs(dx) > 40) { arrastou = true; mostrarSlide(atual + (dx < 0 ? 1 : -1)); }
-    });
-    palco.addEventListener("click", (e) => { if (arrastou) { e.preventDefault(); e.stopPropagation(); arrastou = false; } }, true);
-    palco.addEventListener("dragstart", (e) => e.preventDefault());
-    mostrarSlide(0);
+    montarCarrossel($("#tiktok-carrossel"), CONFIG.tiktokShop.videos, (d, id) => `
+        <h3 class="slide-marca">${esc(d.titulo)}</h3>
+        <a class="card-capa" href="${esc(d.link)}" target="_blank" rel="noopener noreferrer" data-video="${id}" data-titulo="${esc(d.titulo)}">
+          ${capaDoVideo(id, `${T.capaVideo} ${d.titulo}`)}
+          <span class="card-selo">TikTok Shop</span>
+          <span class="play">${icones.play}</span>
+        </a>`);
 
     /* ---------- Trabalhos com filtro e "Ver mais" ---------- */
     const nichos = CONFIG.trabalhos.nichos;
