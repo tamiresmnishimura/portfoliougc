@@ -15,8 +15,16 @@
   <meta property="og:image" content="https://tamiresmnishimura.github.io/portfoliougc/fotos/sobre.jpg">
   <meta name="theme-color" content="#f3eee9">
 
-  <!-- Ícone da aba do navegador (inicial em itálico nas cores do site) -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230049a4'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-style='italic' font-size='40' fill='%23f3eee9'%3ET%3C/text%3E%3Ccircle cx='49' cy='47' r='4' fill='%23df7900'/%3E%3C/svg%3E">
+  <!-- Ícone da aba do navegador: estrela dourada -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f5efe9'/%3E%3Cpath d='M32 7C34 25 39 30 57 32C39 34 34 39 32 57C30 39 25 34 7 32C25 30 30 25 32 7Z' fill='%23c9a15e'/%3E%3C/svg%3E">
+
+  <!-- Aplica a cor do site antes de desenhar a página (evita piscar a outra cor) -->
+  <script>
+    (function () {
+      var t = new URLSearchParams(location.search).get("tema");
+      if (t !== "azul") document.documentElement.dataset.tema = "bordo";
+    })();
+  </script>
 
   <!-- Fontes do Google: Fraunces (títulos) e Plus Jakarta Sans (textos) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -958,6 +966,19 @@
     @keyframes surgir { from { opacity: 0; transform: translateY(14px); } }
     .mais { display: flex; justify-content: center; margin-top: 3rem; }
     @media (max-width: 1100px) { .galeria { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    /* Título de cada nicho dentro da galeria (quando mostra todos) */
+    .galeria-titulo {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: baseline;
+      gap: .8rem;
+      padding-top: 1.5rem;
+      border-bottom: 1px solid var(--linha);
+      padding-bottom: .6rem;
+    }
+    .galeria-titulo:first-child { padding-top: 0; }
+    .galeria-titulo h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-style: italic; color: var(--azul); }
+    .galeria-titulo span { font-size: .8rem; font-weight: 700; letter-spacing: .12em; color: var(--tinta-suave); }
 
     @media (max-width: 700px) {
       .filtros {
@@ -970,6 +991,82 @@
       .filtros::-webkit-scrollbar { display: none; }
       .galeria { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem .85rem; }
       .trabalho-titulo { font-size: 1rem; }
+    }
+
+    /* =========================================================
+       4b. YOUTUBE E TIKTOK SHOP
+       ========================================================= */
+    .plataformas { background: var(--creme-escuro); }
+    .plataforma {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+      gap: clamp(2rem, 5vw, 4.5rem);
+      align-items: center;
+    }
+    .plataforma + .plataforma {
+      margin-top: clamp(4rem, 8vw, 6rem);
+      padding-top: clamp(4rem, 8vw, 6rem);
+      border-top: 1px solid var(--linha);
+    }
+    .plataforma.tiktok { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); }
+    .plataforma-texto { display: grid; gap: 1.1rem; }
+    .icone-yt { width: 1.1em; height: auto; vertical-align: -.08em; margin-left: .15em; }
+    .plataforma-nota {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--azul);
+    }
+    .youtube-videos { display: grid; gap: 1.25rem; }
+    .video-longo { display: block; text-decoration: none; color: inherit; border-radius: var(--raio); }
+    .video-longo .capa-16x9 {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--raio);
+      overflow: hidden;
+      box-shadow: var(--sombra);
+      background: var(--tinta);
+    }
+    .video-longo .midia { transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
+    .video-longo:hover .midia { transform: scale(1.03); }
+    .video-longo:hover .play { background: var(--azul); color: #fff; }
+    .video-longo .card-selo { background: #ff0033; color: #fff; }
+    .video-longo-legenda { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; padding-top: .9rem; }
+    .video-longo-legenda strong { font-family: "Fraunces", Georgia, serif; font-weight: 400; font-size: 1.25rem; }
+    .video-longo-legenda span { font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--azul); white-space: nowrap; }
+
+    .tiktok-card {
+      background: var(--tinta);
+      color: var(--creme);
+      border-radius: calc(var(--raio) + 4px);
+      padding: clamp(1.75rem, 4vw, 2.6rem);
+      box-shadow: var(--sombra);
+      display: grid;
+      gap: 1.4rem;
+    }
+    .tiktok-topo { display: flex; align-items: center; gap: .8rem; }
+    .tiktok-icone {
+      width: 48px; height: 48px;
+      display: grid; place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #25f4ee 0%, #fe2c55 100%);
+      color: #fff;
+    }
+    .tiktok-icone svg { width: 24px; height: 24px; }
+    .tiktok-selo { font-family: "Fraunces", Georgia, serif; font-size: 1.5rem; font-style: italic; }
+    .tiktok-itens { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; }
+    .tiktok-itens li { display: flex; gap: .7rem; align-items: flex-start; line-height: 1.5; color: rgba(243, 238, 233, .9); }
+    .tiktok-itens svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; color: var(--laranja); }
+    .btn-tiktok { justify-self: start; background: var(--creme); color: var(--tinta); }
+    .btn-tiktok:hover { background: #fff; transform: translateY(-2px); }
+    @media (max-width: 880px) {
+      .plataforma, .plataforma.tiktok { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    /* Player com vídeo horizontal (YouTube longo) */
+    .player-video.horizontal {
+      width: min(calc(100vw - 2.5rem), calc((100vh - 9rem) * 16 / 9), 980px);
+      aspect-ratio: 16 / 9;
     }
 
     /* =========================================================
@@ -1064,6 +1161,18 @@
       display: grid;
       gap: 1.1rem;
       margin-bottom: clamp(4rem, 8vw, 6rem);
+    }
+    .logos-grade {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: clamp(.7rem, 1.5vw, 1.1rem);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    @media (max-width: 600px) {
+      .logos-grade .logo-item { width: calc((100% - 2 * .7rem) / 3); height: auto; aspect-ratio: 1; }
     }
     .logos-linha ul {
       display: flex;
@@ -1575,6 +1684,37 @@
       </div>
     </section>
 
+    <!-- ============ 4b. YOUTUBE E TIKTOK SHOP ============ -->
+    <section class="plataformas" id="plataformas" aria-labelledby="youtube-titulo">
+      <div class="container">
+        <div class="plataforma">
+          <div class="plataforma-texto">
+            <p class="sobretitulo reveal" data-cfg="youtube.sobretitulo"></p>
+            <h2 class="titulo reveal" id="youtube-titulo"><span data-cfg="youtube.titulo"></span> <svg class="icone-yt" viewBox="0 0 48 34" aria-hidden="true"><rect width="48" height="34" rx="9" fill="#ff0033"/><path d="M19 10v14l12-7z" fill="#fff"/></svg></h2>
+            <p class="lead reveal" data-cfg="youtube.descricao"></p>
+            <p class="plataforma-nota reveal" data-cfg="youtube.nota"></p>
+          </div>
+          <div class="youtube-videos reveal" id="youtube-videos"></div>
+        </div>
+
+        <div class="plataforma tiktok">
+          <div class="plataforma-texto">
+            <p class="sobretitulo reveal" data-cfg="tiktokShop.sobretitulo"></p>
+            <h2 class="titulo reveal" id="tiktok-titulo" data-cfg="tiktokShop.titulo"></h2>
+            <p class="lead reveal" data-cfg="tiktokShop.descricao"></p>
+          </div>
+          <div class="tiktok-card reveal">
+            <div class="tiktok-topo">
+              <span class="tiktok-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span>
+              <span class="tiktok-selo">TikTok Shop</span>
+            </div>
+            <ul class="tiktok-itens" id="tiktok-itens"></ul>
+            <a class="btn btn-tiktok" id="tiktok-link" target="_blank" rel="noopener noreferrer"></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ 5. COMO EU TE AJUDO ============ -->
     <section class="servicos" id="servicos" aria-labelledby="servicos-titulo">
       <div class="container">
@@ -1599,9 +1739,8 @@
         <h3 class="subtitulo reveal" id="logos-titulo" data-cfg="marcas.tituloLogos"></h3>
       </div>
 
-      <div class="logos reveal" role="region" aria-labelledby="logos-titulo">
-        <div class="logos-linha"><ul id="logos-1"></ul><ul id="logos-1-copia" aria-hidden="true"></ul></div>
-        <div class="logos-linha reversa"><ul id="logos-2"></ul><ul id="logos-2-copia" aria-hidden="true"></ul></div>
+      <div class="container logos reveal" role="region" aria-labelledby="logos-titulo">
+        <ul class="logos-grade" id="logos-grade"></ul>
       </div>
 
       <div class="container">
@@ -1706,9 +1845,9 @@
         profissao: "Criadora de conteúdo UGC"
       },
 
-      // EDITE AQUI: cor do site. "azul" (atual) ou "bordo".
-      // Para testar sem mudar o site, abra o endereço com ?tema=bordo no final.
-      tema: "azul",
+      // EDITE AQUI: cor do site. "bordo" (atual) ou "azul".
+      // Para testar sem mudar o site, abra o endereço com ?tema=azul ou ?tema=bordo no final.
+      tema: "bordo",
 
       // EDITE AQUI: faixa de campanha no topo do site (ex.: Black Friday).
       // ativa: true mostra, false esconde. data: o dia da campanha (ano-mês-dia).
@@ -2036,6 +2175,32 @@
         ]
       },
 
+      // EDITE AQUI: seção do YouTube (vídeos horizontais, mais longos).
+      // Para incluir outro vídeo, copie a linha e troque link, título e marca.
+      youtube: {
+        sobretitulo: "YouTube",
+        titulo: "Sua marca no <em>YouTube</em>",
+        descricao: "Além dos vídeos curtos, também crio conteúdo para o YouTube: vídeos mais longos, com roteiro e ritmo pensados para prender a atenção e apresentar a sua marca com calma e profundidade.",
+        nota: "Ideal para reviews completos, tutoriais e anúncios no YouTube Ads.",
+        videos: [
+          { link: "https://www.youtube.com/watch?v=t1CntMaf0cc", titulo: "Barriga estufada nunca mais!", marca: "Constlivre" }
+        ]
+      },
+
+      // EDITE AQUI: seção do TikTok Shop.
+      tiktokShop: {
+        sobretitulo: "TikTok Shop",
+        titulo: "Vídeos que levam direto ao <em>carrinho</em>",
+        descricao: "Também sou criadora do TikTok Shop: faço vídeos de produto com link de compra no próprio vídeo, unindo a naturalidade do UGC à praticidade de comprar sem sair do app.",
+        itens: [
+          "Vídeos com o produto em uso e link de compra direto no vídeo",
+          "Gancho nos primeiros segundos, demonstração e chamada para a compra",
+          "Conteúdo para a vitrine da sua loja e para campanhas de afiliados"
+        ],
+        botao: "Ver meu TikTok",
+        link: "https://www.tiktok.com/@tamires.nishimura"
+      },
+
       // EDITE AQUI: seus serviços.
       servicos: {
         sobretitulo: "Como eu te ajudo",
@@ -2102,6 +2267,7 @@
         email: "contatotamiresnishimura@gmail.com",
         whatsapp: "(12) 99644-2988",
         instagram: "@tamiresnishimura",
+        tiktok: "@tamires.nishimura",
         mensagemWhatsApp: "Olá, Tamires! Vi seu portfólio e quero conversar sobre um projeto de conteúdo.",
         formTitulo: "Envie uma mensagem",
         // Como o formulário funciona:
@@ -2115,6 +2281,7 @@
       // EDITE AQUI: suas redes sociais (aparecem no rodapé).
       redes: [
         { nome: "Instagram", link: "https://www.instagram.com/tamiresnishimura/" },
+        { nome: "TikTok",    link: "https://www.tiktok.com/@tamires.nishimura" },
         { nome: "YouTube",   link: "https://www.youtube.com/@tamiresnishimura" },
         { nome: "WhatsApp",  link: "https://wa.me/5512996442988" }
       ],
@@ -2200,6 +2367,24 @@
           { nome: "Black Friday", videos: [{ titulo: "Black Friday" }, { titulo: "Early Black Friday" }, { titulo: "Sale" }, { titulo: "Bazaar" }] },
           { nome: "Other", videos: [{ titulo: "Finance" }, { titulo: "Buy and sell" }, { titulo: "Courses" }, { titulo: "Pets" }, { titulo: "Home search" }, { titulo: "Finance, part 2" }, { titulo: "Car dealership" }] }
         ]
+      },
+      youtube: {
+        sobretitulo: "YouTube",
+        titulo: "Your brand on <em>YouTube</em>",
+        descricao: "Beyond short-form videos, I also create content for YouTube: longer videos with a script and pacing designed to hold attention and present your brand with depth.",
+        nota: "Ideal for full reviews, tutorials and YouTube Ads.",
+        videos: [{ titulo: "Say goodbye to bloating!" }]
+      },
+      tiktokShop: {
+        sobretitulo: "TikTok Shop",
+        titulo: "Videos that lead straight to the <em>cart</em>",
+        descricao: "I'm also a TikTok Shop creator: I make product videos with a buy link right in the video, combining the natural feel of UGC with the ease of buying without leaving the app.",
+        itens: [
+          "Product-in-use videos with a buy link right in the video",
+          "A hook in the first seconds, a demo and a call to buy",
+          "Content for your shop showcase and affiliate campaigns"
+        ],
+        botao: "See my TikTok"
       },
       servicos: {
         sobretitulo: "How I can help",
@@ -2316,14 +2501,11 @@
     /* ---------- Tema de cor (azul ou bordô) ---------- */
     const temaUrl = new URLSearchParams(location.search).get("tema");
     const TEMA = temaUrl === "bordo" || temaUrl === "azul" ? temaUrl : (CONFIG.tema || "azul");
+    if (TEMA !== "bordo") delete document.documentElement.dataset.tema;
     if (TEMA === "bordo") {
       document.documentElement.dataset.tema = "bordo";
       CONFIG.capa.imagem.foto = "fotos/capa-bordo.png";
       document.querySelector('meta[name="theme-color"]').content = "#f5efe9";
-      document.querySelector('link[rel="icon"]').href = "data:image/svg+xml," + encodeURIComponent(
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#6e1f30"/>' +
-        '<text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Georgia,serif" font-style="italic" font-size="40" fill="#f5efe9">T</text>' +
-        '<circle cx="49" cy="47" r="4" fill="#d9b56f"/></svg>');
     }
 
     // Junta a tradução com o conteúdo original (listas na mesma ordem)
@@ -2397,6 +2579,7 @@
       play: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5Z"/></svg>',
       whatsapp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5 5 16a8.5 8.5 0 1 1 3 3l-4.5 1.5Z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-1.8-1.8l.8-1-1-2L9 9.5Z"/></svg>',
       email: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>',
+      tiktok: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.6 2.4 4.4 5 4.6"/></svg>',
       instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor"/></svg>'
     };
 
@@ -2538,13 +2721,28 @@
       </li>`;
     }
 
+    // Mostrando todos, cada nicho ganha um título antes dos seus vídeos.
+    function itensGaleria(lista, de, ate) {
+      return lista.slice(de, ate).map((v, k) => {
+        const i = de + k;
+        const titulo = filtroAtual === "*" && (i === 0 || lista[i - 1].nicho !== v.nicho)
+          ? `<li class="galeria-titulo"><h3>${esc(v.nicho)}</h3><span>${nichos.find((n) => n.nome === v.nicho).videos.length}</span></li>`
+          : "";
+        return titulo + cardTrabalho(v, true);
+      }).join("");
+    }
+
     function desenharGaleria(desde) {
       const lista = videosDoFiltro();
+      // mostrando todos, nunca corta um nicho no meio: vai até o último vídeo dele
+      let fim = Math.min(limite, lista.length);
+      if (filtroAtual === "*") while (fim < lista.length && lista[fim].nicho === lista[fim - 1].nicho) fim++;
+      limite = fim;
       const visiveis = lista.slice(0, limite);
       if (desde > 0) {
-        galeria.insertAdjacentHTML("beforeend", visiveis.slice(desde).map((v) => cardTrabalho(v, true)).join(""));
+        galeria.insertAdjacentHTML("beforeend", itensGaleria(lista, desde, visiveis.length));
       } else {
-        galeria.innerHTML = visiveis.map((v) => cardTrabalho(v, true)).join("");
+        galeria.innerHTML = itensGaleria(lista, 0, visiveis.length);
       }
       const restam = lista.length - visiveis.length;
       verMais.hidden = restam <= 0;
@@ -2582,15 +2780,34 @@
       const antes = limite;
       limite += porPagina;
       desenharGaleria(antes);
-      const primeiroNovo = galeria.children[antes] && galeria.children[antes].querySelector("a");
+      const primeiroNovo = galeria.querySelectorAll(".trabalho")[antes];
       if (primeiroNovo) primeiroNovo.focus({ preventScroll: true });
     });
 
     desenharGaleria(0);
 
+    /* ---------- YouTube e TikTok Shop ---------- */
+    $("#youtube-videos").innerHTML = CONFIG.youtube.videos.map((v) => {
+      const id = idDoVideo(v.link);
+      return `
+      <a class="video-longo" href="${esc(v.link)}" target="_blank" rel="noopener noreferrer" data-video="${id}" data-formato="horizontal" data-titulo="${esc(v.titulo)}">
+        <div class="capa-16x9">
+          <img class="midia" src="capas/${id}.jpg" alt="${esc(`${T.capaVideo} ${v.marca}: ${v.titulo}`)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${id}/hqdefault.jpg'">
+          <span class="card-selo">YouTube</span>
+          <span class="play">${icones.play}</span>
+        </div>
+        <div class="video-longo-legenda"><strong>${esc(v.titulo)}</strong><span>${esc(v.marca)}</span></div>
+      </a>`;
+    }).join("");
+    $("#tiktok-itens").innerHTML = CONFIG.tiktokShop.itens.map((t) => `<li>${icones.check}<span>${esc(t)}</span></li>`).join("");
+    const linkTiktok = $("#tiktok-link");
+    linkTiktok.href = CONFIG.tiktokShop.link;
+    linkTiktok.innerHTML = `${esc(CONFIG.tiktokShop.botao)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="visualmente-oculto"> ${T.novaAba}</span>`;
+
     /* ---------- Player de vídeo ---------- */
     const player = $("#player");
-    function abrirVideo(id, titulo) {
+    function abrirVideo(id, titulo, formato) {
+      $("#player-video").classList.toggle("horizontal", formato === "horizontal");
       $("#player-video").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1&cc_load_policy=0&iv_load_policy=3&hl=${T.locale}" title="${esc(titulo)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
       player.showModal();
     }
@@ -2599,7 +2816,7 @@
       if (!link || !link.dataset.video || typeof player.showModal !== "function") return;
       if (evento.ctrlKey || evento.metaKey || evento.shiftKey || evento.button === 1) return;
       evento.preventDefault();
-      abrirVideo(link.dataset.video, link.dataset.titulo);
+      abrirVideo(link.dataset.video, link.dataset.titulo, link.dataset.formato);
     });
     $("#player-fechar").addEventListener("click", () => player.close());
     player.addEventListener("click", (evento) => { if (evento.target === player) player.close(); });
@@ -2626,23 +2843,13 @@
         <span class="contador-rotulo">${esc(c.rotulo)}</span>
       </li>`).join("");
 
-    /* ---------- Parede de logos (logos e selos com nome, misturados) ---------- */
+    /* ---------- Parede de logos: todas paradas e à vista, as mais conhecidas primeiro ---------- */
     const selos = CONFIG.marcas.semLogo.map((nome) => ({ nome, cor: "" }));
-    const logos = logosOrdenados.slice();
-    const mistura = [];
-    const passo = Math.max(1, Math.round(logos.length / Math.max(1, selos.length)));
-    logos.forEach((l, i) => { mistura.push(l); if ((i + 1) % passo === 0 && selos.length) mistura.push(selos.shift()); });
-    mistura.push(...selos);
     function itemLogo(m) {
       if (m.logo) return `<li class="logo-item"><img src="${esc(versao(m.logo))}" alt="${m.nome === "Marca parceira" ? T.logoParceira : T.logo + " " + esc(m.nome)}" loading="lazy" decoding="async" width="100" height="100"></li>`;
       return `<li class="logo-item logo-texto ${m.cor}">${esc(m.nome)}</li>`;
     }
-    const metade = Math.ceil(mistura.length / 2);
-    [mistura.slice(0, metade), mistura.slice(metade)].forEach((grupo, n) => {
-      const html = grupo.map(itemLogo).join("");
-      $(`#logos-${n + 1}`).innerHTML = html;
-      $(`#logos-${n + 1}-copia`).innerHTML = html.replace(/alt="[^"]*"/g, 'alt=""');
-    });
+    $("#logos-grade").innerHTML = conhecidas.concat(demais, selos).map(itemLogo).join("");
 
     /* ---------- Resultados e depoimentos ---------- */
     $("#resultados").innerHTML = CONFIG.numeros.resultados.map((r, i) => `
@@ -2703,7 +2910,8 @@
     $("#contato-links").innerHTML = [
       { icone: icones.whatsapp, rotulo: "WhatsApp", valor: ct.whatsapp, link: linkWhats, externo: true },
       { icone: icones.email, rotulo: "E-mail", valor: ct.email, link: `mailto:${ct.email}`, externo: false },
-      { icone: icones.instagram, rotulo: "Instagram", valor: ct.instagram, link: linkInsta, externo: true }
+      { icone: icones.instagram, rotulo: "Instagram", valor: ct.instagram, link: linkInsta, externo: true },
+      { icone: icones.tiktok, rotulo: "TikTok", valor: ct.tiktok, link: `https://www.tiktok.com/${ct.tiktok}`, externo: true }
     ].map((c, i) => `
       <li class="reveal" style="--atraso:${i * 90}ms">
         <a class="contato-link" href="${esc(c.link)}" ${c.externo ? 'target="_blank" rel="noopener noreferrer"' : ""}>
