@@ -1613,7 +1613,7 @@
     }
     .capa-palco > .container { flex: none; }
     .capa-fundo { position: absolute; inset: 0; z-index: -2; }
-    .capa-fundo img { width: 100%; height: 100%; object-fit: cover; object-position: 78% 30%; }
+    .capa-fundo img { width: 100%; height: 100%; object-fit: cover; object-position: 100% 30%; }
     /* Bordô só do lado do texto; a foto continua viva à direita */
     .capa-palco::before {
       content: "";
@@ -1622,7 +1622,7 @@
       z-index: -1;
       background:
         linear-gradient(180deg, rgba(40, 10, 17, .55) 0%, rgba(40, 10, 17, 0) 24%),
-        linear-gradient(90deg, rgba(58, 14, 24, .94) 0%, rgba(70, 18, 30, .86) 30%, rgba(90, 24, 38, .5) 48%, rgba(90, 24, 38, 0) 62%);
+        linear-gradient(90deg, rgba(58, 14, 24, .94) 0%, rgba(70, 18, 30, .86) 28%, rgba(90, 24, 38, .45) 43%, rgba(90, 24, 38, 0) 54%);
     }
     .capa-palco .capa-grid { grid-template-columns: minmax(0, 1fr); }
     .capa-palco .capa-texto { max-width: 640px; }
@@ -1688,6 +1688,60 @@
     /* TikTok Shop: lista clara e carrossel de vídeos */
     .tiktok .tiktok-itens li { color: var(--tinta-suave); }
     .tiktok .btn-tiktok { justify-self: start; }
+    /* Rótulo das logos e título "+80 marcas atendidas" em destaque, bordô */
+    .faixa-rotulo {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+      font-weight: 400;
+      letter-spacing: -.01em;
+      text-transform: none;
+      color: var(--azul);
+    }
+    .titulo-marcas { text-align: center; color: var(--azul); margin-bottom: 2rem; }
+    .titulo-marcas em { font-style: italic; }
+
+    /* Balões de feedback em cima do vídeo, como mensagens de WhatsApp */
+    .baloes {
+      position: absolute;
+      left: .55rem;
+      bottom: .6rem;
+      right: 3.4rem;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .3rem;
+      pointer-events: none;
+    }
+    .balao {
+      margin: 0;
+      max-width: 100%;
+      padding: .42rem .62rem;
+      border-radius: 11px 11px 11px 3px;
+      background: rgba(255, 253, 250, .96);
+      color: #1d1315;
+      font-size: .72rem;
+      font-weight: 500;
+      line-height: 1.3;
+      text-align: left;
+      box-shadow: 0 4px 14px -6px rgba(20, 17, 13, .45);
+    }
+    .balao:first-child::before {
+      content: "Feedback";
+      display: block;
+      margin-bottom: .12rem;
+      font-size: .58rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--azul);
+    }
+    .slide .baloes { bottom: .9rem; right: .9rem; }
+    .slide .balao { font-size: .78rem; }
+    @media (max-width: 700px) {
+      .balao { font-size: .66rem; padding: .35rem .5rem; }
+      .baloes { right: 2.9rem; }
+    }
   </style>
 </head>
 
@@ -1712,7 +1766,7 @@
         <li><a href="#destaques" data-i18n="menuDestaques">Destaques</a></li>
         <li><a href="#trabalhos" data-i18n="menuTrabalhos">Trabalhos</a></li>
         <li><a href="#servicos" data-i18n="menuServicos">Serviços</a></li>
-        <li><a href="#numeros" data-i18n="menuNumeros">Números</a></li>
+        <li><a href="#numeros" data-i18n="menuNumeros">Marcas</a></li>
         <li><a href="#contato" class="menu-cta" data-i18n="menuContato">Contato</a></li>
       </ul>
       <div class="nav-acoes">
@@ -1824,7 +1878,6 @@
             <p class="sobretitulo reveal" data-cfg="tiktokShop.sobretitulo"></p>
             <h2 class="titulo reveal" id="tiktok-titulo" data-cfg="tiktokShop.titulo"></h2>
             <p class="lead reveal" data-cfg="tiktokShop.descricao"></p>
-            <ul class="tiktok-itens reveal" id="tiktok-itens"></ul>
             <a class="btn btn-primario btn-tiktok reveal" id="tiktok-link" target="_blank" rel="noopener noreferrer"></a>
           </div>
           <div class="carrossel reveal" id="tiktok-carrossel" role="region" aria-roledescription="carrossel" aria-labelledby="tiktok-titulo">
@@ -1849,15 +1902,10 @@
     </section>
 
     <!-- ============ 6. NÚMEROS E DEPOIMENTOS ============ -->
-    <section class="numeros" id="numeros" aria-labelledby="numeros-titulo">
+    <section class="numeros" id="numeros" aria-labelledby="logos-titulo">
       <div class="container">
-        <div class="secao-topo">
-          <p class="sobretitulo reveal" data-cfg="numeros.sobretitulo"></p>
-          <h2 class="titulo reveal" id="numeros-titulo" data-cfg="numeros.titulo"></h2>
-          <p class="lead reveal" data-cfg="numeros.descricao"></p>
-        </div>
-        <ul class="contadores" id="contadores"></ul>
-        <h3 class="subtitulo reveal" id="logos-titulo" data-cfg="marcas.tituloLogos"></h3>
+        <ul class="contadores" id="contadores" hidden></ul>
+        <h2 class="titulo titulo-marcas reveal" id="logos-titulo" data-cfg="marcas.tituloLogos"></h2>
       </div>
 
       <div class="container logos reveal" role="region" aria-labelledby="logos-titulo">
@@ -1984,11 +2032,11 @@
 
       // EDITE AQUI: textos da capa (primeira tela do site).
       capa: {
-        sobretitulo: "Criadora de conteúdo UGC",
+        sobretitulo: "Criadora de conteúdo",
         frase: "Crio vídeos autênticos, com cara de gente de verdade, que fazem a sua marca parar o scroll, gerar confiança e vender mais.",
         selo: "Agenda aberta para novas parcerias",
         // A foto ocupa a capa inteira: "larga" no computador, "vertical" no celular.
-        imagem: { larga: "fotos/capa-larga.jpg", vertical: "fotos/capa-vertical.jpg", alt: `${NOME} sorrindo e abaixando os óculos de sol, de blusa branca de gola alta` },
+        imagem: { larga: "fotos/capa-larga-2.jpg", vertical: "fotos/capa-vertical.jpg", alt: `${NOME} sorrindo e abaixando os óculos de sol, de blusa branca de gola alta` },
         // As três etiquetas abaixo dos botões.
         papeis: ["Influenciadora", "UGC Creator", "TikTok Shop Creator"],
         rotuloMarcas: "+80 marcas que confiam"
@@ -1997,7 +2045,7 @@
       // EDITE AQUI: marcas.
       marcas: {
         // A faixa fina da capa mostra as logos da lista abaixo.
-        tituloLogos: "Marcas que já confiaram no <em>meu trabalho</em>",
+        tituloLogos: "<em>+80</em> marcas atendidas",
         // Logos (ficam na pasta "logos"). Para incluir uma nova, salve a
         // imagem quadrada na pasta e adicione uma linha { nome, logo }.
         logos: [
@@ -2164,6 +2212,24 @@
       // EDITE AQUI: vídeos por nicho. Cada nicho vira um botão de filtro.
       // Para incluir um vídeo, copie uma linha e troque marca, título e link.
       trabalhos: {
+        // Balões de feedback em cima do vídeo (código do vídeo no YouTube: mensagens).
+        baloes: {
+          "RT8yY885xuE": ["Atendeu todas as minhas necessidades e o vídeo ficou perfeito!"],
+          "JU_N27VI-xw": ["Capricho espetacular, cenário lindo, zero defeitos. Ficamos encantadas! 💖"],
+          "38SG8qvT37s": ["Conteúdo maravilhoso e impecável!"],
+          "Y98Zz5V-GP4": ["Tamires, isso está perfeitoooo! Arrasou muito, impecável", "Ficaram perfeitos"],
+          "wZUczVHydiU": ["A Tamires foi maravilhosa!!"],
+          "AA9ZTdH-ccs": ["Caraca, Tamires", "Tô emocionadaaaa", "Elevou nossos vídeos a outro nível"],
+          "Svi-VP0Fsps": ["Conteúdo super legal e, além de tudo, super atenciosa."],
+          "1BFxYgk0Zww": ["Conteúdo dinâmico e com ótima qualidade, nota 10!"],
+          "KWjGJhEC7pw": ["Tamires foi ótima, amamos o conteúdo! Nota 10"],
+          "EiOsKUBIfUg": ["Tamires, acabei de ver, ficou beeeeeem legal, sério mesmo", "Parabéns"],
+          "OrXiRGWX5Nw": ["Super dedicada e entregou o trabalho super rápido!"],
+          "hfaKMRJzIXU": ["Cumpriu todos os prazos e entregou com qualidade. Recomendo muito!"],
+          "lzwVtZcSWjg": ["Muito obrigado pela parceria e pelo ótimo conteúdo! 💚"],
+          "vDy_HsxSQ2Y": ["Entregou no prazo e trouxe naturalidade ao conteúdo."],
+          "NKkCdkueXRw": ["Tamires sempre entrega um ótimo conteúdo!"]
+        },
         sobretitulo: "Trabalhos por nicho",
         titulo: "Um olhar para cada <em>nicho</em>",
         // {total} e {nichos} são preenchidos automaticamente.
@@ -2172,13 +2238,15 @@
         nichos: [
           { nome: "Moda", videos: [
             { marca: "Carol Areco", titulo: "Óculos aesthetic", link: "https://youtube.com/shorts/U01Dk17gAHk" },
-            { marca: "Liz", titulo: "Explicativo Microfibra", link: "https://youtube.com/shorts/5sh6Czculo8" },
             { marca: "Sabrina Fernandes", titulo: "Gêmeas Inspiração", link: "https://youtube.com/shorts/vvXbP8f903s" },
             { marca: "Liz", titulo: "Demonstrativo bermuda e calça", link: "https://youtube.com/shorts/g6Roj4frQIU" },
+            { marca: "Viasete", titulo: "Primavera Aesthetic", link: "https://youtube.com/shorts/00457RqIeEM" },
             { marca: "Sabrina Fernandes", titulo: "Um vestido para cada dia da semana", link: "https://youtube.com/shorts/EQ4VD7r9kNw" },
+            { marca: "Liz", titulo: "Explicativo Microfibra", link: "https://youtube.com/shorts/5sh6Czculo8" },
             { marca: "Viasete", titulo: "GRWM aesthetic", link: "https://youtube.com/shorts/BZH4J_bgKfA" },
             { marca: "Sabrina Fernandes", titulo: "O que comprei x o que recebi", link: "https://youtube.com/shorts/lCzgezoJ6fM" },
             { marca: "Liz", titulo: "Emocional fim de ano", link: "https://youtube.com/shorts/pDF1DGc7U9k" },
+            { marca: "Viasete", titulo: "Vestido Aesthetic", link: "https://youtube.com/shorts/Vxx8-USdAvk" },
             { marca: "Moldavita", titulo: "Gêmeas Inspiração", link: "https://youtube.com/shorts/JU_N27VI-xw" },
             { marca: "Liz", titulo: "Explicativo Microfibra", link: "https://youtube.com/shorts/tGV0sPCNVrg" }
           ]},
@@ -2309,7 +2377,7 @@
       tiktokShop: {
         sobretitulo: "TikTok Shop",
         titulo: "Vídeos que levam direto ao <em>carrinho</em>",
-        descricao: "Também sou criadora do TikTok Shop: faço vídeos de produto com link de compra no próprio vídeo, unindo a naturalidade do UGC à praticidade de comprar sem sair do app.",
+        descricao: "Também sou criadora do TikTok Shop no nicho de moda: faço vídeos de produto com link de compra no próprio vídeo, unindo a naturalidade do UGC à praticidade de comprar sem sair do app.",
         itens: [
           "Vídeos com o produto em uso e link de compra direto no vídeo",
           "Gancho nos primeiros segundos, demonstração e chamada para a compra",
@@ -2333,7 +2401,7 @@
         descricao: "Do roteiro ao arquivo final, cuido de cada etapa para você receber conteúdo pronto para usar e escalar.",
         itens: [
           { titulo: "Vídeo UGC",            descricao: "Vídeos verticais com roteiro, gancho forte e linguagem natural, entregues para a marca publicar no próprio perfil ou usar em anúncios.", detalhe: "Para o perfil da marca" },
-          { titulo: "Publicação no meu perfil", descricao: "Conteúdo publicado no meu perfil, alcançando uma audiência que confia nas minhas indicações.", detalhe: "Instagram e TikTok" },
+          { titulo: "Publicação no meu perfil", descricao: "Conteúdo publicado no meu perfil, alcançando uma audiência que confia nas minhas indicações.", detalhe: "Instagram" },
           { titulo: "Corte para anúncio",   descricao: "Variações do mesmo vídeo com ganchos e chamadas diferentes, para você testar e escalar o que mais vende.", detalhe: "Ideal para tráfego pago" },
           { titulo: "Pacote mensal",        descricao: "Uma rotina de conteúdo para sua marca nunca ficar sem criativo novo, com prioridade na agenda.", detalhe: "Perfeito para quem anuncia todo mês" }
         ]
@@ -2365,7 +2433,9 @@
           { texto: "Tamires sempre entrega um ótimo conteúdo! Adoramos trabalhar com ela e dessa vez não foi diferente. Parabéns pelos conteúdos, Ta!", nome: "Chá Branco", empresa: "Coala", logo: "logos/coala.png" },
           { texto: "Amei trabalhar com você! O conteúdo ficou muito natural, do jeitinho que a gente acredita em UGC. Sua agilidade foi surreal (nota 100) e você foi extremamente prestativa o tempo todo. Com certeza quero repetir essa parceria.", nome: "Campanha UGC", empresa: "Espaço Laser", logo: "logos/espaco-laser.png" },
           { texto: "Trabalhar com a Tamires foi ótimo. Ela entregou no prazo, seguiu o briefing com atenção e trouxe naturalidade ao conteúdo. Uma parceria eficiente e muito bem conduzida.", nome: "Rap10 Oficial | UGC Creator", empresa: "Rap10", logo: "logos/rap10.png" },
+          { texto: "Caraca, Tamires! Tô emocionadaaaa. Elevou nossos vídeos a outro nível, hahahaha", nome: "Mensagem no WhatsApp", empresa: "Empório Macadâmia", logo: "logos/emporio-macadamia.png" },
           { texto: "Sem palavras pro conteúdo que a Tamires entregou, pontualíssima, de um capricho espetacular, cenário lindo, zero defeitos. Ficamos encantadas! 💖", nome: "Macaquinho Jolly", empresa: "Moldavita Boutique", logo: "logos/moldavita.png" },
+          { texto: "Tamires, acabei de ver, ficou beeeeeem legal, sério mesmo. Parabéns!", nome: "Antes e depois: resina para madeira", empresa: "Pra Casa", logo: "logos/pra-casa.png" },
           { texto: "Mais uma vez, fica aqui o nosso agradecimento, muito obrigado pela parceria e pelo ótimo conteúdo! 💚", nome: "Campanha Delivery", empresa: "Poli-Pet", logo: "logos/polipet.png" },
           { texto: "Roteiro e gravação que acertaram em cheio no que estávamos precisando. Um vídeo bem estruturado, pensado nos detalhes. Nós amamos!", nome: "Campanha de awareness", empresa: "Pelmex+", logo: "logos/pelmex.png" },
           { texto: "Criadora incrível, muito criativa e com senso de estética impecável, fotos e vídeos acima das expectativas!", nome: "Campanha de lançamento UGC", empresa: "Bem Me Fiz", logo: "logos/bem-me-fiz.png" },
@@ -2428,14 +2498,14 @@
         mensagemWhatsApp: "Hi Tamires! I'd like to book a slot for Black Friday content."
       },
       capa: {
-        sobretitulo: "UGC Content Creator",
+        sobretitulo: "Content Creator",
         frase: "I create authentic videos that feel like real people talking, the kind that make your brand stop the scroll, build trust and sell more.",
         selo: "Booking new partnerships",
         imagem: { alt: "Tamires Nishimura smiling and lowering her sunglasses, wearing a white turtleneck" },
         papeis: ["Influencer", "UGC Creator", "TikTok Shop Creator"],
         rotuloMarcas: "Trusted by +80 brands"
       },
-      marcas: { tituloLogos: "Brands that have <em>trusted my work</em>" },
+      marcas: { tituloLogos: "<em>+80</em> brands served" },
       sobre: {
         sobretitulo: "About me",
         titulo: "Nice to meet you, I'm <em>Tamires</em>",
@@ -2470,11 +2540,28 @@
         ]
       },
       trabalhos: {
+        baloes: {
+          "RT8yY885xuE": ["She met all my needs and the video turned out perfect!"],
+          "JU_N27VI-xw": ["Spectacular care, a beautiful set, zero flaws. We were delighted! 💖"],
+          "38SG8qvT37s": ["Wonderful, flawless content!"],
+          "Y98Zz5V-GP4": ["Tamires, this is perfeeeect! You nailed it, flawless", "They turned out perfect"],
+          "wZUczVHydiU": ["Tamires was wonderful!!"],
+          "AA9ZTdH-ccs": ["Wow, Tamires", "I'm so emotional", "You took our videos to another level"],
+          "Svi-VP0Fsps": ["Really cool content, and on top of that, super attentive."],
+          "1BFxYgk0Zww": ["Dynamic, high-quality content, a perfect 10!"],
+          "KWjGJhEC7pw": ["Tamires was great, we loved the content! A perfect 10"],
+          "EiOsKUBIfUg": ["Tamires, I just watched it, it turned out sooo good, seriously", "Congrats"],
+          "OrXiRGWX5Nw": ["Super dedicated and delivered the work super fast!"],
+          "hfaKMRJzIXU": ["She met every deadline and delivered quality work. Highly recommend!"],
+          "lzwVtZcSWjg": ["Thank you so much for the partnership and the great content! 💚"],
+          "vDy_HsxSQ2Y": ["Delivered on time and brought a natural feel to the content."],
+          "NKkCdkueXRw": ["Tamires always delivers great content!"]
+        },
         sobretitulo: "Work by niche",
         titulo: "A fresh angle for every <em>niche</em>",
         descricao: "Browse them all below or tap a niche to filter.",
         nichos: [
-          { nome: "Fashion", videos: [{ titulo: "Aesthetic sunglasses" }, { titulo: "Microfiber explainer" }, { titulo: "Twin inspiration" }, { titulo: "Shorts and pants demo" }, { titulo: "A dress for every day of the week" }, { titulo: "Aesthetic GRWM" }, { titulo: "What I ordered vs. what I got" }, { titulo: "Emotional year-end" }, { titulo: "Twin inspiration" }, { titulo: "Microfiber explainer" }] },
+          { nome: "Fashion", videos: [{ titulo: "Aesthetic sunglasses" }, { titulo: "Twin inspiration" }, { titulo: "Shorts and pants demo" }, { titulo: "Aesthetic spring" }, { titulo: "A dress for every day of the week" }, { titulo: "Microfiber explainer" }, { titulo: "Aesthetic GRWM" }, { titulo: "What I ordered vs. what I got" }, { titulo: "Emotional year-end" }, { titulo: "Aesthetic dress" }, { titulo: "Twin inspiration" }, { titulo: "Microfiber explainer" }] },
           { nome: "Try-ons", videos: [{ titulo: "Try-on opening" }, { titulo: "Lança Perfume jumpsuit" }, { titulo: "Party dress" }, { titulo: "Tamires sunglasses" }, { titulo: "Colcci corset and polka dot skirt" }, { titulo: "Heloíse skirt for ads" }, { titulo: "Farm dress" }, { titulo: "Lez a Lez jumpsuit" }, { titulo: "Party dress" }, { titulo: "Colcci look" }] },
           { nome: "Beauty", videos: [{ titulo: "Duos" }, { titulo: "Product launch" }, { titulo: "Lavieen laser experience" }, { titulo: "5 reasons" }, { titulo: "Review" }, { titulo: "Brand presentation" }, { titulo: "Lipo Redux experience" }] },
           { nome: "Health", videos: [{ titulo: "Weight loss" }, { titulo: "Loyalty program" }, { titulo: "Review" }, { marca: "Gift", titulo: "Chocolate gift" }, { titulo: "Lipedema" }, { titulo: "Protein drink" }, { titulo: "Review" }] },
@@ -2499,7 +2586,7 @@
       tiktokShop: {
         sobretitulo: "TikTok Shop",
         titulo: "Videos that lead straight to the <em>cart</em>",
-        descricao: "I'm also a TikTok Shop creator: I make product videos with a buy link right in the video, combining the natural feel of UGC with the ease of buying without leaving the app.",
+        descricao: "I'm also a TikTok Shop creator in the fashion niche: I make product videos with a buy link right in the video, combining the natural feel of UGC with the ease of buying without leaving the app.",
         itens: [
           "Product-in-use videos with a buy link right in the video",
           "A hook in the first seconds, a demo and a call to buy",
@@ -2514,7 +2601,7 @@
         descricao: "From script to final file, I handle every step so you get content that's ready to use and scale.",
         itens: [
           { titulo: "UGC video", descricao: "Vertical videos with a script, a strong hook and natural language, delivered for the brand to post on its own profile or use in ads.", detalhe: "For the brand's profile" },
-          { titulo: "Posting on my profile", descricao: "Content posted on my profile, reaching an audience that trusts my recommendations.", detalhe: "Instagram and TikTok" },
+          { titulo: "Posting on my profile", descricao: "Content posted on my profile, reaching an audience that trusts my recommendations.", detalhe: "Instagram" },
           { titulo: "Ad cuts", descricao: "Variations of the same video with different hooks and calls to action, so you can test and scale what sells best.", detalhe: "Ideal for paid traffic" },
           { titulo: "Monthly package", descricao: "A content routine so your brand never runs out of fresh creatives, with priority booking.", detalhe: "For brands that advertise every month" }
         ]
@@ -2535,7 +2622,9 @@
           { texto: "Tamires always delivers great content! We love working with her, and this time was no different. Congrats on the content, Ta!", nome: "White Tea" },
           { texto: "I loved working with you! The content felt so natural, exactly the way we believe UGC should be. Your speed was unreal (a perfect score) and you were extremely helpful the whole time. I definitely want to repeat this partnership.", nome: "UGC campaign" },
           { texto: "Working with Tamires was great. She delivered on time, followed the brief carefully and brought a natural feel to the content. An efficient, very well-run partnership." },
+          { texto: "Wow, Tamires! I'm so emotional. You took our videos to another level, hahaha", nome: "WhatsApp message" },
           { texto: "No words for the content Tamires delivered: super punctual, beautifully polished, a lovely setting, zero flaws. We were enchanted! 💖", nome: "Jolly romper" },
+          { texto: "Tamires, I just watched it, it turned out sooo good, seriously. Congrats!", nome: "Before and after: wood resin" },
           { texto: "Once again, our thanks: thank you so much for the partnership and the great content! 💚", nome: "Delivery campaign" },
           { texto: "A script and shoot that hit exactly what we needed. A well-structured video, thought out down to the details. We loved it!", nome: "Awareness campaign" },
           { texto: "An amazing, very creative creator with an impeccable sense of aesthetics; photos and videos beyond expectations!", nome: "UGC launch campaign" },
@@ -2574,7 +2663,7 @@
     const TEXTOS = {
       pt: {
         locale: "pt-BR", pular: "Pular para o conteúdo", navPrincipal: "Navegação principal", idioma: "Idioma",
-        menuSobre: "Sobre", menuDestaques: "Destaques", menuTrabalhos: "Trabalhos", menuServicos: "Serviços", menuNumeros: "Números", menuContato: "Contato",
+        feedbackMarca: "Feedback da marca", menuSobre: "Sobre", menuDestaques: "Destaques", menuTrabalhos: "Trabalhos", menuServicos: "Serviços", menuNumeros: "Marcas", menuContato: "Contato",
         abrirMenu: "Abrir menu", fecharMenu: "Fechar menu",
         falarComigo: "Falar comigo", verTrabalhos: "Ver os trabalhos", filtrar: "Filtrar trabalhos por nicho",
         anterior: "Vídeo anterior", proximo: "Próximo vídeo", player: "Vídeo", fecharVideo: "Fechar vídeo",
@@ -2591,7 +2680,7 @@
       },
       en: {
         locale: "en-US", pular: "Skip to content", navPrincipal: "Main navigation", idioma: "Language",
-        menuSobre: "About", menuDestaques: "Highlights", menuTrabalhos: "Work", menuServicos: "Services", menuNumeros: "Numbers", menuContato: "Contact",
+        feedbackMarca: "Brand feedback", menuSobre: "About", menuDestaques: "Highlights", menuTrabalhos: "Work", menuServicos: "Services", menuNumeros: "Brands", menuContato: "Contact",
         abrirMenu: "Open menu", fecharMenu: "Close menu",
         falarComigo: "Let's talk", verTrabalhos: "See my work", filtrar: "Filter work by niche",
         anterior: "Previous video", proximo: "Next video", player: "Video", fecharVideo: "Close video",
@@ -2657,7 +2746,7 @@
     const $ = (seletor) => document.querySelector(seletor);
     // Muda a cada atualização das logos, para o navegador não mostrar versões antigas guardadas.
     const VERSAO_LOGOS = "20261028-1";
-    const VERSAO_CAPAS = "20261028-2";
+    const VERSAO_CAPAS = "20261028-3";
     const versao = (src) => (src ? `${src}?v=${VERSAO_LOGOS}` : src);
     const reduzirMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -2687,6 +2776,12 @@
     function capaDoVideo(id, alt, capaPropria) {
       const src = capaPropria || `capas/${id}.jpg?v=${VERSAO_CAPAS}`;
       return `<img class="midia" src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async" data-id="${id}" onerror="trocarCapa(this)">`;
+    }
+    // Balões de feedback da marca, como mensagens, em cima da capa do vídeo
+    function baloesDoVideo(id) {
+      const msgs = (CONFIG.trabalhos.baloes || {})[id];
+      if (!msgs) return "";
+      return `<div class="baloes" aria-label="${esc(T.feedbackMarca)}">${msgs.map((m) => `<p class="balao">${esc(m)}</p>`).join("")}</div>`;
     }
     window.trocarCapa = function (img) {
       const etapa = Number(img.dataset.etapa || 0);
@@ -2801,6 +2896,7 @@
         <h3 class="slide-marca">${esc(d.titulo)}</h3>
         <a class="card-capa" href="${esc(d.link)}" target="_blank" rel="noopener noreferrer" data-video="${id}" data-titulo="${esc(d.titulo)}">
           ${capaDoVideo(id, `${T.capaVideo} ${d.titulo}`, d.capa)}
+          ${baloesDoVideo(id)}
           <span class="card-selo${d.ouro ? " ouro" : ""}">${esc(d.selo)}</span>
           <span class="play">${icones.play}</span>
         </a>
@@ -2840,6 +2936,7 @@
         <a class="trabalho${animar ? " surgir" : ""}" href="${esc(v.link)}" target="_blank" rel="noopener noreferrer" data-video="${v.id}" data-titulo="${esc(v.marca + ": " + v.titulo)}">
           <div class="moldura">
             ${capaDoVideo(v.id, `${T.capaVideo} ${v.marca}: ${v.titulo}`)}
+            ${baloesDoVideo(v.id)}
             <span class="mini-play">${icones.play}</span>
           </div>
           <div class="trabalho-legenda">
@@ -2935,7 +3032,9 @@
       const b = e.target.closest(".nicho-seta");
       if (!b) return;
       const trilho = b.closest(".nicho-linha").querySelector(".nicho-trilho");
-      trilho.scrollBy({ left: Number(b.dataset.lado) * trilho.clientWidth * 0.8, behavior: reduzirMovimento ? "auto" : "smooth" });
+      // Uma página inteira por clique: soma o espaço entre os vídeos para cair certinho no próximo
+      const vao = parseFloat(getComputedStyle(trilho).columnGap) || 0;
+      trilho.scrollBy({ left: Number(b.dataset.lado) * (trilho.clientWidth + vao), behavior: reduzirMovimento ? "auto" : "smooth" });
     });
     window.addEventListener("resize", () => galeria.querySelectorAll(".nicho-trilho").forEach(atualizarSetas));
 
@@ -2954,7 +3053,6 @@
         <div class="video-longo-legenda"><strong>${esc(v.titulo)}</strong><span>${esc(v.marca)}</span></div>
       </a>`;
     }).join("");
-    $("#tiktok-itens").innerHTML = CONFIG.tiktokShop.itens.map((t) => `<li>${icones.check}<span>${esc(t)}</span></li>`).join("");
     const linkTiktok = $("#tiktok-link");
     linkTiktok.href = CONFIG.tiktokShop.link;
     linkTiktok.innerHTML = `${esc(CONFIG.tiktokShop.botao)} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="visualmente-oculto"> ${T.novaAba}</span>`;
