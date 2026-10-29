@@ -1208,6 +1208,13 @@
     .logos-grade .logo-item img { padding: 10%; }
     @media (max-width: 980px) { .logos-grade { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
     @media (max-width: 600px) { .logos-grade { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    /* no celular, só 4 fileiras de logos até tocar em "ver mais" */
+    .mais-logos { display: none; margin-top: 2rem; }
+    @media (max-width: 600px) {
+      .logos-grade:not(.aberta) > li:nth-child(n+17) { display: none; }
+      .mais-logos { display: flex; }
+      .logos-grade.aberta + .mais-logos { display: none; }
+    }
     .logos-linha ul {
       display: flex;
       flex-shrink: 0;
@@ -1910,6 +1917,7 @@
 
       <div class="container logos reveal" role="region" aria-labelledby="logos-titulo">
         <ul class="logos-grade" id="logos-grade"></ul>
+        <div class="mais mais-logos"><button type="button" class="btn btn-secundario" id="mais-logos" aria-controls="logos-grade"></button></div>
       </div>
 
       <div class="container">
@@ -2672,6 +2680,7 @@
         abrirMenu: "Abrir menu", fecharMenu: "Fechar menu",
         falarComigo: "Falar comigo", verTrabalhos: "Ver os trabalhos", filtrar: "Filtrar trabalhos por nicho",
         anterior: "Vídeo anterior", proximo: "Próximo vídeo", player: "Vídeo", fecharVideo: "Fechar vídeo",
+        verMaisLogos: (n) => `Ver mais marcas (${n})`,
         capaVideo: "Capa do vídeo", verMaisVideos: (n) => `Ver mais vídeos (${n})`,
         mostrandoTodos: (n) => `Mostrando todos os ${n} vídeos.`,
         mostrando: (n, nome) => `Mostrando ${n} ${n === 1 ? "vídeo" : "vídeos"} de ${nome}.`,
@@ -2689,6 +2698,7 @@
         abrirMenu: "Open menu", fecharMenu: "Close menu",
         falarComigo: "Let's talk", verTrabalhos: "See my work", filtrar: "Filter work by niche",
         anterior: "Previous video", proximo: "Next video", player: "Video", fecharVideo: "Close video",
+        verMaisLogos: (n) => `See more brands (${n})`,
         capaVideo: "Video cover", verMaisVideos: (n) => `See more videos (${n})`,
         mostrandoTodos: (n) => `Showing all ${n} videos.`,
         mostrando: (n, nome) => `Showing ${n} ${n === 1 ? "video" : "videos"} in ${nome}.`,
@@ -3106,7 +3116,12 @@
       if (m.logo) return `<li class="logo-item"><img src="${esc(versao(m.logo))}" alt="${m.nome === "Marca parceira" ? T.logoParceira : T.logo + " " + esc(m.nome)}" loading="lazy" decoding="async" width="100" height="100"></li>`;
       return `<li class="logo-item logo-texto ${m.cor}">${esc(m.nome)}</li>`;
     }
-    $("#logos-grade").innerHTML = conhecidas.concat(demais, selos).map(itemLogo).join("");
+    const todasLogos = conhecidas.concat(demais, selos);
+    $("#logos-grade").innerHTML = todasLogos.map(itemLogo).join("");
+    const maisLogos = $("#mais-logos");
+    maisLogos.textContent = T.verMaisLogos(Math.max(todasLogos.length - 16, 0));
+    if (todasLogos.length <= 16) maisLogos.parentElement.remove();
+    else maisLogos.addEventListener("click", () => $("#logos-grade").classList.add("aberta"));
 
     /* ---------- Resultados e depoimentos ---------- */
     const depVisiveis = CONFIG.numeros.depoimentosVisiveis || CONFIG.numeros.depoimentos.length;
