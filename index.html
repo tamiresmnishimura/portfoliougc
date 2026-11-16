@@ -2059,6 +2059,8 @@
         logos: [
           { nome: "Liz", logo: "logos/liz.png" },
           { nome: "Hering", logo: "logos/hering.png" },
+          { nome: "Di Gaspi", logo: "logos/di-gaspi.png" },
+          { nome: "Top Viagem", logo: "logos/top-viagem.png" },
           { nome: "Copacol", logo: "logos/copacol.png" },
           { nome: "Rap10", logo: "logos/rap10.png" },
           { nome: "Zap Imóveis", logo: "logos/zap.png" },
@@ -2356,6 +2358,10 @@
             { marca: "The Frozen Palm Tree", titulo: "Dias da semana", link: "https://youtube.com/shorts/XdysG2NsMVQ" }
           ]},
           { nome: "Black Friday", videos: [
+            { marca: "Hoomy", titulo: "Black Friday", link: "https://youtube.com/shorts/DV1Q24whyiY" },
+            { marca: "Di Gaspi", titulo: "Black Friday", link: "https://youtube.com/shorts/sFU7Da-fkI0" },
+            { marca: "Top Viagem", titulo: "Black Friday", link: "https://youtube.com/shorts/-_nTyUQ_6Z0" },
+            { marca: "Liz", titulo: "Black Liz 2026", link: "https://youtube.com/shorts/-FzNaou-RoU" },
             { marca: "Liz", titulo: "Black Friday", link: "https://youtu.be/pTZ8T1eBpkE" },
             { marca: "Meu Celular", titulo: "Black Friday antecipada", link: "https://youtube.com/shorts/lczhDI5Z1Bo" },
             { marca: "Liz", titulo: "Sale", link: "https://youtube.com/shorts/yXJQYAfLoGE" },
@@ -2585,7 +2591,7 @@
           { nome: "Apps", videos: [{ titulo: "AI in everyday life" }, { titulo: "AI browser" }, { titulo: "App" }, { titulo: "AI search" }, { titulo: "Review" }, { titulo: "Benefits club" }, { titulo: "Tips" }, { titulo: "App" }, { titulo: "Circular fashion" }] },
           { nome: "Special dates", videos: [{ titulo: "Carnival" }, { titulo: "Valentine's Day" }, { titulo: "Mother's Day" }, { titulo: "Valentine's Day" }, { titulo: "Valentine's Day" }, { titulo: "Mother's Day 2025" }] },
           { nome: "International", videos: [{ titulo: "Narrated version" }, { titulo: "Travel SIM" }, { titulo: "Ice cream shop in Florida" }, { titulo: "Açaí" }, { titulo: "Meme" }, { titulo: "Spoken version" }, { titulo: "Days of the week" }] },
-          { nome: "Black Friday", videos: [{ titulo: "Black Friday" }, { titulo: "Early Black Friday" }, { titulo: "Sale" }, { titulo: "Bazaar" }] },
+          { nome: "Black Friday", videos: [{ titulo: "Black Friday" }, { titulo: "Black Friday" }, { titulo: "Black Friday" }, { titulo: "Black Liz 2026" }, { titulo: "Black Friday" }, { titulo: "Early Black Friday" }, { titulo: "Sale" }, { titulo: "Bazaar" }] },
           { nome: "Other", videos: [{ titulo: "Finance" }, { titulo: "Buy and sell" }, { titulo: "Courses" }, { titulo: "Pets" }, { titulo: "Home search" }, { titulo: "Finance, part 2" }, { titulo: "Car dealership" }] }
         ]
       },
@@ -2760,8 +2766,8 @@
 
     const $ = (seletor) => document.querySelector(seletor);
     // Muda a cada atualização das logos, para o navegador não mostrar versões antigas guardadas.
-    const VERSAO_LOGOS = "20261028-2";
-    const VERSAO_CAPAS = "20261029-4";
+    const VERSAO_LOGOS = "20261116-1";
+    const VERSAO_CAPAS = "20261116-1";
     const versao = (src) => (src ? `${src}?v=${VERSAO_LOGOS}` : src);
     const reduzirMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
